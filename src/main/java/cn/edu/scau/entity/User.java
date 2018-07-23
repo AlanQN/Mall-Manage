@@ -3,6 +3,7 @@ package cn.edu.scau.entity;
 import java.util.Date;
 
 public class User {
+
     private Integer id;
 
     private String username;
@@ -130,4 +131,5 @@ public class User {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+
 }
