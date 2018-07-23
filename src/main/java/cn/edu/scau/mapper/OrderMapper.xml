@@ -26,19 +26,16 @@
     end_time, close_time, shipping_name, shipping_id, user_id, buyer_message, buyer_nick, 
     description
   </sql>
-
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from tb_order
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
-
-  <delete id="deleteById" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_order
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="cn.edu.scau.entity.Order" >
     insert into tb_order (order_id, payment, post_fee, 
       status, create_time, update_time, 
@@ -53,7 +50,6 @@
       #{userId,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR})
   </insert>
-
   <insert id="insertSelective" parameterType="cn.edu.scau.entity.Order" >
     insert into tb_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -157,7 +153,6 @@
       </if>
     </trim>
   </insert>
-
   <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.Order" >
     update tb_order
     <set >
@@ -209,7 +204,6 @@
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-
   <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.Order" >
     update tb_order
     set payment = #{payment,jdbcType=DECIMAL},
@@ -229,5 +223,4 @@
       description = #{description,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-
 </mapper>

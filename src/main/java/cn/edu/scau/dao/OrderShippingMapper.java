@@ -3,32 +3,15 @@ package cn.edu.scau.dao;
 import cn.edu.scau.entity.OrderShipping;
 
 public interface OrderShippingMapper {
+    int deleteByPrimaryKey(Integer orderId);
 
-    /**
-     * 删除
-     * @param orderId
-     * @return
-     */
-    int deleteById(Integer orderId);
-
-    /**
-     * 添加
-     * @param record
-     * @return
-     */
     int insert(OrderShipping record);
 
-    /**
-     * 获取
-     * @param orderId
-     * @return
-     */
-    OrderShipping selectById(Integer orderId);
+    int insertSelective(OrderShipping record);
 
-    /**
-     * 更新
-     * @param record
-     * @return
-     */
-    int update(OrderShipping record);
+    OrderShipping selectByPrimaryKey(Integer orderId);
+
+    int updateByPrimaryKeySelective(OrderShipping record);
+
+    int updateByPrimaryKey(OrderShipping record);
 }
