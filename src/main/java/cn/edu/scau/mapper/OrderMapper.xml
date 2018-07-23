@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.scau.entity.Order" >
+    <constructor >
+      <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="payment" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="post_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="payment_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="consign_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="close_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="shipping_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shipping_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="buyer_message" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer_nick" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, payment, post_fee, status, create_time, update_time, payment_time, consign_time, 
+    end_time, close_time, shipping_name, shipping_id, user_id, buyer_message, buyer_nick, 
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.scau.entity.Order" >
+    insert into tb_order (order_id, payment, post_fee, 
+      status, create_time, update_time, 
+      payment_time, consign_time, end_time, 
+      close_time, shipping_name, shipping_id, 
+      user_id, buyer_message, buyer_nick, 
+      description)
+    values (#{orderId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{postFee,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.scau.entity.Order" >
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="postFee != null" >
+        post_fee,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="consignTime != null" >
+        consign_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="closeTime != null" >
+        close_time,
+      </if>
+      <if test="shippingName != null" >
+        shipping_name,
+      </if>
+      <if test="shippingId != null" >
+        shipping_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="buyerMessage != null" >
+        buyer_message,
+      </if>
+      <if test="buyerNick != null" >
+        buyer_nick,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="postFee != null" >
+        #{postFee,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignTime != null" >
+        #{consignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shippingName != null" >
+        #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        #{shippingId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerMessage != null" >
+        #{buyerMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerNick != null" >
+        #{buyerNick,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.Order" >
+    update tb_order
+    <set >
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="postFee != null" >
+        post_fee = #{postFee,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignTime != null" >
+        consign_time = #{consignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null" >
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shippingName != null" >
+        shipping_name = #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        shipping_id = #{shippingId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerMessage != null" >
+        buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerNick != null" >
+        buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.Order" >
+    update tb_order
+    set payment = #{payment,jdbcType=DECIMAL},
+      post_fee = #{postFee,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      consign_time = #{consignTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      shipping_name = #{shippingName,jdbcType=VARCHAR},
+      shipping_id = #{shippingId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
