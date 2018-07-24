@@ -17,12 +17,60 @@
   <!-- 更新用户信息 -->
   <update id="update" parameterType="cn.edu.scau.entity.User" >
     update tb_user
-    set username = #{username}, password = #{password},
-      phone = #{phone}, email = #{email},
-      created = #{created}, updated = #{updated},
-      sex = #{sex}, state = #{state},
-      headicon = #{headicon}, description = #{description}
+    <set >
+    <if test="username != null and username != ''" >
+      username = #{username},
+    </if>
+    <if test="password != null and password != ''" >
+      password = #{password},
+    </if>
+    <if test="phone != null and phone != ''" >
+      phone = #{phone},
+    </if>
+    <if test="email != null and email != ''" >
+      email = #{email},
+    </if>
+    <if test="created != null" >
+    created = #{created},
+    </if>
+    <if test="updated != null" >
+      updated = #{updated},
+    </if>
+    <if test="sex != null" >
+      sex = #{sex},
+    </if>
+    <if test="state != null" >
+      state = #{state},
+    </if>
+    <if test="headicon != null" >
+      headicon = #{headicon},
+    </if>
+    <if test="description != null" >
+      description = #{description},
+    </if>
+    </set>
     where id = #{id}
+  </update>
+
+  <!-- 移除单个用户：即将state改为2，表示移除 -->
+  <update id="removeOne" parameterType="java.lang.Integer">
+      update tb_user
+      set state = 2
+      where id = #{id}
+  </update>
+
+  <!-- 批量移除用户 -->
+  <update id="removeMore">
+      update tb_user
+      set state = 2
+      <where>
+          <if test="array != null and array.length > 0">
+              and id in
+              <foreach collection="array" item="id" open="(" separator="," close=")">
+                  #{id}
+              </foreach>
+          </if>
+      </where>
   </update>
 
   <!-- 删除单个用户 -->
@@ -34,17 +82,49 @@
   <delete id="deleteMore" parameterType="java.util.List">
     delete from tb_user
     <where>
-      <if test="idList != null and idList.size() > 0">
+      <if test="array != null and array.length > 0">
         and id in 
-        <foreach collection="idList" item="id" open="(" separator="," close=")">
+        <foreach collection="array" item="id" open="(" separator="," close=")">
           #{id}
         </foreach>
       </if>
     </where>
   </delete>
 
+  <!-- 从删除列表中还原单个用户 -->
+  <update id="restoreOne" parameterType="java.lang.Integer">
+    update tb_user set state = 0 where id = #{id};
+  </update>
+
+  <!-- 从删除列表中批量还原用户 -->
+  <update id="restoreMore">
+    update tb_user set state = 0
+    <where>
+      <if test="array != null and array.length > 0">
+        and id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
+  <!-- 禁用用户 -->
+  <update id="pause" parameterType="java.lang.Integer">
+    update tb_user
+    set state = 1
+    where id = #{id}
+  </update>
+
+  <!-- 启用用户 -->
+  <update id="resume" parameterType="java.lang.Integer">
+    update tb_user
+    set state = 0
+    where id = #{id}
+  </update>
+
   <!-- 根据id查找用户 -->
-  <select id="find" resultType="cn.edu.scau.entity.User" parameterType="java.lang.Integer" >
+  <select id="findById" resultType="cn.edu.scau.entity.User" parameterType="java.lang.Integer" >
     select id, username, phone, email, created, updated, state, sex, headicon, description from tb_user where id = #{id}
   </select>
 
@@ -63,19 +143,23 @@
     select id, username, phone, email, created, updated, state from tb_user where id like ‘%#{id}%’
   </select>
 
-  <!-- 根据邮箱查找用户 -->
-  <select id="findByEmail" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select email from tb_user where email = #{email}
-  </select>
-
-  <!-- 根据手机号查找用户 -->
-  <select id="findByPhone" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select phone from tb_user where phone = #{phone}
-  </select>
-
-  <!-- 根据名称查找用户 -->
-  <select id="findByName" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select username from tb_user where username = #{name}
+  <!-- 根据唯一的字段查找用户（邮箱、手机号和名称） -->
+  <select id="findByUniqueField" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.entity.User">
+    select email from tb_user
+      <where>
+        <if test="id != null and id != ''">
+          and id != #{id}
+        </if>
+        <if test="email != null and email != ''">
+          and ( email = #{email}
+        </if>
+        <if test="phone != null and phone != ''">
+          or phone = #{phone}
+        </if>
+        <if test="username != null and username != ''">
+          or username = #{username} )
+        </if>
+      </where>
   </select>
 
   <!-- 分页查找用户 -->

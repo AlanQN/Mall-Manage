@@ -1,5 +1,7 @@
 package cn.edu.scau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
@@ -84,6 +86,7 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreated() {
         return created;
     }
@@ -92,6 +95,7 @@ public class User {
         this.created = created;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getUpdated() {
         return updated;
     }
@@ -132,4 +136,20 @@ public class User {
         this.description = description == null ? null : description.trim();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", sex='" + sex + '\'' +
+                ", state=" + state +
+                ", headicon='" + headicon + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
