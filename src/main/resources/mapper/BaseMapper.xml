@@ -1,166 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.scau.dao.BaseMapper" >
+
   <resultMap id="BaseResultMap" type="cn.edu.scau.entity.Base" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="web_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="key_word" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="copyright" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="has_log_notice" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="log_notice" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="has_all_notice" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="all_notice" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="notice" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="update_log" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id property="id" column="id"></id>
+    <result property="webName" column="web_name"></result>
+    <result property="keyWord" column="key_word"></result>
+    <result property="description" column="description"></result>
+    <result property="copyright" column="copyright"></result>
+    <result property="hasLogNotice" column="has_log_notice"></result>
+    <result property="logNotice" column="log_notice"></result>
+    <result property="hasAllNotice" column="has_all_notice"></result>
+    <result property="allNotice" column="all_notice"></result>
+    <result property="notice" column="notice"></result>
+    <result property="updateLog" column="update_log"></result>
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, web_name, key_word, description, copyright, has_log_notice, log_notice, has_all_notice, 
-    all_notice, notice, update_log
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_base
-    where id = #{id,jdbcType=INTEGER}
+
+  <!-- 根据id获取系统信息 -->
+  <select id="find" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from tb_base
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_base
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.edu.scau.entity.Base" >
-    insert into tb_base (id, web_name, key_word, 
-      description, copyright, has_log_notice, 
-      log_notice, has_all_notice, all_notice, 
-      notice, update_log)
-    values (#{id,jdbcType=INTEGER}, #{webName,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{hasLogNotice,jdbcType=INTEGER}, 
-      #{logNotice,jdbcType=VARCHAR}, #{hasAllNotice,jdbcType=INTEGER}, #{allNotice,jdbcType=VARCHAR}, 
-      #{notice,jdbcType=VARCHAR}, #{updateLog,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.edu.scau.entity.Base" >
-    insert into tb_base
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="webName != null" >
-        web_name,
-      </if>
-      <if test="keyWord != null" >
-        key_word,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="copyright != null" >
-        copyright,
-      </if>
-      <if test="hasLogNotice != null" >
-        has_log_notice,
-      </if>
-      <if test="logNotice != null" >
-        log_notice,
-      </if>
-      <if test="hasAllNotice != null" >
-        has_all_notice,
-      </if>
-      <if test="allNotice != null" >
-        all_notice,
-      </if>
-      <if test="notice != null" >
-        notice,
-      </if>
-      <if test="updateLog != null" >
-        update_log,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="webName != null" >
-        #{webName,jdbcType=VARCHAR},
-      </if>
-      <if test="keyWord != null" >
-        #{keyWord,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="copyright != null" >
-        #{copyright,jdbcType=VARCHAR},
-      </if>
-      <if test="hasLogNotice != null" >
-        #{hasLogNotice,jdbcType=INTEGER},
-      </if>
-      <if test="logNotice != null" >
-        #{logNotice,jdbcType=VARCHAR},
-      </if>
-      <if test="hasAllNotice != null" >
-        #{hasAllNotice,jdbcType=INTEGER},
-      </if>
-      <if test="allNotice != null" >
-        #{allNotice,jdbcType=VARCHAR},
-      </if>
-      <if test="notice != null" >
-        #{notice,jdbcType=VARCHAR},
-      </if>
-      <if test="updateLog != null" >
-        #{updateLog,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.Base" >
+
+  <!-- 根据id更新系统信息 -->
+  <update id="updateById" parameterType="cn.edu.scau.entity.Base" >
     update tb_base
-    <set >
-      <if test="webName != null" >
-        web_name = #{webName,jdbcType=VARCHAR},
-      </if>
-      <if test="keyWord != null" >
-        key_word = #{keyWord,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="copyright != null" >
-        copyright = #{copyright,jdbcType=VARCHAR},
-      </if>
-      <if test="hasLogNotice != null" >
-        has_log_notice = #{hasLogNotice,jdbcType=INTEGER},
-      </if>
-      <if test="logNotice != null" >
-        log_notice = #{logNotice,jdbcType=VARCHAR},
-      </if>
-      <if test="hasAllNotice != null" >
-        has_all_notice = #{hasAllNotice,jdbcType=INTEGER},
-      </if>
-      <if test="allNotice != null" >
-        all_notice = #{allNotice,jdbcType=VARCHAR},
-      </if>
-      <if test="notice != null" >
-        notice = #{notice,jdbcType=VARCHAR},
-      </if>
-      <if test="updateLog != null" >
-        update_log = #{updateLog,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
+    set web_name = #{webName}, key_word = #{keyWord}, description = #{description},
+      copyright = #{copyright}, has_log_notice = #{hasLogNotice}, log_notice = #{logNotice},
+      has_all_notice = #{hasAllNotice}, all_notice = #{allNotice}, notice = #{notice},
+      update_log = #{updateLog}
+    where id = #{id}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.Base" >
-    update tb_base
-    set web_name = #{webName,jdbcType=VARCHAR},
-      key_word = #{keyWord,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      copyright = #{copyright,jdbcType=VARCHAR},
-      has_log_notice = #{hasLogNotice,jdbcType=INTEGER},
-      log_notice = #{logNotice,jdbcType=VARCHAR},
-      has_all_notice = #{hasAllNotice,jdbcType=INTEGER},
-      all_notice = #{allNotice,jdbcType=VARCHAR},
-      notice = #{notice,jdbcType=VARCHAR},
-      update_log = #{updateLog,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

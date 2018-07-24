@@ -2,16 +2,21 @@ package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Base;
 
+import java.util.List;
+
 public interface BaseMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Base record);
+    /**
+     * 获取系统的基本信息
+     * @return
+     */
+    List<Base> find();
 
-    int insertSelective(Base record);
+    /**
+     * 根据id更新系统信息
+     * @param base
+     * @return
+     */
+    int updateById(Base base);
 
-    Base selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Base record);
-
-    int updateByPrimaryKey(Base record);
 }
