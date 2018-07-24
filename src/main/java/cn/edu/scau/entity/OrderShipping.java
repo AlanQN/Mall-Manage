@@ -19,7 +19,6 @@ public class OrderShipping {
 
     private Date created;
 
-    private Date updated;
 
     public OrderShipping(Integer orderId, String receiverName, String receiverMobile, String receiverState, String receiverCity, String receiverDistrict, String receiverAddress, Date created, Date updated) {
         this.orderId = orderId;
@@ -30,7 +29,6 @@ public class OrderShipping {
         this.receiverDistrict = receiverDistrict;
         this.receiverAddress = receiverAddress;
         this.created = created;
-        this.updated = updated;
     }
 
     public OrderShipping() {
@@ -101,11 +99,4 @@ public class OrderShipping {
         this.created = created;
     }
 
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

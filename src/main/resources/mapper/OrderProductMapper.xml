@@ -16,16 +16,19 @@
   <sql id="Base_Column_List" >
     id, product_id, order_id, num, name, price, total_fee, pic_path
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from tb_order_product
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+  <delete id="delete" parameterType="java.lang.Integer" >
     delete from tb_order_product
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.edu.scau.entity.OrderProduct" >
     insert into tb_order_product (id, product_id, order_id, 
       num, name, price, total_fee, 
@@ -34,89 +37,8 @@
       #{num,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{totalFee,jdbcType=DECIMAL}, 
       #{picPath,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.scau.entity.OrderProduct" >
-    insert into tb_order_product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="productId != null" >
-        product_id,
-      </if>
-      <if test="orderId != null" >
-        order_id,
-      </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="totalFee != null" >
-        total_fee,
-      </if>
-      <if test="picPath != null" >
-        pic_path,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="totalFee != null" >
-        #{totalFee,jdbcType=DECIMAL},
-      </if>
-      <if test="picPath != null" >
-        #{picPath,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.OrderProduct" >
-    update tb_order_product
-    <set >
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="num != null" >
-        num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="totalFee != null" >
-        total_fee = #{totalFee,jdbcType=DECIMAL},
-      </if>
-      <if test="picPath != null" >
-        pic_path = #{picPath,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.OrderProduct" >
+
+  <update id="update" parameterType="cn.edu.scau.entity.OrderProduct" >
     update tb_order_product
     set product_id = #{productId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},

@@ -26,134 +26,46 @@
     end_time, close_time, shipping_name, shipping_id, user_id, buyer_message, buyer_nick, 
     description
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_order
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_order
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.edu.scau.entity.Order" >
-    insert into tb_order (order_id, payment, post_fee, 
+
+  <insert id="save" parameterType="cn.edu.scau.entity.Order" >
+    insert into tb_order ( payment, post_fee, 
       status, create_time, update_time, 
       payment_time, consign_time, end_time, 
       close_time, shipping_name, shipping_id, 
       user_id, buyer_message, buyer_nick, 
       description)
-    values (#{orderId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{postFee,jdbcType=DECIMAL}, 
+    values ( #{payment,jdbcType=DECIMAL}, #{postFee,jdbcType=DECIMAL}, 
       #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingId,jdbcType=INTEGER}, 
       #{userId,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.scau.entity.Order" >
-    insert into tb_order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
-      </if>
-      <if test="payment != null" >
-        payment,
-      </if>
-      <if test="postFee != null" >
-        post_fee,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="paymentTime != null" >
-        payment_time,
-      </if>
-      <if test="consignTime != null" >
-        consign_time,
-      </if>
-      <if test="endTime != null" >
-        end_time,
-      </if>
-      <if test="closeTime != null" >
-        close_time,
-      </if>
-      <if test="shippingName != null" >
-        shipping_name,
-      </if>
-      <if test="shippingId != null" >
-        shipping_id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="buyerMessage != null" >
-        buyer_message,
-      </if>
-      <if test="buyerNick != null" >
-        buyer_nick,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="payment != null" >
-        #{payment,jdbcType=DECIMAL},
-      </if>
-      <if test="postFee != null" >
-        #{postFee,jdbcType=DECIMAL},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="paymentTime != null" >
-        #{paymentTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="consignTime != null" >
-        #{consignTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="closeTime != null" >
-        #{closeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="shippingName != null" >
-        #{shippingName,jdbcType=VARCHAR},
-      </if>
-      <if test="shippingId != null" >
-        #{shippingId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="buyerMessage != null" >
-        #{buyerMessage,jdbcType=VARCHAR},
-      </if>
-      <if test="buyerNick != null" >
-        #{buyerNick,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.Order" >
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+  <!--
+  <delete id="deleteMore" parameterType="java.lang.Integer[]">
+    delete from tb_order
+    where order_id in {list}
+  </delete>
+  -->
+  
+  <select id="list" resultMap="BaseResultMap">
+    select * from tb_order
+  </select>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+  <update id="update" parameterType="cn.edu.scau.entity.Order" >
     update tb_order
     <set >
       <if test="payment != null" >
@@ -204,23 +116,5 @@
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.Order" >
-    update tb_order
-    set payment = #{payment,jdbcType=DECIMAL},
-      post_fee = #{postFee,jdbcType=DECIMAL},
-      status = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
-      consign_time = #{consignTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      close_time = #{closeTime,jdbcType=TIMESTAMP},
-      shipping_name = #{shippingName,jdbcType=VARCHAR},
-      shipping_id = #{shippingId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      buyer_message = #{buyerMessage,jdbcType=VARCHAR},
-      buyer_nick = #{buyerNick,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
+
 </mapper>
