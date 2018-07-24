@@ -17,7 +17,6 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
     public User find(Map<String, String> request) {
         //获取id
         Integer id = Integer.valueOf(request.get("id"));
