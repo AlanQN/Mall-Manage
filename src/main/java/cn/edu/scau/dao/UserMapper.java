@@ -51,7 +51,7 @@ public interface UserMapper {
      * @param username 用户名称
      * @return List<User> 符合条件的用户
      */
-    public List<User> findByName(String username);
+    public List<User> fuzzyFindByName(String username);
 
     /**
      * 查找创建时间在preDate和endDate之间的用户
@@ -59,14 +59,42 @@ public interface UserMapper {
      * @param endDate 结束时间
      * @return List<User> 符合条件的用户
      */
-    public List<User> findByTime(Date preDate, Date endDate);
+    public List<User> fuzzyFindByTime(Date preDate, Date endDate);
 
     /**
      * 根据手机号模糊查找用户
      * @param phone 手机号
      * @return List<User> 符合条件的用户
      */
-    public List<User> findById(String phone);
+    public List<User> fuzzyFindByPhone(String phone);
+
+    /**
+     * 根据id模糊查找用户
+     * @param id
+     * @return
+     */
+    public List<User> fuzzyFindById(String id);
+
+    /**
+     * 根据邮箱查找用户
+     * @param emial 邮箱
+     * @return
+     */
+    public User findByEmail(String emial);
+
+    /**
+     * 根据手机号查找用户
+     * @param phone 邮箱
+     * @return
+     */
+    public User findByPhone(String phone);
+
+    /**
+     * 根据名称查找用户
+     * @param name 邮箱
+     * @return
+     */
+    public User findByName(String name);
 
     /**
      * 分页查找用户

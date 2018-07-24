@@ -4,11 +4,11 @@
 
   <!-- 添加用户 -->
   <insert id="insert" parameterType="cn.edu.scau.entity.User" >
-    insert into tb_user (id, username, password,
+    insert into tb_user (username, password,
       phone, email, created,
       updated, sex, state,
       headicon, description)
-    values (#{id}, #{username}, #{password},
+    values (#{username}, #{password},
       #{phone}, #{email}, #{created},
       #{updated}, #{sex}, #{state},
       #{headicon}, #{description})
@@ -49,18 +49,33 @@
   </select>
 
   <!-- 根据名称模糊查找用户 -->
-  <select id="findByName" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+  <select id="fuzzyFindByName" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
     select id, username, phone, email, created, updated, state from tb_user where username like ‘%#{name}%’
   </select>
 
   <!-- 根据手机号模糊查找用户 -->
-  <select id="findByPhone" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+  <select id="fuzzyFindByPhone" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
     select id, username, phone, email, created, updated, state from tb_user where phone like ‘%#{phone}%’
   </select>
 
   <!-- 根据id模糊查找用户 -->
-  <select id="findById" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+  <select id="fuzzyFindById" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
     select id, username, phone, email, created, updated, state from tb_user where id like ‘%#{id}%’
+  </select>
+
+  <!-- 根据邮箱查找用户 -->
+  <select id="findByEmail" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+    select email from tb_user where email = #{email}
+  </select>
+
+  <!-- 根据手机号查找用户 -->
+  <select id="findByPhone" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+    select phone from tb_user where phone = #{phone}
+  </select>
+
+  <!-- 根据名称查找用户 -->
+  <select id="findByName" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
+    select username from tb_user where username = #{name}
   </select>
 
   <!-- 分页查找用户 -->
