@@ -2,16 +2,20 @@ package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Order;
 
+import java.util.List;
+
 public interface OrderMapper {
-    int deleteByPrimaryKey(Integer orderId);
 
-    int insert(Order record);
+    int save(Order order);
 
-    int insertSelective(Order record);
+    int delete(Integer id);
 
-    Order selectByPrimaryKey(Integer orderId);
+    int deleteMore(Integer[] list);
 
-    int updateByPrimaryKeySelective(Order record);
+    List<Order> list();
 
-    int updateByPrimaryKey(Order record);
+    Order getById(Integer id);
+
+    int update(Order order);
+
 }
