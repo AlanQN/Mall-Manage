@@ -131,4 +131,26 @@ public class UserController {
         return userService.deleteMore(request);
     }
 
+    /**
+     * 还原单个用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/restoreOne")
+    @ResponseBody
+    public Map<String, Object> restoreOne(@RequestBody Map<String, Integer> request) {
+        return userService.restoreOne(request);
+    }
+
+    /**
+     * 批量还原用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/restoreMore")
+    @ResponseBody
+    public Map<String, Object> restoreMore(@RequestBody Integer[] request) {
+        return userService.restoreMore(request);
+    }
+
 }

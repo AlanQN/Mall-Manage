@@ -145,5 +145,31 @@ public class UserServiceImpl implements IUserService {
         return response;
     }
 
+    @Override
+    public Map<String, Object> restoreOne(Map<String, Integer> request) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        //获取要还原的用户编号
+        Integer id = request.get("id");
+        //还原用户
+        if (userMapper.restoreOne(id) > 0) {
+            response.put("result", true);
+        } else {
+            response.put("result", false);
+        }
+        return response;
+    }
+
+    @Override
+    public Map<String, Object> restoreMore(Integer[] ids) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        //还原批量选定的用户
+        if (userMapper.restoreMore(ids) > 0) {
+            response.put("result", true);
+        } else {
+            response.put("result", false);
+        }
+        return response;
+    }
+
 
 }

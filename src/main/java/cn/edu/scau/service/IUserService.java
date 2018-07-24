@@ -64,7 +64,7 @@ public interface IUserService {
     public Map<String, Object> changepwd(User user);
 
     /**
-     * 删除用户
+     * 删除单个用户
      * @param request 请求参数
      * @return
      */
@@ -76,5 +76,19 @@ public interface IUserService {
      * @return
      */
     public Map<String, Object> deleteMore(Integer[] ids);
+
+    /**
+     * 还原单个用户
+     * @param request 请求参数
+     * @return
+     */
+    public Map<String, Object> restoreOne(Map<String, Integer> request);
+
+    /**
+     * 批量还原用户
+     * @param ids 请求参数
+     * @return
+     */
+    public Map<String, Object> restoreMore(Integer[] ids);
 
 }
