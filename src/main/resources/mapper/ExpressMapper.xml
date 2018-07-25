@@ -72,4 +72,41 @@
     set express_name = #{expressName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!-- 查找日志总数 -->
+  <select id="getTotal" resultType="java.lang.Integer" parameterType="cn.edu.scau.component.Page">
+    select count(*) from tb_express
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and id like '%${keyword}%' or express_name like '%${keyword}%'
+      </if>
+    </where>
+  </select>
+
+  <!-- 查找当前页的记录 -->
+  <select id="findRecords" resultMap="BaseResultMap" parameterType="cn.edu.scau.component.Page">
+    select * from tb_express
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and id like '%${keyword}%' or express_name like '%${keyword}%'
+      </if>
+    </where>
+    limit #{startIndex}, #{pageSize}
+  </select>
+
+  <!-- 批量删除日志 -->
+  <delete id="deleteMore">
+    delete from tb_express
+    <where>
+      <if test="array != null and array.length > 0">
+        and id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+
 </mapper>

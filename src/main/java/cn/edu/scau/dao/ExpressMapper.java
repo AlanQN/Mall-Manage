@@ -1,5 +1,6 @@
 package cn.edu.scau.dao;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Express;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface ExpressMapper {
     List<Express> search(String s);
 
     List<Express> getAll();
+
+    int getTotal(Page<Express> page);
+
+    List<Express> findRecords(Page<Express> page);
+
+    int deleteMore(Integer[] ids);
+
 }
