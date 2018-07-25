@@ -47,7 +47,7 @@ public class ProductController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Map<String,String> add(@RequestBody Map<String ,Integer> request){
+    public Map<String,String> delete(@RequestBody Map<String ,Integer> request){
         return productService.deleteByPrimaryKey(request);
     }
 //    测试
