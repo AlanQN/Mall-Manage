@@ -6,12 +6,8 @@
     <id property="id" column="id"/>
     <result property="name" column="name"/>
     <result property="type" column="type"/>
-    <result property="url" column="url"/>
-    <result property="requestType" column="request_type"/>
-    <result property="requestParam" column="request_param"/>
     <result property="user" column="user"/>
     <result property="ip" column="ip"/>
-    <result property="time" column="time"/>
     <result property="createDate" column="create_date"/>
   </resultMap>
 
@@ -21,9 +17,7 @@
     <where>
       <if test="keyword != null and keyword != ''">
         and id like '%${keyword}%' or name like '%${keyword}%' or type like '%${keyword}%'
-        or url like '%${keyword}%' or request_type like '%${keyword}%' or request_param like '%${keyword}%'
-        or user like '%${keyword}%' or ip like '%${keyword}%' or time like '%${keyword}%'
-        or create_date like '%${keyword}%'
+        or user like '%${keyword}%' or ip like '%${keyword}%' or create_date like '%${keyword}%'
       </if>
     </where>
   </select>
@@ -34,9 +28,7 @@
     <where>
       <if test="keyword != null and keyword != ''">
         and id like '%${keyword}%' or name like '%${keyword}%' or type like '%${keyword}%'
-        or url like '%${keyword}%' or request_type like '%${keyword}%' or request_param like '%${keyword}%'
-        or user like '%${keyword}%' or ip like '%${keyword}%' or time like '%${keyword}%'
-        or create_date like '%${keyword}%'
+        or user like '%${keyword}%' or ip like '%${keyword}%' or create_date like '%${keyword}%'
       </if>
     </where>
     limit #{startIndex}, #{pageSize}
@@ -62,8 +54,8 @@
 
   <!-- 添加日志 -->
   <insert id="insert" parameterType="cn.edu.scau.entity.Log" >
-    insert into tb_log (name, type, url, request_type, request_param, user, ip, time, create_date)
-    values (#{name}, #{type}, #{url}, #{requestType}, #{requestParam}, #{user}, #{ip}, #{time}, #{createDate})
+    insert into tb_log (name, type, user, ip, create_date)
+    values (#{name}, #{type}, #{user}, #{ip}, #{createDate})
   </insert>
 
 </mapper>
