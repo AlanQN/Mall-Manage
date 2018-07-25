@@ -1,17 +1,47 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Log;
+import cn.edu.scau.entity.Page;
+
+import java.util.List;
 
 public interface LogMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Log record);
+    /**
+     * 删除单条日志
+     * @param id
+     * @return
+     */
+    public int deleteOne(Integer id);
 
-    int insertSelective(Log record);
+    /**
+     * 删除批量选定的日志
+     * @param ids
+     * @return
+     */
+    public int deleteMore(Integer[] ids);
+
+    /**
+     * 获取记录总数
+     * @param page
+     * @return
+     */
+    public int getTotal(Page page);
+
+    /**
+     * 查找日志
+     * @param page
+     * @return
+     */
+    public List<Log> findRecords(Page<Log> page);
+
+    /**
+     * 添加日志
+     * @param log
+     * @return
+     */
+    public int insert(Log log);
 
     Log selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Log record);
-
-    int updateByPrimaryKey(Log record);
 }
