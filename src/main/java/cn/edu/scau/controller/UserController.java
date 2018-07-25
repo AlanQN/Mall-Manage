@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.User;
 import cn.edu.scau.service.IUserService;
 import cn.edu.scau.service.impl.UserServiceImpl;
@@ -152,6 +153,28 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> restoreMore(@RequestBody Integer[] request) {
         return userService.restoreMore(request);
+    }
+
+    /**
+     * 分页查找用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/query")
+    @ResponseBody
+    public Page<User> query(@RequestBody  Page<User> request) {
+        return userService.findByPage(request);
+    }
+
+    /**
+     * 根据指定字段模糊查找用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/search")
+    @ResponseBody
+    public Page<User> search(@RequestBody Page<User> request) {
+        return userService.fuzzyFindByField(request);
     }
 
 }
