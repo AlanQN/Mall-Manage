@@ -1,7 +1,7 @@
 package cn.edu.scau.service;
 
 import cn.edu.scau.entity.Log;
-import cn.edu.scau.entity.Page;
+import cn.edu.scau.component.Page;
 
 import java.util.Map;
 

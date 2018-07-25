@@ -1,4 +1,4 @@
-package cn.edu.scau.entity;
+package cn.edu.scau.component;
 
 import java.util.List;
 
@@ -14,6 +14,8 @@ public class Page<T> {
 
     private Integer totalPage;  //总页数
 
+    private Integer recordNum;  //当前页显示的记录个数
+
     private String keyword; //搜索关键字
 
     private List<T> records;    //当前页显示的记录
@@ -22,12 +24,13 @@ public class Page<T> {
 
     }
 
-    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, String keyword, List<T> records) {
+    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, List<T> records) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.startIndex = startIndex;
         this.totalRecord = totalRecord;
         this.totalPage = totalPage;
+        this.recordNum = recordNum;
         this.keyword = keyword;
         this.records = records;
     }
@@ -40,6 +43,7 @@ public class Page<T> {
                 ", startIndex=" + startIndex +
                 ", totalRecord=" + totalRecord +
                 ", totalPage=" + totalPage +
+                ", recordNum=" + recordNum +
                 ", keyword='" + keyword + '\'' +
                 ", records=" + records +
                 '}';
@@ -75,6 +79,14 @@ public class Page<T> {
 
     public void setTotalPage(Integer totalPage) {
         this.totalPage = totalPage;
+    }
+
+    public Integer getRecordNum() {
+        return recordNum;
+    }
+
+    public void setRecordNum(Integer recordNum) {
+        this.recordNum = recordNum;
     }
 
     public String getKeyword() {
