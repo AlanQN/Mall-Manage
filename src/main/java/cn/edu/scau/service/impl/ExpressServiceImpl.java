@@ -71,7 +71,9 @@ public class ExpressServiceImpl implements IExpressService {
     public Map<String, Object> search(String string) {
         Map<String, Object> map = new HashMap<>();
         Integer errorCode = 0;
-        List<Express> expressList = expressMapper.search("%"+string+"%");
+        String s = "%"+string+"%";
+        System.out.println(s);
+        List<Express> expressList = expressMapper.search(s);
         if (expressList == null) {
             errorCode = 1;
             map.put("errorCode", errorCode);

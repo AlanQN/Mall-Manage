@@ -43,7 +43,7 @@ public class ExpressController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public Map<String,Object> search(@RequestBody Map<String,Object> map){
+    public Map<String,Object> search(@RequestBody Map<String,String> map){
         return expressService.search((String) map.get("string"));
     }
 
