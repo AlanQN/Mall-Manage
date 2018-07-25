@@ -18,4 +18,6 @@ public interface OrderMapper {
 
     int update(Order order);
 
+    List<Order> search(String string);
+
 }

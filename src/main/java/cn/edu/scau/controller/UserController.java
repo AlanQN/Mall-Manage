@@ -1,6 +1,7 @@
 package cn.edu.scau.controller;
 
 import cn.edu.scau.entity.User;
+import cn.edu.scau.service.IUserService;
 import cn.edu.scau.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    IUserService userService;
 
     /**
      * 添加用户

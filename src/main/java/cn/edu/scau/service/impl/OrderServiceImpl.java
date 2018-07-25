@@ -161,8 +161,19 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public Map<String, Object> search(Integer id) {
-        return null;
+    public Map<String, Object> search(String string) {
+        Map<String, Object> map = new HashMap<>();
+        Integer errorCode = 0;
+        String s1 = "%"+string+"%";
+        List<Order> orderList = orderMapper.search(s1);
+        if (orderList != null){
+            map.put("errorCode" ,errorCode);
+            map.put("orderList",orderList);
+        }else {
+            errorCode = 1;
+            map.put("errorCode" ,errorCode);
+        }
+        return map;
     }
 
 }
