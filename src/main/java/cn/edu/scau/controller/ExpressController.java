@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Express;
 import cn.edu.scau.service.IExpressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,18 @@ public class ExpressController {
     @ResponseBody
     public Map<String,Object> getAll(){
         return expressService.getAll();
+    }
+
+    @RequestMapping("/getPage")
+    @ResponseBody
+    public Page<Express> getPage(@RequestBody Page<Express> page){
+        return expressService.getPage(page);
+    }
+
+    @RequestMapping("/deleteMore")
+    @ResponseBody
+    public Map<String,Object> deleteMore(@RequestBody Integer[] ids){
+        return expressService.deleteMore(ids);
     }
 
 }

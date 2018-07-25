@@ -1,7 +1,7 @@
 package cn.edu.scau.controller;
 
 import cn.edu.scau.entity.Log;
-import cn.edu.scau.entity.Page;
+import cn.edu.scau.component.Page;
 import cn.edu.scau.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

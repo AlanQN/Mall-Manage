@@ -11,8 +11,8 @@
     <result property="createDate" column="create_date"/>
   </resultMap>
 
-  <!-- 查找日志总数 -->
-  <select id="getTotal" resultType="java.lang.Integer" parameterType="cn.edu.scau.entity.Page">
+  <!-- 查找搜索日志总数 -->
+  <select id="getSearchNum" resultType="java.lang.Integer" parameterType="cn.edu.scau.component.Page">
     select count(*) from tb_log
     <where>
       <if test="keyword != null and keyword != ''">
@@ -22,8 +22,8 @@
     </where>
   </select>
 
-  <!-- 查找当前页的记录 -->
-  <select id="findRecords" resultMap="LogResultMap" parameterType="cn.edu.scau.entity.Page">
+  <!-- 查找搜索页面当前页的日志 -->
+  <select id="findRecords" resultMap="LogResultMap" parameterType="cn.edu.scau.component.Page">
     select * from tb_log
     <where>
       <if test="keyword != null and keyword != ''">

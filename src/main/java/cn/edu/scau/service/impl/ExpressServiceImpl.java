@@ -1,5 +1,6 @@
 package cn.edu.scau.service.impl;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.dao.ExpressMapper;
 import cn.edu.scau.entity.Express;
 import cn.edu.scau.service.IExpressService;
@@ -95,6 +96,35 @@ public class ExpressServiceImpl implements IExpressService {
         }else {
             map.put("errorCode", errorCode);
             map.put("expressList",expressList);
+        }
+        return map;
+    }
+
+    @Override
+    public Page<Express> getPage(Page<Express> page) {
+        //查询记录总数
+        int total = expressMapper.getTotal(page);
+        //设置记录总数和偏移量
+        page.setTotalRecord(total);
+        page.setTotalPage((int)Math.ceil((double)total/page.getPageSize()));
+        page.setStartIndex((page.getPageNum()-1)*page.getPageSize());
+        //查找记录
+        if (page.getPageNum() > 0 && page.getPageNum() <= page.getTotalPage()) {
+            List<Express> expressList = expressMapper.findRecords(page);
+            page.setRecords(expressList);
+            page.setRecordNum(expressList.size());
+        }
+        return page;
+    }
+
+    @Override
+    public Map<String, Object> deleteMore(Integer[] ids) {
+        Map<String,Object> map = new HashMap<>();
+        //删除批量选定的订单
+        if(expressMapper.deleteMore(ids) > 0){
+            map.put("errorCode",0);
+        }else {
+            map.put("errorCode",1);
         }
         return map;
     }

@@ -1,7 +1,7 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Log;
-import cn.edu.scau.entity.Page;
+import cn.edu.scau.component.Page;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public interface LogMapper {
      * @param page
      * @return
      */
-    public int getTotal(Page page);
+    public int getSearchNum(Page page);
 
     /**
      * 查找日志

@@ -1,4 +1,4 @@
-package cn.edu.scau.entity;
+package cn.edu.scau.component;
 
 import java.util.List;
 
@@ -14,7 +14,11 @@ public class Page<T> {
 
     private Integer totalPage;  //总页数
 
+    private Integer recordNum;  //当前页显示的记录个数
+
     private String keyword; //搜索关键字
+
+    private Integer keyType;    //关键字类型
 
     private List<T> records;    //当前页显示的记录
 
@@ -22,13 +26,15 @@ public class Page<T> {
 
     }
 
-    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, String keyword, List<T> records) {
+    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, Integer keyType, List<T> records) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.startIndex = startIndex;
         this.totalRecord = totalRecord;
         this.totalPage = totalPage;
+        this.recordNum = recordNum;
         this.keyword = keyword;
+        this.keyType = keyType;
         this.records = records;
     }
 
@@ -40,7 +46,9 @@ public class Page<T> {
                 ", startIndex=" + startIndex +
                 ", totalRecord=" + totalRecord +
                 ", totalPage=" + totalPage +
+                ", recordNum=" + recordNum +
                 ", keyword='" + keyword + '\'' +
+                ", keyType=" + keyType +
                 ", records=" + records +
                 '}';
     }
@@ -77,12 +85,28 @@ public class Page<T> {
         this.totalPage = totalPage;
     }
 
+    public Integer getRecordNum() {
+        return recordNum;
+    }
+
+    public void setRecordNum(Integer recordNum) {
+        this.recordNum = recordNum;
+    }
+
     public String getKeyword() {
         return keyword;
     }
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public Integer getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(Integer keyType) {
+        this.keyType = keyType;
     }
 
     public List<T> getRecords() {

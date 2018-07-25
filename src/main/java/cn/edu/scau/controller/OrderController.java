@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Order;
 import cn.edu.scau.entity.OrderShipping;
 import cn.edu.scau.service.IOrderService;
@@ -63,6 +64,19 @@ public class OrderController {
     @ResponseBody
     public Map<String,Object> search(@RequestBody Map<String,String> map){
         return orderService.search(map.get("string"));
+    }
+
+    @RequestMapping("/deleteMore")
+    @ResponseBody
+    public Map<String,Object> deleteMore(@RequestBody Integer[] ids){
+        return orderService.deleteMore(ids);
+    }
+
+
+    @RequestMapping("/getPage")
+    @ResponseBody
+    public Page<Order> getPage(@RequestBody Page<Order> page){
+        return orderService.getPage(page);
     }
 
 }

@@ -1,9 +1,9 @@
 package cn.edu.scau.service;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Order;
 import cn.edu.scau.entity.OrderShipping;
 
-import java.util.List;
 import java.util.Map;
 
 public interface IOrderService {
@@ -31,5 +31,9 @@ public interface IOrderService {
 
     //搜索
     public Map<String, Object> search(String string);
+
+    public Map<String,Object>deleteMore(Integer[] ids);
+
+    public Page<Order> getPage(Page<Order> page);
 
 }

@@ -1,5 +1,6 @@
 package cn.edu.scau.service.impl;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.dao.OrderMapper;
 import cn.edu.scau.dao.OrderProductMapper;
 import cn.edu.scau.dao.OrderShippingMapper;
@@ -174,6 +175,34 @@ public class OrderServiceImpl implements IOrderService {
             map.put("errorCode" ,errorCode);
         }
         return map;
+    }
+
+    @Override
+    public Map<String, Object> deleteMore(Integer[] ids) {
+        Map<String,Object> map = new HashMap<>();
+        //删除批量选定的订单
+        if(orderMapper.deleteMore(ids) > 0){
+            map.put("errorCode",0);
+        }else {
+            map.put("errorCode",1);
+        }
+        return map;
+    }
+
+    @Override
+    public Page<Order> getPage(Page<Order> page) {
+        //查询记录总数
+        int total = orderMapper.getTotal(page);
+        page.setTotalRecord(total);
+        page.setTotalPage((int)Math.ceil((double)total/page.getPageSize()));
+        page.setStartIndex((page.getPageNum()-1)*page.getPageSize());
+        //查找记录
+        if (page.getPageNum() > 0 && page.getPageNum() <= page.getTotalPage()) {
+            List<Order> orders = orderMapper.findRecords(page);
+            page.setRecords(orders);
+            page.setRecordNum(orders.size());
+        }
+        return page;
     }
 
 }

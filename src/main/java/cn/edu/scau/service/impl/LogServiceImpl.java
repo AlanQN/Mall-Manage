@@ -2,7 +2,7 @@ package cn.edu.scau.service.impl;
 
 import cn.edu.scau.dao.LogMapper;
 import cn.edu.scau.entity.Log;
-import cn.edu.scau.entity.Page;
+import cn.edu.scau.component.Page;
 import cn.edu.scau.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,17 +59,21 @@ public class LogServiceImpl implements ILogService {
      * @return
      */
     public Page<Log> serach(Page<Log> page) {
-        //查询记录总数
-        int total = logMapper.getTotal(page);
-        //设置记录总数和偏移量
-        page.setTotalRecord(total);
-        page.setTotalPage((int)Math.ceil((double)total/page.getPageSize()));
-        page.setStartIndex((page.getPageNum()-1)*page.getPageSize());
-        //查找记录
-        if (page.getPageNum() > 0 && page.getPageNum() <= page.getTotalPage()) {
-            List<Log> logs = logMapper.findRecords(page);
-            page.setRecords(logs);
-        }
+        //查询搜索记录总数
+        int totalNum = logMapper.getSearchNum(page);
+        //设置搜索记录总数
+        page.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        int totalPage = (int) Math.ceil((double) totalNum / page.getPageSize());
+        int startIndex = page.getPageSize() * (page.getPageNum() - 1);
+        page.setTotalPage(totalPage);
+        page.setStartIndex(startIndex);
+        //查询日志
+        List<Log> logs = logMapper.findRecords(page);
+        //设置当前页需要显示的记录
+        page.setRecords(logs);
+        //设置当前页的实际记录数
+        page.setRecordNum(logs.size());
         return page;
 
     }

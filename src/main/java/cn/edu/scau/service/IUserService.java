@@ -1,5 +1,6 @@
 package cn.edu.scau.service;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.User;
 
 import java.util.Map;
@@ -90,5 +91,19 @@ public interface IUserService {
      * @return
      */
     public Map<String, Object> restoreMore(Integer[] ids);
+
+    /**
+     * 分页查询用户
+     * @param page
+     * @return
+     */
+    public Page<User> findByPage(Page<User> page);
+
+    /**
+     * 根据指定字段模糊查找用户
+     * @param page
+     * @return
+     */
+    public Page<User> fuzzyFindByField(Page<User> page);
 
 }
