@@ -28,10 +28,8 @@
     where express_name = #{name}
   </select>
   <select id="search" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from tb_express
-    where name like #{s}
+    select * from tb_express
+    where express_name like #{s}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_express
