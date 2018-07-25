@@ -12,4 +12,10 @@ public interface IProductService {
 
     List<Product> selectByPrice(Map<String,BigDecimal> request);
 
+    Map<String ,String> updateByPrimaryKeySelective(Product record);
+
+    Map<String ,String>insert(Product record);
+
+    Map<String ,String>deleteByPrimaryKey(Map<String ,Integer> request);
+
 }
