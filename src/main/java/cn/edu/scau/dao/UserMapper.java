@@ -1,7 +1,7 @@
 package cn.edu.scau.dao;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -89,33 +89,18 @@ public interface UserMapper {
     public User findById(Integer id);
 
     /**
-     * 根据名称模糊查找用户
-     * @param username 用户名称
-     * @return List<User> 符合条件的用户
-     */
-    public List<User> fuzzyFindByName(String username);
-
-    /**
-     * 查找创建时间在preDate和endDate之间的用户
-     * @param preDate 开始时间
-     * @param endDate 结束时间
-     * @return List<User> 符合条件的用户
-     */
-    public List<User> fuzzyFindByTime(Date preDate, Date endDate);
-
-    /**
-     * 根据手机号模糊查找用户
-     * @param phone 手机号
-     * @return List<User> 符合条件的用户
-     */
-    public List<User> fuzzyFindByPhone(String phone);
-
-    /**
-     * 根据id模糊查找用户
-     * @param id
+     * 根据指定字段模糊查找用户
+     * @param page
      * @return
      */
-    public List<User> fuzzyFindById(String id);
+    public List<User> fuzzyFindByField(Page page);
+
+    /**
+     * 获取搜索记录总数
+     * @param page
+     * @return
+     */
+    public int getSearchNum(Page<User> page);
 
     /**
      * 根据唯一的字段查找用户（邮箱、手机号和名称）
@@ -126,10 +111,15 @@ public interface UserMapper {
 
     /**
      * 分页查找用户
-     * @param page 当前页号
-     * @param rows 一页包含的记录数
+     * @param page
      * @return List<User> 用户
      */
-    public List<User> findByPage(Integer page, Integer rows);
+    public List<User> findByPage(Page page);
+
+    /**
+     * 获取用户总数
+     * @return
+     */
+    public int getUserNum();
 
 }

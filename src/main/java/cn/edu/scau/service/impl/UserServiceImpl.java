@@ -1,5 +1,6 @@
 package cn.edu.scau.service.impl;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.dao.UserMapper;
 import cn.edu.scau.entity.User;
 import cn.edu.scau.service.IUserService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -171,5 +173,44 @@ public class UserServiceImpl implements IUserService {
         return response;
     }
 
+    @Override
+    public Page<User> findByPage(Page<User> page) {
+        //查询用户总数
+        int totalNum = userMapper.getUserNum();
+        //设置用户总数
+        page.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        int totalPage = (int) Math.ceil((double) totalNum / page.getPageSize());
+        int startIndex = page.getPageSize() * (page.getPageNum() - 1);
+        page.setTotalPage(totalPage);
+        page.setStartIndex(startIndex);
+        //查询当前页的用户
+        List<User> users = userMapper.findByPage(page);
+        //设置当前页需要显示的记录
+        page.setRecords(users);
+        //设置当前页的实际记录数
+        page.setRecordNum(users.size());
+        return page;
+    }
+
+    @Override
+    public Page<User> fuzzyFindByField(Page<User> page) {
+        //查询搜索记录总数
+        int totalNum = userMapper.getSearchNum(page);
+        //设置搜索记录总数
+        page.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        int totalPage = (int) Math.ceil((double) totalNum / page.getPageSize());
+        int startIndex = page.getPageSize() * (page.getPageNum() - 1);
+        page.setTotalPage(totalPage);
+        page.setStartIndex(startIndex);
+        //查询符合搜索关键字的用户
+        List<User> users = userMapper.fuzzyFindByField(page);
+        //设置当前页需要显示的记录
+        page.setRecords(users);
+        //设置当前页的实际记录数
+        page.setRecordNum(users.size());
+        return page;
+    }
 
 }

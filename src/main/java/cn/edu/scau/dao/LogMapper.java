@@ -26,7 +26,7 @@ public interface LogMapper {
      * @param page
      * @return
      */
-    public int getTotal(Page page);
+    public int getSearchNum(Page page);
 
     /**
      * 查找日志

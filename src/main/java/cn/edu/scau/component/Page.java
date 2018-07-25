@@ -18,13 +18,15 @@ public class Page<T> {
 
     private String keyword; //搜索关键字
 
+    private Integer keyType;    //关键字类型
+
     private List<T> records;    //当前页显示的记录
 
     public Page() {
 
     }
 
-    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, List<T> records) {
+    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, Integer keyType, List<T> records) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.startIndex = startIndex;
@@ -32,6 +34,7 @@ public class Page<T> {
         this.totalPage = totalPage;
         this.recordNum = recordNum;
         this.keyword = keyword;
+        this.keyType = keyType;
         this.records = records;
     }
 
@@ -45,6 +48,7 @@ public class Page<T> {
                 ", totalPage=" + totalPage +
                 ", recordNum=" + recordNum +
                 ", keyword='" + keyword + '\'' +
+                ", keyType=" + keyType +
                 ", records=" + records +
                 '}';
     }
@@ -95,6 +99,14 @@ public class Page<T> {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public Integer getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(Integer keyType) {
+        this.keyType = keyType;
     }
 
     public List<T> getRecords() {

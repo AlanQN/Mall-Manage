@@ -128,19 +128,47 @@
     select id, username, phone, email, created, updated, state, sex, headicon, description from tb_user where id = #{id}
   </select>
 
-  <!-- 根据名称模糊查找用户 -->
-  <select id="fuzzyFindByName" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select id, username, phone, email, created, updated, state from tb_user where username like ‘%#{name}%’
+  <!-- 获取记录总数 -->
+  <select id="getSearchNum" resultType="java.lang.Integer" parameterType="cn.edu.scau.component.Page">
+    select count(*) from tb_user
+    <where>
+      <if test="keyword != null and keyword != ''">
+        <if test="keyType != null and keyType == 1">  <!-- 根据id -->
+          and id like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 2">  <!-- 根据用户名 -->
+          and username like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 3">  <!-- 根据手机号 -->
+          and phone like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 4">  <!-- 根据邮箱 -->
+          and email like '%${keyword}%'
+        </if>
+      </if>
+    </where>
   </select>
 
-  <!-- 根据手机号模糊查找用户 -->
-  <select id="fuzzyFindByPhone" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select id, username, phone, email, created, updated, state from tb_user where phone like ‘%#{phone}%’
-  </select>
-
-  <!-- 根据id模糊查找用户 -->
-  <select id="fuzzyFindById" resultType="cn.edu.scau.entity.User" parameterType="java.lang.String">
-    select id, username, phone, email, created, updated, state from tb_user where id like ‘%#{id}%’
+  <!-- 根据指定字段模糊查找用户 -->
+  <select id="fuzzyFindByField" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.component.Page">
+    select id, username, phone, email, created, updated, state from tb_user
+    <where>
+      <if test="keyword != null and keyword != ''">
+        <if test="keyType != null and keyType == 1">  <!-- 根据id -->
+          and id like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 2">  <!-- 根据用户名 -->
+          and username like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 3">  <!-- 根据手机号 -->
+          and phone like '%${keyword}%'
+        </if>
+        <if test="keyType != null and keyType == 4">  <!-- 根据邮箱 -->
+          and email like '%${keyword}%'
+        </if>
+      </if>
+    </where>
+    limit #{startIndex}, #{pageSize}
   </select>
 
   <!-- 根据唯一的字段查找用户（邮箱、手机号和名称） -->
@@ -163,6 +191,13 @@
   </select>
 
   <!-- 分页查找用户 -->
-  <select id="findByPage" resultType="cn.edu.scau.entity.User" parameterType="java.lang.Integer"></select>
+  <select id="findByPage" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.component.Page">
+    select id, username, phone, email, created, updated, state from tb_user limit #{startIndex}, #{pageSize}
+  </select>
+
+  <!-- 获取用户总数 -->
+  <select id="getUserNum" resultType="java.lang.Integer">
+    select count(*) from tb_user
+  </select>
 
 </mapper>
