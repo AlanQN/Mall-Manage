@@ -1,5 +1,6 @@
 package cn.edu.scau.dao;
 
+import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Order;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface OrderMapper {
 
     int delete(Integer id);
 
-    int deleteMore(Integer[] list);
+    int deleteMore(Integer[] ids);
 
     List<Order> list();
 
@@ -20,4 +21,7 @@ public interface OrderMapper {
 
     List<Order> search(String string);
 
+    int getTotal(Page<Order> page);
+
+    List<Order> findRecords(Page<Order> page);
 }

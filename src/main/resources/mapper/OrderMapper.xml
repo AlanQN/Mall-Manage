@@ -123,4 +123,42 @@
     where order_id like #{string}
   </select>
 
+  <!-- 批量删除-->
+  <delete id="deleteMore">
+    delete from tb_order
+    <where>
+      <if test="array != null and array.length > 0">
+        and order_id in
+        <foreach collection="array" item="order_id" open="(" separator="," close=")">
+          #{order_id}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+  <!--总数-->
+  <select id="getTotal" parameterType="cn.edu.scau.component.Page" resultType="java.lang.Integer">
+    select count(*) from tb_order
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and order_id like '%${keyword}%' or payment like '%${keyword}%' or post_fee like '%${keyword}%'
+        or status like '%${keyword}%' or create_time like '%${keyword}%' or user_id like '%${keyword}%'
+        or buyer_message like '%${keyword}%' or buyer_nick like '%${keyword}%' or description like '%${keyword}%'
+      </if>
+    </where>
+  </select>
+
+  <!-- 查找当前页的记录 -->
+  <select id="findRecords" resultMap="BaseResultMap" parameterType="cn.edu.scau.component.Page">
+    select * from tb_order
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and order_id like '%${keyword}%' or payment like '%${keyword}%' or post_fee like '%${keyword}%'
+        or status like '%${keyword}%' or create_time like '%${keyword}%' or user_id like '%${keyword}%'
+        or buyer_message like '%${keyword}%' or buyer_nick like '%${keyword}%' or description like '%${keyword}%'
+      </if>
+    </where>
+    limit #{startIndex}, #{pageSize}
+  </select>
+
 </mapper>
