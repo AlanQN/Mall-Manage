@@ -16,13 +16,30 @@
     from tb_express
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from tb_express
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_express
+    where express_name = #{name}
+  </select>
+  <select id="search" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_express
+    where name like #{s}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_express
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.edu.scau.entity.Express" >
-    insert into tb_express (id, express_name)
-    values (#{id,jdbcType=INTEGER}, #{expressName,jdbcType=VARCHAR})
+  <insert id="insert" >
+    insert into tb_express ( express_name)
+    values (#{expressName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.scau.entity.Express" >
     insert into tb_express
