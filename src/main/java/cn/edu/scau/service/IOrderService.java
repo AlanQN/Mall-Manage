@@ -30,6 +30,6 @@ public interface IOrderService {
     public Map<String, Object> delete(Integer id);
 
     //搜索
-    public Map<String, Object> search(Integer id);
+    public Map<String, Object> search(String string);
 
 }

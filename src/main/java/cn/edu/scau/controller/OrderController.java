@@ -59,4 +59,10 @@ public class OrderController {
         return orderService.delete(map.get("orderId"));
     }
 
+    @RequestMapping("/search")
+    @ResponseBody
+    public Map<String,Object> search(@RequestBody Map<String,String> map){
+        return orderService.search(map.get("string"));
+    }
+
 }

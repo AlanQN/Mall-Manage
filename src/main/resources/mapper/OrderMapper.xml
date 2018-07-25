@@ -117,4 +117,10 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 
+  <select id="search" resultMap="BaseResultMap">
+    select *
+    from tb_order
+    where order_id like #{string}
+  </select>
+
 </mapper>
