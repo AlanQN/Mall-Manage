@@ -1,5 +1,7 @@
 package cn.edu.scau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class OrderShipping {
@@ -19,8 +21,7 @@ public class OrderShipping {
 
     private Date created;
 
-
-    public OrderShipping(Integer orderId, String receiverName, String receiverMobile, String receiverState, String receiverCity, String receiverDistrict, String receiverAddress, Date created, Date updated) {
+    public OrderShipping(Integer orderId, String receiverName, String receiverMobile, String receiverState, String receiverCity, String receiverDistrict, String receiverAddress, Date created) {
         this.orderId = orderId;
         this.receiverName = receiverName;
         this.receiverMobile = receiverMobile;
@@ -32,7 +33,6 @@ public class OrderShipping {
     }
 
     public OrderShipping() {
-        super();
     }
 
     public Integer getOrderId() {
@@ -91,6 +91,7 @@ public class OrderShipping {
         this.receiverAddress = receiverAddress == null ? null : receiverAddress.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreated() {
         return created;
     }
