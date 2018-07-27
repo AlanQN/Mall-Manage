@@ -3,7 +3,6 @@ package cn.edu.scau.entity;
 import java.math.BigDecimal;
 
 public class OrderProduct {
-    private Integer id;
 
     private Integer productId;
 
@@ -19,8 +18,7 @@ public class OrderProduct {
 
     private String picPath;
 
-    public OrderProduct(Integer id, Integer productId, Integer orderId, Integer num, String name, BigDecimal price, BigDecimal totalFee, String picPath) {
-        this.id = id;
+    public OrderProduct( Integer productId, Integer orderId, Integer num, String name, BigDecimal price, BigDecimal totalFee, String picPath) {
         this.productId = productId;
         this.orderId = orderId;
         this.num = num;
@@ -32,14 +30,6 @@ public class OrderProduct {
 
     public OrderProduct() {
         super();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getProductId() {

@@ -1,7 +1,10 @@
 package cn.edu.scau.component;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class Page<T> {
 
     private Integer pageNum;   //当前页号
