@@ -1,26 +1,40 @@
 package cn.edu.scau.service;
 
 import cn.edu.scau.component.Page;
+import cn.edu.scau.dto.Result;
 import cn.edu.scau.entity.Express;
 
 import java.util.Map;
 
 public interface IExpressService {
 
-    public Map<String, Object> insert(String name);
+    /**
+     * 添加快递
+     * @param name
+     * @return
+     */
+    public Result<String> insert(String name);
 
-    public Map<String, Object> delete(Integer id);
+    public Result<String> delete(Integer[] ids);
 
-    public Map<String, Object> get(Integer id);
+    public Result<Express> get(Integer id);
 
-    public Map<String, Object> update(Express express);
+    public Result<String> update(Express express);
 
-    public Map<String,Object> search(String string);
+    /**
+     * 获取快递列表
+     * @param pageNum 页
+     * @param pageSize 数量
+     * @return
+     */
+    Result<Page<Express>> getPage(Integer pageNum, Integer pageSize);
 
-    public Map<String, Object> getAll();
-
-    Page<Express> getPage(Page<Express> page);
-
-    Map<String,Object> deleteMore(Integer[] ids);
-
+    /**
+     * 搜索快递
+     * @param pageNum 页
+     * @param pageSize 数量
+     * @param key 关键字
+     * @return
+     */
+    Result<Page<Express>> search(Integer pageNum, Integer pageSize, String key);
 }
