@@ -18,6 +18,13 @@
     <!-- 扫描controller和dao等 -->
     <context:component-scan base-package="cn.edu.scau"></context:component-scan>
 
+    <!-- 允许css目录下所有文件可见 -->
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+    <!-- 允许html目录下所有文件可见 -->
+    <mvc:resources location="/html/" mapping="/html/**"></mvc:resources>
+    <!--允许js目录下所有文件可见 -->
+    <mvc:resources location="/js/" mapping="/images/**"></mvc:resources>
+
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
