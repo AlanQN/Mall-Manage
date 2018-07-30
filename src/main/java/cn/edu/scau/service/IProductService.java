@@ -1,5 +1,6 @@
 package cn.edu.scau.service;
 
+import cn.edu.scau.component.Info;
 import cn.edu.scau.entity.Product;
 
 import java.math.BigDecimal;
@@ -8,14 +9,14 @@ import java.util.Map;
 
 public interface IProductService {
 
-    Product selectByPrimaryKey(Map<String,Integer> request);
+    Info<Product> selectByPrimaryKey(Map<String,Integer> request);
 
-    List<Product> selectByPrice(Map<String,BigDecimal> request);
+    Info<Product> selectByPrice(Map<String,BigDecimal> request);
 
-    Map<String ,String> updateByPrimaryKeySelective(Product record);
+    Info<Product> updateByPrimaryKeySelective(Product record);
 
-    Map<String ,String>insert(Product record);
+    Info<Product> insert(Product record);
 
-    Map<String ,String>deleteByPrimaryKey(Map<String ,Integer> request);
+    Info<Product> deleteByPrimaryKey(Map<String ,Integer> request);
 
 }

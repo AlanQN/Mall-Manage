@@ -3,8 +3,7 @@
 <mapper namespace="cn.edu.scau.dao.OrderProductMapper" >
   <resultMap id="BaseResultMap" type="cn.edu.scau.entity.OrderProduct" >
     <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="num" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -14,39 +13,32 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, product_id, order_id, num, name, price, total_fee, pic_path
+     product_id, order_id, num, name, price, total_fee, pic_path
   </sql>
 
-  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_order_product
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-
-  <delete id="delete" parameterType="java.lang.Integer" >
-    delete from tb_order_product
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
 
   <insert id="insert" parameterType="cn.edu.scau.entity.OrderProduct" >
-    insert into tb_order_product (id, product_id, order_id, 
+    insert into tb_order_product (product_id, order_id,
       num, name, price, total_fee, 
       pic_path)
-    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+    values (#{productId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
       #{num,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{totalFee,jdbcType=DECIMAL}, 
       #{picPath,jdbcType=VARCHAR})
   </insert>
 
-  <update id="update" parameterType="cn.edu.scau.entity.OrderProduct" >
-    update tb_order_product
-    set product_id = #{productId,jdbcType=INTEGER},
-      order_id = #{orderId,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      total_fee = #{totalFee,jdbcType=DECIMAL},
-      pic_path = #{picPath,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  <select id="queryAllByID" resultMap="BaseResultMap">
+    select *
+    from tb_order_product
+    where order_id = #{id}
+    order by product_id
+    limit #{offset},#{limit}
+  </select>
+
+  <select id="getTotal">
+    select sum(total_fee)
+    from tb_order_product
+    where order_id = #{id}
+  </select>
+
+
 </mapper>

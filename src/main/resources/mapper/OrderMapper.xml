@@ -41,23 +41,12 @@
       #{userId,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR})
   </insert>
-  
-  <delete id="delete" parameterType="java.lang.Integer" >
-    delete from tb_order
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
 
-  <!--
-  <delete id="deleteMore" parameterType="java.lang.Integer[]">
-    delete from tb_order
-    where order_id in {list}
-  </delete>
-  -->
-  
   <select id="list" resultMap="BaseResultMap">
     select * from tb_order
   </select>
 
+  <!-- 通过id获取订单-->
   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
@@ -124,17 +113,34 @@
   </select>
 
   <!-- 批量删除-->
-  <delete id="deleteMore">
+  <delete id="delete">
     delete from tb_order
-    <where>
-      <if test="array != null and array.length > 0">
-        and order_id in
+     where order_id in
         <foreach collection="array" item="order_id" open="(" separator="," close=")">
           #{order_id}
         </foreach>
-      </if>
-    </where>
   </delete>
+
+  <!-- 备注-->
+  <update id="description" >
+    update tb_order
+    set description = #{description}
+    where order_id = #{id}
+  </update>
+
+  <!-- 发货-->
+  <update id="consign">
+    update tb_order
+    set shipping_name = #{shippingName},shipping_id = #{shippingId},consign_time = NOW(),status = 3
+    where order_id = #{orderId} and status = 2
+  </update>
+
+  <!-- 取消-->
+  <update id="cancel">
+    update tb_order
+    set status = 5,end_time = NOW()
+    where order_id = #{id} and status in(1,2)
+  </update>
 
   <!--总数-->
   <select id="getTotal" parameterType="cn.edu.scau.component.Page" resultType="java.lang.Integer">
