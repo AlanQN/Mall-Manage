@@ -1,7 +1,10 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.ProductCat;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public interface ProductCatMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,5 +1,6 @@
 package cn.edu.scau.service.impl;
 
+import cn.edu.scau.component.Info;
 import cn.edu.scau.dao.ProductCatMapper;
 import cn.edu.scau.entity.ProductCat;
 import cn.edu.scau.service.IProductCatService;
@@ -16,55 +17,60 @@ public class ProductCatServiceImpl implements IProductCatService{
     @Autowired
     private ProductCatMapper productCatMapper;
 
+    @Autowired
+    private Info info;
+
     @Override
-    public ProductCat selectByPrimaryKey(Map<String, Integer> request) {
+    public Info<ProductCat> selectByPrimaryKey(Map<String, Integer> request) {
+        info.clear();
         Integer id = request.get("id");
         ProductCat product_id = productCatMapper.selectByPrimaryKey(id);
-        return product_id;
+        if(product_id != null){
+            info.setData(product_id);
+            info.setSuccess("查询成功");
+        }
+
+        else {
+            info.setError("查询商品不存在");
+        }
+        return info;
     }
 
     @Override
-    public Map<String, String> deleteByPrimaryKey(Map<String, Integer> request) {
-        Map<String ,String> response = new HashMap<String, String>();
+    public Info<ProductCat> deleteByPrimaryKey(Map<String, Integer> request) {
+        info.clear();
         Integer id = request.get("id");
-        if(productCatMapper.deleteByPrimaryKey(id)>0){
-            response.put("message","success");
-            return response;
+        Integer del = productCatMapper.deleteByPrimaryKey(id);
+        if(del > 0){
+            info.setSuccess("删除成功");
+            return info;
         }
         else {
-            response.put("message","failed");
+            info.setError("删除失败");
+            return info;
         }
-        return response;
+
     }
 
     @Override
-    public Map<String, String> insert(ProductCat record) {
-        Map<String ,String> response = new HashMap<String, String>();
-        Integer id = record.getId();
-        Integer parent_id = record.getParentId();
-        if(id >= parent_id) {
-            if (productCatMapper.insert(record) > 0) {
-                response.put("message", "success");
-                return response;
-            }
-        }
-        else {
-            response.put("message","failed");
-        }
-        return response;
+    public Info<ProductCat> insert(ProductCat record) {
+        info.clear();
+        info.setData(record);
+        info.setSuccess("查询成功");
+        return info;
     }
 
     @Override
-    public Map<String,String> updateByPrimaryKeySelective(@RequestBody ProductCat record) {
-        Map<String ,String> response = new HashMap<String, String>();
+    public Info<ProductCat> updateByPrimaryKeySelective(@RequestBody ProductCat record) {
+        info.clear();
         if(productCatMapper.updateByPrimaryKeySelective(record) > 0 ){
-            response.put("message","success");
-            return response;
+            info.setData(record);
+            info.setSuccess("更新成功");
         }
         else {
-            response.put("message","failed");
+            info.setError("更新失败");
         }
-        return response;
+        return info;
     }
 
 }

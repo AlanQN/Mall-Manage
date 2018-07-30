@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.component.Info;
 import cn.edu.scau.entity.ProductCat;
 import cn.edu.scau.service.impl.ProductCatServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +20,25 @@ public class ProductCatController {
 
     @RequestMapping("/read_id")
     @ResponseBody
-    public ProductCat read_id(@RequestBody Map<String ,Integer> request){
+    public Info<ProductCat> read_id(@RequestBody Map<String ,Integer> request){
         return  productCatService.selectByPrimaryKey(request);
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Map<String,String> delete(@RequestBody Map<String ,Integer> request){
+    public Info<ProductCat> delete(@RequestBody Map<String ,Integer> request){
         return productCatService.deleteByPrimaryKey(request);
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public Map<String,String> add(@RequestBody ProductCat record){
+    public Info<ProductCat> add(@RequestBody ProductCat record){
         return productCatService.insert(record);
     }
 
     @RequestMapping("/modify")
     @ResponseBody
-    public Map<String,String> modify(@RequestBody ProductCat record){
+    public Info<ProductCat> modify(@RequestBody ProductCat record){
         return productCatService.updateByPrimaryKeySelective(record);
     }
 }
