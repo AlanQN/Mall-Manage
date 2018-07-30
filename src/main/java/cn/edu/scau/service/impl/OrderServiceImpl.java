@@ -1,19 +1,22 @@
 package cn.edu.scau.service.impl;
 
+
 import cn.edu.scau.component.Page;
 import cn.edu.scau.dao.OrderMapper;
 import cn.edu.scau.dao.OrderProductMapper;
 import cn.edu.scau.dao.OrderShippingMapper;
+import cn.edu.scau.dto.OrderInfo;
+import cn.edu.scau.dto.Result;
 import cn.edu.scau.entity.Order;
+import cn.edu.scau.entity.OrderProduct;
 import cn.edu.scau.entity.OrderShipping;
 import cn.edu.scau.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -24,185 +27,242 @@ public class OrderServiceImpl implements IOrderService {
     private OrderShippingMapper orderShippingMapper;
     @Autowired
     private OrderProductMapper orderProductMapper;
+    @Autowired
+    private Result<Order> orderFindResult;
+    @Autowired
+    private Result<OrderInfo> orderInfoResult;
+    @Autowired
+    private OrderInfo orderInfo;
+    @Autowired
+    private Result<String> orderStringResult;
+    @Autowired
+    private Result<Page<Order>> orderListResult;
+    @Autowired
+    private Page<Order> orderPage;
+
 
     /**
-     * 获取全部订单
+     * 通过id获取订单
      *
+     * @param id
      * @return
      */
     @Override
-    public Map<String, Object> getAll() {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        List<Order> orders;
-        if ((orders = orderMapper.list()) == null) {
-            errorCode = 1;
-        }
-        map.put("errorCode", errorCode);
-        map.put("orderList", orders);
-        return map;
-    }
 
-    /**
-     * 添加订单
-     * 订单状态初始为1 未付款
-     *
-     * @param order
-     * @return
-     */
-    @Override
-    public Map<String, Object> save(Order order) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        order.setStatus(1);
-        order.setCreateTime(new Date());
-        order.setUpdateTime(new Date());
-        if (orderMapper.save(order) == 0) {
-            errorCode = 1;
-        }
-        map.put("errorCode", errorCode);
-        return map;
-    }
+    public Result<Order> getById(Integer id) {
 
-    /**
-     * 订单发货
-     * 修改订单更新时间和订单状态
-     * 添加订单快递信息
-     *
-     * @param orderShipping
-     * @return 1表示获取订单失败，2表示更新订单失败，3表示发货失败,4订单已发货
-     */
-    @Override
-    public Map<String, Object> consign(OrderShipping orderShipping) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        Order order;
-        if ((order = orderMapper.getById(orderShipping.getOrderId())) == null) {
-            errorCode = 1;
-        } else if (order.getStatus() == 2 && (orderShippingMapper.select(orderShipping.getOrderId()) == null)) {
-            //订单状态为未发货且订单的物流信息不存在
-            order.setUpdateTime(new Date());
-            order.setStatus(3);
-            if (orderMapper.update(order) == 0) {
-                errorCode = 2;
-            }
-            orderShipping.setCreated(new Date());
-            if (orderShippingMapper.insert(orderShipping) == 0) {
-                errorCode = 3;
-            }
+        Order order = orderMapper.getById(id);
+        if (order != null) {
+            orderFindResult.setSuccess(true);
+            orderFindResult.setData(order);
+            orderFindResult.setError(null);
         } else {
-            errorCode = 4;
+            orderFindResult.setSuccess(false);
+            orderFindResult.setError("不存在");
+            orderFindResult.setData(null);
         }
-        map.put("errorCode", errorCode);
-        return map;
+        return orderFindResult;
     }
 
     /**
      * 获取订单详情
-     * @param id
+     * @param offset 起始位置
+     * @param limit 数量
+     * @param id 订单id
      * @return
      */
     @Override
-    public Map<String, Object> info(Integer id) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
+    public Result<OrderInfo> getOrderInfoById(Integer offset, Integer limit, Integer id) {
 
-        map.put("errorCode", errorCode);
-        return map;
+        OrderShipping orderShipping = orderShippingMapper.select(id);
+        List<OrderProduct> orderProductList = orderProductMapper.queryAllByID(offset, limit, id);
+        if ( orderProductList == null || orderShipping == null ) {
+            orderInfoResult.setSuccess(false);
+            orderInfoResult.setData(null);
+            orderInfoResult.setError("无法得到订单详情或者订单商品");
+        }
+        else {
+            orderInfo.setOrderProductList(orderProductList);
+            orderInfo.setOrderShipping(orderShipping);
+            orderInfoResult.setSuccess(true);
+            orderInfoResult.setData(orderInfo);
+            orderInfoResult.setError(null);
+        }
+        return orderInfoResult;
     }
 
     /**
-     * 订单取消
-     * @param id
+     * 批量删除订单
+     * @param ids id数组
      * @return
      */
     @Override
-    public Map<String, Object> cancel(Integer id) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        Order order = orderMapper.getById(id);
-        if(order.getStatus() == 1 || order.getStatus() ==2)
-        {
-            order.setStatus(6);
-            orderMapper.update(order);
+    public Result<String> delete(Integer[] ids) {
+        int i = orderMapper.delete(ids);
+        if(i >0){
+            orderStringResult.setSuccess(true);
+            orderStringResult.setData("成功删除"+i+"个订单");
+            orderStringResult.setError(null);
         }else {
-            errorCode = 1;
+            orderStringResult.setSuccess(false);
+            orderStringResult.setData(null);
+            orderStringResult.setError("删除失败");
         }
-        map.put("errorCode", errorCode);
-        return map;
+        return orderStringResult;
     }
 
     /**
-     * 新的备注
-     * @param order
+     * 添加或修改备注
+     * @param id 订单id
+     * @param description 备注
      * @return
      */
     @Override
-    public Map<String, Object> description(Order order) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        orderMapper.update(order);
-        map.put("errorCode", errorCode);
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> delete(Integer id) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        Order order = orderMapper.getById(id);
-        if(order.getStatus() == 6 )
-        {
-            orderMapper.delete(id);
+    public Result<String> description(Integer id, String description) {
+        if(orderMapper.description(id,description) > 0){
+            orderStringResult.setSuccess(true);
+            orderStringResult.setData("成功");
+            orderStringResult.setError(null);
         }else {
-            errorCode = 1;
+            orderStringResult.setSuccess(false);
+            orderStringResult.setData(null);
+            orderStringResult.setError("删除失败");
         }
-        map.put("errorCode", errorCode);
-        return map;
+
+        return orderStringResult;
     }
 
+    /**
+     * 取消订单
+     * 只有状态为1和2的才能取消
+     * @param id 订单id
+     * @return
+     */
     @Override
-    public Map<String, Object> search(String string) {
-        Map<String, Object> map = new HashMap<>();
-        Integer errorCode = 0;
-        String s1 = "%"+string+"%";
-        List<Order> orderList = orderMapper.search(s1);
-        if (orderList != null){
-            map.put("errorCode" ,errorCode);
-            map.put("orderList",orderList);
+    public Result<String> cancel(Integer id) {
+        if(orderMapper.cancel(id) > 0){
+            orderStringResult.setSuccess(true);
+            orderStringResult.setData("成功");
+            orderStringResult.setError(null);
         }else {
-            errorCode = 1;
-            map.put("errorCode" ,errorCode);
+            orderStringResult.setSuccess(false);
+            orderStringResult.setData(null);
+            orderStringResult.setError("取消失败");
         }
-        return map;
+        return orderStringResult;
     }
 
+    /**
+     * 发货
+     * @param orderId 订单id
+     * @param shippingId 物流单号
+     * @param shippingName 物流名称
+     * @return
+     */
     @Override
-    public Map<String, Object> deleteMore(Integer[] ids) {
-        Map<String,Object> map = new HashMap<>();
-        //删除批量选定的订单
-        if(orderMapper.deleteMore(ids) > 0){
-            map.put("errorCode",0);
+    public Result<String> consign(Integer orderId, String shippingId, String shippingName) {
+        if(orderMapper.consign(orderId,shippingId,shippingName) > 0){
+            orderStringResult.setSuccess(true);
+            orderStringResult.setData("成功");
+            orderStringResult.setError(null);
         }else {
-            map.put("errorCode",1);
+            orderStringResult.setSuccess(false);
+            orderStringResult.setData(null);
+            orderStringResult.setError("发货失败");
         }
-        return map;
+        return orderStringResult;
+    }
+
+    /**
+     * 获取订单
+     * 分页
+     * @param pageNum 页
+     * @param pageSize 数量
+     * @return
+     */
+    @Override
+    public Result<Page<Order>> orderList(Integer pageNum, Integer pageSize) {
+        orderPage.setPageNum(pageNum);
+        orderPage.setPageSize(pageSize);
+        //查询订单总数
+        Integer totalNum = orderMapper.getTotal(orderPage);
+        orderPage.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        Integer totalPage = (int) Math.ceil((double) totalNum / pageSize);
+        Integer startIndex =pageSize * (pageNum - 1);
+        orderPage.setTotalPage(totalPage);
+        orderPage.setStartIndex(startIndex);
+        //查询当前页用户
+        List<Order> orderList = orderMapper.findRecords(orderPage);
+
+        if(orderList != null && orderList.size() > 0 ){
+            orderListResult.setSuccess(true);
+            orderPage.setRecordNum(orderList.size());
+            orderPage.setRecords(orderList);
+            orderListResult.setData(orderPage);
+            orderListResult.setError(null);
+        }else {
+            orderListResult.setSuccess(false);
+            orderListResult.setData(null);
+            orderListResult.setError("获取失败");
+
+        }
+        return orderListResult;
+    }
+
+    /**
+     * 搜索
+     * @param pageNum 页
+     * @param pageSize 数量
+     * @param key 关键字
+     * @return
+     */
+    @Override
+    public Result<Page<Order>> search(Integer pageNum, Integer pageSize, String key) {
+        orderPage.setPageNum(pageNum);
+        orderPage.setPageSize(pageSize);
+        orderPage.setKeyword(key);
+        //查询订单总数
+        Integer totalNum = orderMapper.getTotal(orderPage);
+        orderPage.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        Integer totalPage = (int) Math.ceil((double) totalNum / pageSize);
+        Integer startIndex =pageSize * (pageNum - 1);
+        orderPage.setTotalPage(totalPage);
+        orderPage.setStartIndex(startIndex);
+        //查询当前页用户
+        List<Order> orderList = orderMapper.findRecords(orderPage);
+
+        if(orderList != null && orderList.size() > 0 ){
+            orderListResult.setSuccess(true);
+            orderPage.setRecordNum(orderList.size());
+            orderPage.setRecords(orderList);
+            orderListResult.setData(orderPage);
+            orderListResult.setError(null);
+        }else {
+            orderListResult.setSuccess(false);
+            orderListResult.setData(null);
+            orderListResult.setError("获取失败");
+
+        }
+        return orderListResult;
     }
 
     @Override
-    public Page<Order> getPage(Page<Order> page) {
-        //查询记录总数
-        int total = orderMapper.getTotal(page);
-        page.setTotalRecord(total);
-        page.setTotalPage((int)Math.ceil((double)total/page.getPageSize()));
-        page.setStartIndex((page.getPageNum()-1)*page.getPageSize());
-        //查找记录
-        if (page.getPageNum() > 0 && page.getPageNum() <= page.getTotalPage()) {
-            List<Order> orders = orderMapper.findRecords(page);
-            page.setRecords(orders);
-            page.setRecordNum(orders.size());
+    public Result<String> add(Order order) {
+        order.setCreateTime(new Date());
+        order.setUpdateTime(new Date());
+        if(orderMapper.save(order) > 0){
+            orderStringResult.setSuccess(true);
+            orderStringResult.setData("成功");
+            orderStringResult.setError(null);
+        }else {
+            orderStringResult.setSuccess(false);
+            orderStringResult.setData(null);
+            orderStringResult.setError("添加失败");
         }
-        return page;
+        return orderStringResult;
     }
+
 
 }

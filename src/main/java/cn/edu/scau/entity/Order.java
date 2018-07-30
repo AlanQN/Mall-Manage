@@ -1,5 +1,7 @@
 package cn.edu.scau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -91,6 +93,7 @@ public class Order {
         this.status = status;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -99,6 +102,7 @@ public class Order {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -107,6 +111,7 @@ public class Order {
         this.updateTime = updateTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getPaymentTime() {
         return paymentTime;
     }
@@ -115,6 +120,7 @@ public class Order {
         this.paymentTime = paymentTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getConsignTime() {
         return consignTime;
     }
@@ -123,6 +129,7 @@ public class Order {
         this.consignTime = consignTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getEndTime() {
         return endTime;
     }
@@ -131,6 +138,7 @@ public class Order {
         this.endTime = endTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCloseTime() {
         return closeTime;
     }

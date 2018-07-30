@@ -24,6 +24,16 @@ public class Product {
 
     private Date updated;
 
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Product(Integer id, String name, String description, BigDecimal price, Integer num, String image, String catid, Integer status, Date created, Date updated) {
         this.id = id;
         this.name = name;

@@ -1,8 +1,10 @@
 package cn.edu.scau.controller;
 
+
 import cn.edu.scau.component.Page;
+import cn.edu.scau.dto.OrderInfo;
+import cn.edu.scau.dto.Result;
 import cn.edu.scau.entity.Order;
-import cn.edu.scau.entity.OrderShipping;
 import cn.edu.scau.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,62 +24,75 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
-    @RequestMapping("/getAll")
+    @RequestMapping("/get")
     @ResponseBody
-    public Map<String,Object> getAll(){
-        return orderService.getAll();
+    public Result<Order> getById(@RequestBody Map<String,Object> map){
+        Integer orderId = (Integer) map.get("orderId");
+        return  orderService.getById(orderId);
     }
 
-
-    @RequestMapping("/add")
+    @RequestMapping("/info")
     @ResponseBody
-    public Map<String,Object> save(@RequestBody Order order ){
-        return orderService.save(order);
-    }
-
-
-    @RequestMapping("/consign")
-    @ResponseBody
-    public Map<String,Object> consign(@RequestBody OrderShipping orderShipping){
-        return orderService.consign(orderShipping);
-    }
-
-
-    @RequestMapping("/description")
-    @ResponseBody
-    public Map<String,Object> description(@RequestBody Order order){
-        return orderService.description(order);
-    }
-
-    @RequestMapping("/cancel")
-    @ResponseBody
-    public Map<String,Object> cancel(@RequestBody Map<String,Integer> map){
-        return orderService.cancel(map.get("orderId"));
+    public Result<OrderInfo> getInfo(@RequestBody Map<String,Object> map){
+        Integer offest = (Integer) map.get("offset");
+        Integer limit = (Integer)map.get("limit");
+        Integer orderId = (Integer)map.get("orderId");
+        return orderService.getOrderInfoById(offest,limit,orderId);
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Map<String,Object> delete(@RequestBody Map<String,Integer> map){
-        return orderService.delete(map.get("orderId"));
+    public Result<String> delete(@RequestBody Map<String,Object> map){
+        ArrayList<Integer> list = (ArrayList<Integer>) map.get("ids");
+        Integer[] ids = list.toArray(new Integer[list.size()]);
+        return orderService.delete(ids);
+    }
+
+    @RequestMapping("/description")
+    @ResponseBody
+    public Result<String> description(@RequestBody Map<String,Object> map){
+        Integer id = (Integer) map.get("orderId");
+        String description = (String) map.get("description");
+        return orderService.description(id,description);
+    }
+
+    @RequestMapping("cancel")
+    @ResponseBody
+    public Result<String> cancel(@RequestBody Map<String,Object> map){
+        Integer id = (Integer)map.get("orderId");
+        return orderService.cancel(id);
+    }
+
+    @RequestMapping("/consign")
+    @ResponseBody
+    public Result<String> consign(@RequestBody Map<String,Object> map){
+        Integer orderId = (Integer) map.get("orderId");
+        String shippingId = (String) map.get("shippingId");
+        String shippingName = (String)map.get("shippingName");
+        return orderService.consign(orderId,shippingId,shippingName);
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public Result<Page<Order>> list(@RequestBody Map<String,Object> map){
+        Integer pageNum = (Integer) map.get("pageNum");
+        Integer pageSize = (Integer)map.get("pageSize");
+        return orderService.orderList(pageNum,pageSize);
     }
 
     @RequestMapping("/search")
     @ResponseBody
-    public Map<String,Object> search(@RequestBody Map<String,String> map){
-        return orderService.search(map.get("string"));
+    public Result<Page<Order>> search(@RequestBody Map<String,Object> map){
+        Integer pageNum = (Integer) map.get("pageNum");
+        Integer pageSize = (Integer)map.get("pageSize");
+        String key = (String) map.get("key");
+        return orderService.search(pageNum,pageSize,key);
     }
 
-    @RequestMapping("/deleteMore")
+    @RequestMapping("/add")
     @ResponseBody
-    public Map<String,Object> deleteMore(@RequestBody Integer[] ids){
-        return orderService.deleteMore(ids);
+    public Result<String> add(@RequestBody Map<String,Order> map){
+        Order order = (Order) map.get("order");
+        return orderService.add(order);
     }
-
-
-    @RequestMapping("/getPage")
-    @ResponseBody
-    public Page<Order> getPage(@RequestBody Page<Order> page){
-        return orderService.getPage(page);
-    }
-
 }

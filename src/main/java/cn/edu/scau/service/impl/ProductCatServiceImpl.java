@@ -40,9 +40,13 @@ public class ProductCatServiceImpl implements IProductCatService{
     @Override
     public Map<String, String> insert(ProductCat record) {
         Map<String ,String> response = new HashMap<String, String>();
-        if(productCatMapper.insert(record)>0){
-            response.put("message","success");
-            return response;
+        Integer id = record.getId();
+        Integer parent_id = record.getParentId();
+        if(id >= parent_id) {
+            if (productCatMapper.insert(record) > 0) {
+                response.put("message", "success");
+                return response;
+            }
         }
         else {
             response.put("message","failed");

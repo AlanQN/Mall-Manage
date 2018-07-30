@@ -7,6 +7,8 @@ import cn.edu.scau.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import cn.edu.scau.component.Info;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -17,63 +19,89 @@ import java.util.Map;
 public class ProductServiceImpl implements IProductService{
 
     @Autowired
-    private ProductMapper productMapper;
+    ProductMapper productMapper;
+
+    @Autowired
+    private Info info;
 
     @Override
-    public Product selectByPrimaryKey(@RequestBody Map<String, Integer> request) {
-//        获取id
-        Integer id = request.get("id");
-//        根据id查找商品信息
-        Product product_id = productMapper.selectByPrimaryKey(id);
-        return product_id;
+    public Info<Product> selectByPrimaryKey(@RequestBody Map<String, Integer> request) {
+        Product product_id = productMapper.selectByPrimaryKey(request.get("id"));
+        if(product_id != null){
+            info.setData(product_id);
+            info.getSuccess();
+        }
+
+        else {
+            info.setError("查询商品不存在");
+        }
+
+        return info;
     }
 
     @Override
-    public List<Product> selectByPrice(@RequestBody Map<String,BigDecimal> requset) {
-        BigDecimal price = requset.get("price");
-        List<Product> product_price = productMapper.selectByPrice(price);
-        return product_price;
+    public Info<Product> selectByPrice(@RequestBody Map<String,BigDecimal> requset) {
+        List<Product> product_price = productMapper.selectByPrice(requset.get("price"));
+        if(product_price != null){
+            info.setData(product_price);
+            info.getSuccess();
+        }
+        else {
+            info.setError("查询商品不存在");
+        }
+
+        return info;
     }
 
     @Override
-    public Map<String,String> updateByPrimaryKeySelective(@RequestBody Product record) {
-        Map<String ,String> response = new HashMap<String, String>();
+    public Info<Product> updateByPrimaryKeySelective(@RequestBody Product record) {
         if(productMapper.updateByPrimaryKeySelective(record) > 0 ){
-            response.put("message","success");
-            return response;
+           info.setData(record);
+           info.getSuccess();
         }
         else {
-            response.put("message","failed");
+            info.setError("更新失败");
         }
-        return response;
+        return info;
     }
 
 
 
     @Override
-    public Map<String, String> insert(Product record) {
-        Map<String ,String> response = new HashMap<String, String>();
-        if(productMapper.insert(record)>0){
-            response.put("message","success");
-            return response;
+    public Info<Product> insert(@RequestBody Product record) {
+
+        if(productMapper.selectByPrimaryKey(record.getId()) == null){
+            info.getSuccess();
+            return info;
         }
-        else {
-            response.put("message","failed");
+
+        else{
+            if (record.getId() != null) {
+                info.setError("id值已存在，不可重复");
+            }
+            else if (record.getId() == null){
+                info.setError("id为空");
+            }
+            else if (record.getCatid() == null){
+                info.setError("分类为空");
+            }
+            else info.setError("其他错误");
+
+            return info;
         }
-        return response;
+
     }
 
+
     @Override
-    public Map<String, String> deleteByPrimaryKey(Map<String, Integer> request) {
-        Map<String ,String> response = new HashMap<String, String>();
+    public Info<Product> deleteByPrimaryKey(@RequestBody Map<String, Integer> request) {
         Integer id = request.get("id");
         if(productMapper.deleteByPrimaryKey(id)>0){
-            response.put("message","success");
-            return response;
+            info.getSuccess();
         }
         else {
-            response.put("message","failed");
+            info.setError("删除失败");
         }
-        return response;
+        return info;
     }
 }

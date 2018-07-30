@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.component.Info;
 import cn.edu.scau.entity.Product;
 import cn.edu.scau.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,13 @@ public class ProductController {
 
     @RequestMapping("/read_id")
     @ResponseBody
-    public Product read_id(@RequestBody Map<String ,Integer> request){
+    public Info<Product> read_id(@RequestBody Map<String ,Integer> request){
         return  productService.selectByPrimaryKey(request);
     }
 
     @RequestMapping("/read_price")
     @ResponseBody
-    public List<Product> read_price(@RequestBody Map<String ,BigDecimal> request){
+    public Info<Product> read_price(@RequestBody Map<String ,BigDecimal> request){
 
         return  productService.selectByPrice(request);
     }
@@ -41,13 +42,13 @@ public class ProductController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Map<String,String> add(@RequestBody Product record){
+    public Info<Product> add(@RequestBody Product record){
         return productService.insert(record);
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Map<String,String> delete(@RequestBody Map<String ,Integer> request){
+    public Info<Product> delete(@RequestBody Map<String ,Integer> request){
         return productService.deleteByPrimaryKey(request);
     }
 //    测试

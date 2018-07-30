@@ -16,6 +16,73 @@
     <link rel="stylesheet" href="assets/css/amazeui.min.css" />
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <script src="assets/js/jquery1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/system/basic",
+                dataType: "json",
+                async: false,
+                data: {},
+                success: function (data) {
+                    document.getElementById("setting-id").value = data.id;
+                    document.getElementById("website-name").value = data.webName;
+                    document.getElementById("keyword").value = data.keyWord;
+                    document.getElementById("web-description").value = data.description;
+                    document.getElementById("copyright").value = data.copyright;
+                    var hasLoginInfo = data.hasLogNotice;
+                    document.getElementById("login_inform").value = data.logNotice;
+                    var hasWelcomeInfo = data.hasAllNotice;
+                    document.getElementById("welcome_inform").value = data.allNotice;
+                    document.getElementById("notice").innerText = data.notice;
+                    document.getElementById("update_log").innerText = data.updateLog;
+                    if (hasLoginInfo = 0) {
+
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        });
+
+        function changeSetting() {
+            console.log($("#notice").val());
+            var rawData = {
+                id: $("#setting-id").val(),
+                webName: $("#website-name").val(),
+                keyWord: $("#keyword").val(),
+                description: $("#web-description").val(),
+                copyright: $("#copyright").val(),
+                hasLogNotice: "0",
+                logNotice: $("#login_inform").val(),
+                hasAllNotice: "0",
+                allNotice: $("#welcome_inform").val(),
+                notice: $("#notice").val(),
+                updateLog: $("#update_log").val()
+            };
+            var fData = JSON.stringify(rawData);
+            console.log(fData);
+            $.ajax({
+                url: "http://localhost:8080/system/modify",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: "false",
+                data: fData,
+                success:function (data) {
+                    console.log(data);
+                    if (data.result) {
+                        alert("修改成功！");
+                    }
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -99,45 +166,36 @@
                     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
+                                <input type="hidden" id="setting-id">
+                            </div>
+                            <div class="am-form-group">
                                 <label for="website-name" class="am-u-sm-3 am-form-label">网站名称</label>
                                 <div class="am-u-sm-9">
-                                    <input type="password" id="website-name" placeholder="输入网站名称">
+                                    <input type="text" id="website-name" placeholder="输入网站名称">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="keyword" class="am-u-sm-3 am-form-label">关键词</label>
                                 <div class="am-u-sm-9">
-                                    <input type="email" id="keyword" placeholder="输入关键词">
+                                    <input type="text" id="keyword" placeholder="输入关键词">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="web-description" class="am-u-sm-3 am-form-label">网站描述</label>
                                 <div class="am-u-sm-9">
-                                    <input type="email" id="web-description" placeholder="输入网站描述">
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label for="ways" class="am-u-sm-3 am-form-label">css/js/images路径</label>
-                                <div class="am-u-sm-9">
-                                    <input type="email" id="ways" placeholder="输入css/js/image路径">
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label for="config" class="am-u-sm-3 am-form-label">上传目录配置</label>
-                                <div class="am-u-sm-9">
-                                    <input type="email" id="config" placeholder="输入上传目录配置">
+                                    <input type="text" id="web-description" placeholder="输入网站描述">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="copyright" class="am-u-sm-3 am-form-label">底部版权信息</label>
                                 <div class="am-u-sm-9">
-                                    <input type="email" id="copyright" placeholder="输入底部版权信息">
+                                    <input type="text" id="copyright" placeholder="输入底部版权信息">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="login_inform" class="am-u-sm-3 am-form-label">登录通知</label>
                                 <div class="am-u-sm-9">
-                                    <input type="email" id="login_inform" placeholder="输入登录通知">
+                                    <textarea class="" cols="6" rows="5" id="login_inform" placeholder="输入登录通知"></textarea>
                                     <label for="use_login_inform">
                                         <input id="use_login_inform" type="checkbox"> 启用
                                     </label>
@@ -146,7 +204,7 @@
                             <div class="am-form-group">
                                 <label for="welcome_inform" class="am-u-sm-3 am-form-label">欢迎页通知</label>
                                 <div class="am-u-sm-9">
-                                    <input type="email" id="welcome_inform" placeholder="输入欢迎页通知">
+                                    <textarea class="" cols="6" rows="5" id="welcome_inform" placeholder="输入欢迎页通知"></textarea>
                                     <label for="use_welcome_inform">
                                         <input id="use_welcome_inform" type="checkbox"> 启用
                                     </label>
@@ -155,18 +213,18 @@
                             <div class="am-form-group">
                                 <label for="notice" class="am-u-sm-3 am-form-label">公告</label>
                                 <div class="am-u-sm-9">
-                                    <textarea class="" rows="5" id="notice" placeholder="输入公告"></textarea>
+                                    <textarea class="" cols="6" rows="5" id="notice" placeholder="输入公告"></textarea>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="update_log" class="am-u-sm-3 am-form-label">更新日志</label>
                                 <div class="am-u-sm-9">
-                                    <textarea class="" rows="5" id="update_log" placeholder="输入新的日志"></textarea>
+                                    <textarea class="" cols="6" rows="5" id="update_log" placeholder="输入新的日志"></textarea>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="button" class="am-btn am-btn-primary">保存修改</button>
+                                    <button type="button" class="am-btn am-btn-primary" onclick="changeSetting()">保存修改</button>
                                 </div>
                             </div>
                         </form>
@@ -176,12 +234,15 @@
             <!-- content end -->
         </div>
         <!--[if lt IE 9]>
-<script src="assets/js/jquery1.11.1.min.js"></script>
-<script src="assets/js/modernizr.js"></script>
-<script src="assets/js/polyfill/rem.min.js"></script>
-<script src="assets/js/polyfill/respond.min.js"></script>
-<script src="assets/js/amazeui.legacy.js"></script>
-<![endif]-->
+        <div id="response">
+            <h2>使用ajax获取数据</h2>
+        </div>
+
+        <script src="assets/js/modernizr.js"></script>
+        <script src="assets/js/polyfill/rem.min.js"></script>
+        <script src="assets/js/polyfill/respond.min.js"></script>
+        <script src="assets/js/amazeui.legacy.js"></script>
+        <![endif]-->
         <!--[if (gte IE 9)|!(IE)]><!-->
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/amazeui.min.js"></script>
