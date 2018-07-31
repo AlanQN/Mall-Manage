@@ -1,7 +1,9 @@
 package cn.edu.scau.controller;
 
 import cn.edu.scau.component.Page;
+import cn.edu.scau.entity.Admin;
 import cn.edu.scau.entity.User;
+import cn.edu.scau.service.IAdminService;
 import cn.edu.scau.service.IUserService;
 import cn.edu.scau.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +25,31 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
+    IAdminService adminService;
+
+    /**
+     * 用户登录
+     * @param request
+     * @param admin
+     * @return
+     */
+    @RequestMapping("/login")
+    @ResponseBody
+    public Map<String, Object> login(HttpServletRequest request, @RequestBody Admin admin) {
+        return adminService.login(request, admin);
+    }
+
+    /**
+     * 用户注销
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Map<String, Object> logout(HttpServletRequest request) {
+        return adminService.logout(request);
+    }
 
     /**
      * 添加用户
@@ -52,7 +80,7 @@ public class UserController {
      */
     @RequestMapping("/removeMore")
     @ResponseBody
-    public Map<String, Object> removeMore(@RequestBody Integer[] request) {
+    public Map<String, Object> removeMore(@RequestBody Map<String, Integer[]> request) {
         return userService.removeMore(request);
     }
 
@@ -129,7 +157,7 @@ public class UserController {
      */
     @RequestMapping("/deleteMore")
     @ResponseBody
-    public Map<String, Object> deleteMore(@RequestBody Integer[] request) {
+    public Map<String, Object> deleteMore(@RequestBody Map<String, Integer[]> request) {
         return userService.deleteMore(request);
     }
 
@@ -151,7 +179,7 @@ public class UserController {
      */
     @RequestMapping("/restoreMore")
     @ResponseBody
-    public Map<String, Object> restoreMore(@RequestBody Integer[] request) {
+    public Map<String, Object> restoreMore(@RequestBody Map<String, Integer[]> request) {
         return userService.restoreMore(request);
     }
 
@@ -160,10 +188,21 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/query")
+    @RequestMapping("/queryNormal")
     @ResponseBody
-    public Page<User> query(@RequestBody  Page<User> request) {
-        return userService.findByPage(request);
+    public Page<User> queryNormal(@RequestBody  Page<User> request) {
+        return userService.findNormalByPage(request);
+    }
+
+    /**
+     * 分页查找已移除用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/queryRemove")
+    @ResponseBody
+    public Page<User> queryRemove(@RequestBody  Page<User> request) {
+        return userService.findRemoveByPage(request);
     }
 
     /**

@@ -34,5 +34,19 @@
             <value>.jsp</value>	<!-- 对返回的字符串自动拼接后缀.jsp -->
         </property>
     </bean>
+    
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.edu.scau.interceptor.LoginInterceptor">
+                <property name="excludeUrl">
+                    <list>
+                        <value>http://localhost:8080/user/login</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

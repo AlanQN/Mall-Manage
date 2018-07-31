@@ -31,10 +31,10 @@ public interface IUserService {
 
     /**
      * 批量移除用户
-     * @param ids 请求参数
+     * @param request 请求参数
      * @return
      */
-    public Map<String, Object> removeMore(Integer[] ids);
+    public Map<String, Object> removeMore(Map<String, Integer[]> request);
 
     /**
      * 禁用用户
@@ -73,10 +73,10 @@ public interface IUserService {
 
     /**
      * 批量删除用户
-     * @param ids 请求参数
+     * @param request 请求参数
      * @return
      */
-    public Map<String, Object> deleteMore(Integer[] ids);
+    public Map<String, Object> deleteMore(Map<String, Integer[]> request);
 
     /**
      * 还原单个用户
@@ -87,17 +87,24 @@ public interface IUserService {
 
     /**
      * 批量还原用户
-     * @param ids 请求参数
+     * @param request 请求参数
      * @return
      */
-    public Map<String, Object> restoreMore(Integer[] ids);
+    public Map<String, Object> restoreMore(Map<String, Integer[]> request);
 
     /**
      * 分页查询用户
      * @param page
      * @return
      */
-    public Page<User> findByPage(Page<User> page);
+    public Page<User> findNormalByPage(Page<User> page);
+
+    /**
+     * 分页查询已移除用户
+     * @param page
+     * @return
+     */
+    public Page<User> findRemoveByPage(Page<User> page);
 
     /**
      * 根据指定字段模糊查找用户

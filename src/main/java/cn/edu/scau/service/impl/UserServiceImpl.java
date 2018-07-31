@@ -58,8 +58,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Map<String, Object> removeMore(Integer[] ids) {
+    public Map<String, Object> removeMore(Map<String, Integer[]> request) {
         Map<String, Object> response = new HashMap<String, Object>();
+        //获取要移除用户的编号
+        Integer[] ids = request.get("ids");
         //移除指定的用户
         if (userMapper.removeMore(ids) > 0) {
             response.put("result", true);
@@ -136,8 +138,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Map<String, Object> deleteMore(Integer[] ids) {
+    public Map<String, Object> deleteMore(Map<String, Integer[]> request) {
         Map<String, Object> response = new HashMap<String, Object>();
+        //获取要删除用户的编号
+        Integer[] ids = request.get("ids");
         //删除批量选定的用户
         if (userMapper.deleteMore(ids) > 0) {
             response.put("result", true);
@@ -162,8 +166,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Map<String, Object> restoreMore(Integer[] ids) {
+    public Map<String, Object> restoreMore(Map<String, Integer[]> request) {
         Map<String, Object> response = new HashMap<String, Object>();
+        //获取要还原用户的编号
+        Integer[] ids = request.get("ids");
         //还原批量选定的用户
         if (userMapper.restoreMore(ids) > 0) {
             response.put("result", true);
@@ -174,9 +180,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Page<User> findByPage(Page<User> page) {
+    public Page<User> findNormalByPage(Page<User> page) {
         //查询用户总数
-        int totalNum = userMapper.getUserNum();
+        int totalNum = userMapper.getNormalUserNum();
         //设置用户总数
         page.setTotalRecord(totalNum);
         //设置总页数和偏移量
@@ -185,7 +191,27 @@ public class UserServiceImpl implements IUserService {
         page.setTotalPage(totalPage);
         page.setStartIndex(startIndex);
         //查询当前页的用户
-        List<User> users = userMapper.findByPage(page);
+        List<User> users = userMapper.findNormalByPage(page);
+        //设置当前页需要显示的记录
+        page.setRecords(users);
+        //设置当前页的实际记录数
+        page.setRecordNum(users.size());
+        return page;
+    }
+
+    @Override
+    public Page<User> findRemoveByPage(Page<User> page) {
+        //查询用户总数
+        int totalNum = userMapper.getRemoveUserNum();
+        //设置用户总数
+        page.setTotalRecord(totalNum);
+        //设置总页数和偏移量
+        int totalPage = (int) Math.ceil((double) totalNum / page.getPageSize());
+        int startIndex = page.getPageSize() * (page.getPageNum() - 1);
+        page.setTotalPage(totalPage);
+        page.setStartIndex(startIndex);
+        //查询当前页的用户
+        List<User> users = userMapper.findRemoveByPage(page);
         //设置当前页需要显示的记录
         page.setRecords(users);
         //设置当前页的实际记录数

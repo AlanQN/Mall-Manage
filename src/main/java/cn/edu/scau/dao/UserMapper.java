@@ -114,12 +114,25 @@ public interface UserMapper {
      * @param page
      * @return List<User> 用户
      */
-    public List<User> findByPage(Page page);
+    public List<User> findNormalByPage(Page page);
 
     /**
      * 获取用户总数
      * @return
      */
-    public int getUserNum();
+    public int getNormalUserNum();
+
+    /**
+     * 分页查找已移除用户
+     * @param page
+     * @return List<User> 用户
+     */
+    public List<User> findRemoveByPage(Page page);
+
+    /**
+     * 获取已移除用户总数
+     * @return
+     */
+    public int getRemoveUserNum();
 
 }
