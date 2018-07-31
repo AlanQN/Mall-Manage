@@ -1,3 +1,4 @@
+import cn.edu.scau.controller.OrderController;
 import cn.edu.scau.service.IOrderService;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggerFactory;
@@ -15,6 +16,8 @@ public class Test {
 
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private OrderController orderController;
 
     @org.junit.Test
     public void testOrderShipping(){

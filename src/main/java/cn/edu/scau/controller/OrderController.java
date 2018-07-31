@@ -1,6 +1,7 @@
 package cn.edu.scau.controller;
 
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
 import cn.edu.scau.dto.OrderInfo;
 import cn.edu.scau.dto.Result;
@@ -72,6 +73,7 @@ public class OrderController {
         return orderService.consign(orderId,shippingId,shippingName);
     }
 
+    @SystemControllerLog(description = "获取订单列表")
     @RequestMapping("/list")
     @ResponseBody
     public Result<Page<Order>> list(@RequestBody Map<String,Object> map){

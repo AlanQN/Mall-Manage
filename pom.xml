@@ -274,7 +274,16 @@
       <version>2.9.6</version>
     </dependency>
     <!-- 添加jackson依赖包end -->
-
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.1</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Admin;
 import cn.edu.scau.entity.User;
@@ -34,6 +35,7 @@ public class UserController {
      * @param admin
      * @return
      */
+    @SystemControllerLog(description = "用户登录")
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, Object> login(HttpServletRequest request, @RequestBody Admin admin) {

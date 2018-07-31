@@ -14,6 +14,8 @@
 
     <!-- aop注解-->
     <aop:aspectj-autoproxy/>
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- 扫描注解的bean -->
     <context:component-scan base-package="cn.edu.scau.*"></context:component-scan>
