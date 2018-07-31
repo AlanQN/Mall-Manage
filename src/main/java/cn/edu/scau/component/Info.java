@@ -21,8 +21,8 @@ public class Info<T> {
         return success;
     }
 
-    public void setSuccess() {
-        this.success = "查询成功";
+    public void setSuccess(String success) {
+        this.success = success;
     }
 
     public String getError() {
@@ -39,5 +39,11 @@ public class Info<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public void clear(){
+        this.success = null;
+        this.error = null;
+        this.data = null;
     }
 }
