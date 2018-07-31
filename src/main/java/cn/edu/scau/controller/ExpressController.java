@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
 import cn.edu.scau.dto.Result;
 import cn.edu.scau.entity.Express;
@@ -20,7 +21,7 @@ public class ExpressController {
     @Autowired
     private IExpressService expressService;
 
-
+    @SystemControllerLog(description = "添加快递")
     @RequestMapping("/add")
     @ResponseBody
     public Result<String> insert(@RequestBody Map<String, Object> map) {
@@ -28,6 +29,7 @@ public class ExpressController {
         return expressService.insert(name);
     }
 
+    @SystemControllerLog(description = "删除快递")
     @RequestMapping("/delete")
     @ResponseBody
     public Result<String> delete(@RequestBody Map<String, Object> map) {
@@ -36,18 +38,21 @@ public class ExpressController {
         return expressService.delete(ids);
     }
 
+    @SystemControllerLog(description = "编辑快递")
     @RequestMapping("/edit")
     @ResponseBody
     public Result<Express> get(@RequestBody Map<String, Integer> map) {
         return expressService.get(map.get("id"));
     }
 
+    @SystemControllerLog(description = "修改快递")
     @RequestMapping("/modify")
     @ResponseBody
     public Result<String> update(@RequestBody Map<String, Express> map) {
         return expressService.update(map.get("express"));
     }
 
+    @SystemControllerLog(description = "搜索快递")
     @RequestMapping("/search")
     @ResponseBody
     public Result<Page<Express>> search(@RequestBody Map<String, Object> map) {
@@ -57,6 +62,7 @@ public class ExpressController {
         return expressService.search(pageNum,pageSize,key);
     }
 
+    @SystemControllerLog(description = "获取快递")
     @RequestMapping("/getlist")
     @ResponseBody
     public Result<Page<Express>> getPage(@RequestBody Map<String, Object> map) {

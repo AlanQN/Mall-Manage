@@ -44,6 +44,7 @@
                 <property name="excludeUrl">
                     <list>
                         <value>http://localhost:8080/user/login</value>
+                        <value>http://127.0.0.1:8080/user/login</value>
                     </list>
                 </property>
             </bean>

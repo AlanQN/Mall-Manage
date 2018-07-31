@@ -1,7 +1,6 @@
 package cn.edu.scau.aop;
 
 import cn.edu.scau.annotation.SystemControllerLog;
-import cn.edu.scau.annotation.SystemServiceLog;
 import cn.edu.scau.dao.LogMapper;
 import cn.edu.scau.entity.Admin;
 import cn.edu.scau.entity.Log;
@@ -31,16 +30,10 @@ public class SystemLogAspect {
     //本地异常日志记录对象
     private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
 
-    //Service层切点
-    @Pointcut("@annotation(cn.edu.scau.annotation.SystemServiceLog)")
-    public void serviceAspect() {
-    }
-
     //Controller层切点
     @Pointcut("@annotation(cn.edu.scau.annotation.SystemControllerLog)")
     public void controllerAspect() {
     }
-
 
     /**
      * 前置通知 用于拦截Controller层记录用户的操作
@@ -48,7 +41,7 @@ public class SystemLogAspect {
      * @param joinPoint 切点
      */
     @After("controllerAspect()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doAfter(JoinPoint joinPoint) {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.
                 getRequestAttributes()).getRequest();
@@ -80,7 +73,7 @@ public class SystemLogAspect {
             log.setCreateDate(new Date());
             //保存数据库
             logMapper.insert(log);
-            System.out.println("=====前置通知结束=====");
+            System.out.println("=====后置通知结束=====");
         } catch (Exception ex) {
             //记录本地异常日志
             logger.error("==异常通知异常==");
@@ -90,41 +83,6 @@ public class SystemLogAspect {
 
     }
 
-    /**
-     * 异常通知 用于拦截service层记录异常日志
-     *
-     * @param joinPoint
-     * @param e
-     */
-    @AfterThrowing(pointcut = "serviceAspect()", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, Throwable e) throws Exception {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.
-                getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        //获取请求ip
-        String ip = request.getRemoteHost();
-        try {
-            /*========控制台输出=========*/
-            System.out.println("=====异常通知开始=====");
-            System.out.println("异常代码:" + e.getClass().getName());
-            System.out.println("异常信息:" + e.getMessage());
-            System.out.println("异常方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-            System.out.println("方法描述:" + getServiceMthodDescription(joinPoint));
-            System.out.println("请求人:" + admin.getName());
-            System.out.println("请求IP:" + ip);
-        } catch (Exception ex) {
-            //记录本地异常日志
-            logger.error("==异常通知异常==");
-            logger.error("异常信息:{}", ex.getMessage());
-            Log log = new Log();
-            log.setName( getServiceMthodDescription(joinPoint));
-            log.setType(1);
-            log.setUser(admin.getName());
-            log.setIp(ip);
-            log.setCreateDate(new Date());
-        }
-    }
 
     /**
      * 获取注解中对方法的描述信息 用于Controller层注解
@@ -153,24 +111,6 @@ public class SystemLogAspect {
     }
 
 
-    private String getServiceMthodDescription (JoinPoint joinPoint) throws ClassNotFoundException,Exception {
-        String targetName = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getSignature().getName();
-        Object[] arguments = joinPoint.getArgs();
-        Class targetClass = Class.forName(targetName);
-        Method[] methods = targetClass.getMethods();
-        String description = "";
-        for (Method method : methods) {
-            if (method.getName().equals(methodName)) {
-                Class[] clazzs = method.getParameterTypes();
-                if (clazzs.length == arguments.length) {
-                    description = method.getAnnotation(SystemServiceLog. class).description();
-                    break;
-                }
-            }
-        }
-        return description;
-    }
 
 
     public String getRemortIP(HttpServletRequest request) {
