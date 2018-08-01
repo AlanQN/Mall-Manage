@@ -47,6 +47,13 @@
                         <value>http://127.0.0.1:8080/user/login</value>
                     </list>
                 </property>
+                <property name="staticResource">
+                    <list>
+                        <value>html</value>
+                        <value>css</value>
+                        <value>js</value>
+                    </list>
+                </property>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
