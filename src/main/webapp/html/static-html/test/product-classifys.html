@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个form页面">
+    <meta name="keywords" content="form">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+        <!-- sidebar end -->
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">分类管理</strong></div>
+            </div>
+            <!--列表开始-->
+            <div>
+                <div class="am-cf am-padding">商品目录</div>
+                <div class="admin-newside">
+                    <ul class="am-list admin-sidebar-list">
+                        <li class="admin-parent">
+                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav5'}"><span"></span> 高达 <span></span></a>
+                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">
+                                <li><a href="#" class="am-cf"><span></span> 拼装<span></span></a></li>
+                                <li><a href="#"><span></span> 成品</a></li>
+                                <!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+          <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+          <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>-->
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav6'}"><span></span> 变形金刚<span></span></a>
+                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav6">
+                                <li><a href="#" class="am-cf"><span></span>MB<span></span></a></li>
+                                <li><a href="#" class="am-cf"><span></span>SS<span></span></a></li>
+                                <li><a href="#" class="am-cf"><span></span>MP<span></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav7'}"><span></span>HT<span></span></a>
+                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav7">
+                                <li><a href="#" class="am-cf"><span></span>电影<span></span></a></li>
+                                <li><a href="#" class="am-cf"><span></span>游戏<span></span></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><span></span> GSC<span></span></a></li>
+                        <li><a href="#"><span></span>粘土人</a></li>
+                        <li><a href="#"><span></span>shf</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--列表结束-->
+            <div class="admin-content">
+                <div class="am-tabs am-margin" data-am-tabs>
+                    <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="#tab2">增加分类</a></li>
+                        <!--<li><a href="#tab2">详细描述</a></li>
+                    <li><a href="#tab3">SEO 选项</a></li>-->
+                    </ul>
+                    <div class="am-tabs-bd">
+                       
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab2">
+                            <form class="am-form">
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-2 am-text-right">
+                                        分类名称
+                                    </div>
+                                    <div class="am-u-sm-4">
+                                        <input type="text" class="am-input-sm">
+                                    </div>
+                                    <div class="am-u-sm-6">*必填</div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-2 am-text-right">
+                                        父分类
+                                    </div>
+                                    <div class="am-u-sm-4 col-end">
+                                        <select>
+                                            <option value="option1">无</option>
+                                            <option value="option2">高达</option>
+                                            <option value="option2">变形金刚</option>
+                                            <option value="option2">shf</option>
+                                            <option value="option2">GSC</option>
+                                        </select>
+                                    </div>
+                                    <div class="am-u-sm-6">无父分类则为根分类</div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-2 am-text-right">
+                                        优先排序值
+                                    </div>
+                                    <div class="am-u-sm-4">
+                                        <input type="text" class="am-input-sm">
+                                    </div>
+                                    <div class="am-u-sm-6">0~9999 排序值越小越好</div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-2 am-text-right">
+                                        是否启用
+                                    </div>
+                                    <div class="am-u-sm-4">
+                                        <label class="am-btn am-btn-default am-btn-xs">
+                                            <input type="radio" name="options" id="option1"> 启用
+                                        </label>
+                                        <label class="am-btn am-btn-default am-btn-xs">
+                                            <input type="radio" name="options" id="option2"> 不启用
+                                        </label>
+                                    </div>
+                                    <div class="am-u-sm-6">不填写则为不启用</div>
+                                </div>
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-2 am-text-right">
+                                        详细信息/备注
+                                    </div>
+                                    <div class="am-u-sm-10">
+                                        <textarea rows="10" placeholder="请使用富文本编辑插件"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--<div class="am-tab-panel am-fade" id="tab3">
+                        <form class="am-form">
+                            <div class="am-g am-margin-top-sm">
+                                <div class="am-u-sm-2 am-text-right">
+                                    SEO 标题
+                                </div>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" class="am-input-sm">
+                                </div>
+                            </div>
+                            <div class="am-g am-margin-top-sm">
+                                <div class="am-u-sm-2 am-text-right">
+                                    SEO 关键字
+                                </div>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" class="am-input-sm">
+                                </div>
+                            </div>
+                            <div class="am-g am-margin-top-sm">
+                                <div class="am-u-sm-2 am-text-right">
+                                    SEO 描述
+                                </div>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <textarea rows="4"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>-->
+                    </div>
+                </div>
+                <div class="am-margin">
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs">删除节点</button>
+                </div>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <footer>
+        <hr>
+        <p class="am-padding-left">SCAU2018<a href="http://h2design.taobao.com/" target="_blank">666CGN</a></p>
+    </footer>
+    <!--[if lt IE 9]>
+<script src="assets/js/jquery1.11.1.min.js"></script>
+<script src="assets/js/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

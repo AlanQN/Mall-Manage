@@ -1,0 +1,405 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <style type="text/css">
+    .dialog {
+        width: 500px;
+        height: 300px;
+        position: fixed;
+        /*left: 50%;
+        top: 50%;
+        margin-top: -100px;
+        margin-left: -100px;*/
+        margin: 100px 100px 10px 200px;
+        z-index: 30;
+        box-shadow: 2px 2px 4px #ccc;
+        background-color: #f1f1f1;
+        border: solid 1px #aaa;
+        border-radius: 4px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+        padding: 6px;
+        background-color: #00FFFF;
+    }
+
+    .close {
+        width: 20px;
+        height: 20px;
+        margin: 3px;
+        float: right;
+        cursor: pointer;
+        color: black;
+    }
+
+    .pageCover {
+        width: 100%;
+        height: 573px;
+        position: absolute;
+        z-index: 10;
+        background-color: #666;
+        opacity: 0.5;
+        display: none;
+    }
+
+    .button_a {
+        background-color: #ffffff;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="pageCover" class="pageCover"></div>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+        <!-- sidebar end -->
+        <!-- content start -->
+        <div class="admin-content">
+        <!--返回商品列表提示对话框结束-->
+        <div id="rechoose" class="dialog"><span class="close">&times;</span>
+            <div class="title">警告</div>
+            <div class="content">
+                <div class="am-tabs am-margin" data-am-tabs>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade" id="tab3">
+                            <form class="am-form">
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-7 am-text-right">
+                                        您未选择任何用户，请重选
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-end">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-3 am-text-right">
+                                    </div>
+                                    <div class="am-u-sm-8 am-text-right">
+                                        <input type="button" value="确认" class="am-input-sm" onclick="closeDialog('rechoose');">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--已删除-->
+        <div id="hasdelete" class="dialog"><span class="close">&times;</span>
+            <div class="title">提示</div>
+            <div class="content">
+                <div class="am-tabs am-margin" data-am-tabs>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade" id="tab3">
+                            <form class="am-form">
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-7 am-text-right">
+                                        删除成功
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-end">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-3 am-text-right">
+                                    </div>
+                                    <div class="am-u-sm-8 am-text-right">
+                                        <input type="button" value="确认" class="am-input-sm" onclick="closeDialog('hasdelete');">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--停用用户-->
+        <div id="stopuser" class="dialog"><span class="close">&times;</span>
+            <div class="title">提示</div>
+            <div class="content">
+                <div class="am-tabs am-margin" data-am-tabs>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade" id="tab3">
+                            <form class="am-form">
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-7 am-text-right">
+                                        删除用户成功
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-end">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-3 am-text-right">
+                                    </div>
+                                    <div class="am-u-sm-8 am-text-right">
+                                        <input type="button" value="确认" class="am-input-sm" onclick="closeDialog('stopuser');">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--停用用户结束-->
+
+        <!--修改密码-->
+            <div id="cpd" class="dialog"><span class="close">&times;</span>
+                <div class="title">修改密码</div>
+                <div class="content">
+                    <div class="am-tabs am-margin" data-am-tabs>
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade" id="tab3">
+                                <form class="am-form">
+                                    <div class="am-g am-margin-top-sm">
+                                        <div class="am-u-sm-3 am-text-right">
+                                            密码
+                                        </div>
+                                        <div class="am-u-sm-8 am-u-end">
+                                            <input type="text" class="am-input-sm">
+                                        </div>
+                                    </div>
+                                    <div class="am-g am-margin-top-sm">
+                                        <div class="am-u-sm-3 am-text-right">
+                                            重复密码
+                                        </div>
+                                        <div class="am-u-sm-8 am-u-end">
+                                            <input type="text" class="am-input-sm">
+                                        </div>
+                                    </div>
+                                    <div class="am-g am-margin-top-sm">
+                                        <div class="am-u-sm-3 am-text-right">
+                                        </div>
+                                        <div class="am-u-sm-8 am-text-right">
+                                            <input type="button" value="确认" class="am-input-sm" onclick="closeDialog('cpd');">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--修改密码结束-->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">用户列表</strong></div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-6 am-cf">
+                    <div class="am-fl am-cf">
+                        <div class="am-btn-toolbar am-fl">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <a href="#" class="am-btn am-btn-default" onclick="new_user_load();"><span class="am-icon-plus"></span> 新增
+                                </a>
+                                <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>-->
+                                <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 审核</button>-->
+                                <a  class="am-btn am-btn-default" onclick="deletemany();"><span class="am-icon-trash-o" ></span> 删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-md-3 am-cf">
+                    <div class="am-fr">
+                        <div class="am-input-group am-input-group-sm">
+                            <input type="text" class="am-form-field">
+                            <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-check">
+                                        <!--<input type="checkbox" />-->
+                                    </th>
+                                    <th class="table-id">ID</th>
+                                    <th class="table-title">用户名</th>
+                                    <th class="table-type">手机</th>
+                                    <th class="table-author">邮箱</th>
+                                    <th class="table-author">状态</th>
+                                    <th class="table-date">注册时间</th>
+                                    <th class="table-date">更新时间</th>
+                                    <th class="table-set">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="cbx"/>
+                                    </td>
+                                    <td></td>
+                                    <td><a href="#"></a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="#" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit_user_load();">
+                                                    <span class="am-icon-pencil-square-o"></span> 编辑
+                                                </a>
+                                                <a href="#" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="openDialog('stopuser')">
+                                                    <span class="am-icon-pencil-square-o"></span> 停用</a>
+                                                <a href="#" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="openDialog('cpd');">
+                                                    <span class="am-icon-pencil-square-o"></span> 修改密码</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="cbx"/>
+                                    </td>
+                                    <td></td>
+                                    <td><a href="#"></a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="edit-user.html" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit_user_load();">
+                                                    <span class="am-icon-pencil-square-o"></span> 编辑
+                                                </a>
+                                                <a href="#" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="openDialog('stopuser')">
+                                                    <span class="am-icon-pencil-square-o"></span> 停用</a>
+                                                <a href="#" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="openDialog('cpd');">
+                                                    <span class="am-icon-pencil-square-o"></span> 修改密码</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+                            共 2 条记录
+                            <div class="am-fr">
+                                <ul class="am-pagination">
+                                    <li class="am-disabled"><a href="#">«</a></li>
+                                    <li class="am-active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        <p>注：.....</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <footer>
+        <hr>
+        <p class="am-padding-left">2018SCAU <a href="http://h2design.taobao.com/" target="_blank">666CGN</a></p>
+    </footer>
+    <!--[if lt IE 9]>
+<script src="assets/js/jquery1.11.1.min.js"></script>
+<script src="assets/js/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+    function new_user_load() {
+        parent.frames["main"].location = "new-users.html";
+    }
+
+    function edit_user_load() {
+        parent.frames["main"].location = "edit-users.html";
+    }
+
+    function Dialog(id) {
+        this.id = id;
+        var that = this;
+        document.getElementById(id).children[0].onclick = function() {
+            that.close();
+        }
+    }
+    Dialog.prototype.show = function() {
+        var dlg = document.getElementById(this.id);
+        dlg.style.display = 'block';
+        dlg = null;
+    }
+
+    Dialog.prototype.close = function() {
+        document.getElementById('pageCover').style.display = 'none';
+        var dlg = document.getElementById(this.id);
+        dlg.style.display = 'none';
+        dlg = null;
+    }
+
+    function openDialog(id) {
+        document.getElementById('pageCover').style.display = 'block';
+        var dlg = new Dialog(id);
+        dlg.show();
+    }
+
+    function closeDialog(id) {
+        document.getElementById('pageCover').style.display = 'none';
+        document.getElementById(id).style.display = 'none';
+
+    }
+
+    function deletemany() {
+        var namebox = $("input[name='cbx']"); //获取name值为boxs的所有input
+        var i = 0;
+        var flag = 0;
+        for (i = 0; i < namebox.length; i++) {
+            if (namebox[i].checked == true) {
+                flag = 1;
+            }
+        }
+        if (flag == 1) {
+            openDialog("hasdelete");
+
+        } else {
+            openDialog("rechoose");
+        }
+
+    }
+    </script>>
+</body>
+
+</html>

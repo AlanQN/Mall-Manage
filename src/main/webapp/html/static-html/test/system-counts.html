@@ -1,0 +1,413 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个 user 页面">
+    <meta name="keywords" content="user">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+        
+        <div class="admin-content">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">统计报表</strong></div>
+            </div>
+            <div class="admin-content">
+                <div class="am-tabs am-margin" data-am-tabs>
+                    <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="#tab1">统计图</a></li>
+                        <li class="am-active"><a href="#tab2">饼状图</a></li>
+                        <!--<li><a href="#tab2">详细描述</a></li>
+                    <li><a href="#tab3">SEO 选项</a></li>-->
+                    </ul>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <form class="am-form">
+                                <canvas id="barChart" height="400" width="600" style="margin:50px"> 你的浏览器不支持HTML5 canvas </canvas>
+                                <script type="text/javascript">
+                                function goBarChart(dataArr) {
+                                    // 声明所需变量
+                                    var canvas, ctx;
+                                    // 图表属性
+                                    var cWidth, cHeight, cMargin, cSpace;
+                                    var originX, originY;
+                                    // 柱状图属性
+                                    var bMargin, tobalBars, bWidth, maxValue;
+                                    var totalYNomber;
+                                    var gradient;
+
+                                    // 运动相关变量
+                                    var ctr, numctr, speed;
+                                    //鼠标移动
+                                    var mousePosition = {};
+
+                                    // 获得canvas上下文
+                                    canvas = document.getElementById("barChart");
+                                    if (canvas && canvas.getContext) {
+                                        ctx = canvas.getContext("2d");
+                                    }
+                                    initChart(); // 图表初始化
+                                    drawLineLabelMarkers(); // 绘制图表轴、标签和标记
+                                    drawBarAnimate(); // 绘制柱状图的动画
+                                    //检测鼠标移动
+                                    var mouseTimer = null;
+                                    canvas.addEventListener("mousemove", function(e) {
+                                        e = e || window.event;
+                                        if (e.layerX || e.layerX == 0) {
+                                            mousePosition.x = e.layerX;
+                                            mousePosition.y = e.layerY;
+                                        } else if (e.offsetX || e.offsetX == 0) {
+                                            mousePosition.x = e.offsetX;
+                                            mousePosition.y = e.offsetY;
+                                        }
+
+                                        clearTimeout(mouseTimer);
+                                        mouseTimer = setTimeout(function() {
+                                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                            drawLineLabelMarkers();
+                                            drawBarAnimate(true);
+                                        }, 10);
+                                    });
+
+                                    //点击刷新图表
+                                    canvas.onclick = function() {
+                                        initChart(); // 图表初始化
+                                        drawLineLabelMarkers(); // 绘制图表轴、标签和标记
+                                        drawBarAnimate(); // 绘制折线图的动画
+                                    };
+
+
+                                    // 图表初始化
+                                    function initChart() {
+                                        // 图表信息
+                                        cMargin = 30;
+                                        cSpace = 60;
+                                        cHeight = canvas.height - cMargin * 2 - cSpace;
+                                        cWidth = canvas.width - cMargin * 2 - cSpace;
+                                        originX = cMargin + cSpace;
+                                        originY = cMargin + cHeight;
+
+                                        // 柱状图信息
+                                        bMargin = 15;
+                                        tobalBars = dataArr.length;
+                                        bWidth = parseInt(cWidth / tobalBars - bMargin);
+                                        maxValue = 0;
+                                        for (var i = 0; i < dataArr.length; i++) {
+                                            var barVal = parseInt(dataArr[i][1]);
+                                            if (barVal > maxValue) {
+                                                maxValue = barVal;
+                                            }
+                                        }
+                                        maxValue += 50;
+                                        totalYNomber = 10;
+                                        // 运动相关
+                                        ctr = 1;
+                                        numctr = 100;
+                                        speed = 10;
+
+                                        //柱状图渐变色
+                                        gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                                        gradient.addColorStop(0, 'green');
+                                        gradient.addColorStop(1, 'rgba(67,203,36,1)');
+
+                                    }
+
+                                    // 绘制图表轴、标签和标记
+                                    function drawLineLabelMarkers() {
+                                        ctx.translate(0.5, 0.5); // 当只绘制1像素的线的时候，坐标点需要偏移，这样才能画出1像素实线
+                                        ctx.font = "12px Arial";
+                                        ctx.lineWidth = 1;
+                                        ctx.fillStyle = "#000";
+                                        ctx.strokeStyle = "#000";
+                                        // y轴
+                                        drawLine(originX, originY, originX, cMargin);
+                                        // x轴
+                                        drawLine(originX, originY, originX + cWidth, originY);
+
+                                        // 绘制标记
+                                        drawMarkers();
+                                        ctx.translate(-0.5, -0.5); // 还原位置
+                                    }
+
+                                    // 画线的方法
+                                    function drawLine(x, y, X, Y) {
+                                        ctx.beginPath();
+                                        ctx.moveTo(x, y);
+                                        ctx.lineTo(X, Y);
+                                        ctx.stroke();
+                                        ctx.closePath();
+                                    }
+
+                                    // 绘制标记
+                                    function drawMarkers() {
+                                        ctx.strokeStyle = "#E0E0E0";
+                                        // 绘制 y
+                                        var oneVal = parseInt(maxValue / totalYNomber);
+                                        ctx.textAlign = "right";
+                                        for (var i = 0; i <= totalYNomber; i++) {
+                                            var markerVal = i * oneVal;
+                                            var xMarker = originX - 5;
+                                            var yMarker = parseInt(cHeight * (1 - markerVal / maxValue)) + cMargin;
+                                            //console.log(xMarker, yMarker+3,markerVal/maxValue,originY);
+                                            ctx.fillText(markerVal, xMarker, yMarker + 3, cSpace); // 文字
+                                            if (i > 0) {
+                                                drawLine(originX, yMarker, originX + cWidth, yMarker);
+                                            }
+                                        }
+                                        // 绘制 x
+                                        ctx.textAlign = "center";
+                                        for (var i = 0; i < tobalBars; i++) {
+                                            var markerVal = dataArr[i][0];
+                                            var xMarker = parseInt(originX + cWidth * (i / tobalBars) + bMargin + bWidth / 2);
+                                            var yMarker = originY + 15;
+                                            ctx.fillText(markerVal, xMarker, yMarker, cSpace); // 文字
+                                        }
+                                        // 绘制标题 y
+                                        ctx.save();
+                                        ctx.rotate(-Math.PI / 2);
+                                        ctx.fillText("销售额", -canvas.height / 2, cSpace - 10);
+                                        ctx.restore();
+                                        // 绘制标题 x
+                                        ctx.fillText("年份", originX + cWidth / 2, originY + cSpace / 2 + 10);
+                                    };
+
+                                    //绘制柱形图
+                                    function drawBarAnimate(mouseMove) {
+                                        for (var i = 0; i < tobalBars; i++) {
+                                            var oneVal = parseInt(maxValue / totalYNomber);
+                                            var barVal = dataArr[i][1];
+                                            var barH = parseInt(cHeight * barVal / maxValue * ctr / numctr);
+                                            var y = originY - barH;
+                                            var x = originX + (bWidth + bMargin) * i + bMargin;
+                                            drawRect(x, y, bWidth, barH, mouseMove); //高度减一避免盖住x轴
+                                            ctx.fillText(parseInt(barVal * ctr / numctr), x + 15, y - 8); // 文字
+                                        }
+                                        if (ctr < numctr) {
+                                            ctr++;
+                                            setTimeout(function() {
+                                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                                drawLineLabelMarkers();
+                                                drawBarAnimate();
+                                            }, speed);
+                                        }
+                                    }
+
+                                    //绘制方块
+                                    function drawRect(x, y, X, Y, mouseMove) {
+
+                                        ctx.beginPath();
+                                        ctx.rect(x, y, X, Y);
+                                        if (mouseMove && ctx.isPointInPath(mousePosition.x, mousePosition.y)) { //如果是鼠标移动的到柱状图上，重新绘制图表
+                                            ctx.fillStyle = "green";
+                                        } else {
+                                            ctx.fillStyle = gradient;
+                                            ctx.strokeStyle = gradient;
+                                        }
+                                        ctx.fill();
+                                        ctx.closePath();
+
+                                    }
+
+
+                                }
+
+
+                                goBarChart(
+                                    [
+                                        [2007, 750],
+                                        [2008, 425],
+                                        [2009, 960],
+                                        [2010, 700],
+                                        [2011, 800],
+                                        [2012, 975],
+                                        [2013, 375],
+                                        [2014, 775]
+                                    ]
+                                )
+                                </script>
+                            </form>
+                        </div>
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab2">
+                            <form class="am-form">
+                                <script>
+                                //绘制饼图
+                                function drawCircle(canvasId, data_arr, color_arr, text_arr) {
+                                    var c = document.getElementById(canvasId);
+                                    var ctx = c.getContext("2d");
+
+                                    var radius = c.height / 2 - 20; //半径
+                                    var ox = radius + 20,
+                                        oy = radius + 20; //圆心
+
+                                    var width = 30,
+                                        height = 10; //图例宽和高
+                                    var posX = ox * 2 + 20,
+                                        posY = 30; //
+                                    var textX = posX + width + 5,
+                                        textY = posY + 10;
+
+                                    var startAngle = 0; //起始弧度
+                                    var endAngle = 0; //结束弧度
+                                    for (var i = 0; i < data_arr.length; i++) {
+                                        //绘制饼图
+                                        endAngle = endAngle + data_arr[i] * Math.PI * 2; //结束弧度
+                                        ctx.fillStyle = color_arr[i];
+                                        ctx.beginPath();
+                                        ctx.moveTo(ox, oy); //移动到到圆心
+                                        ctx.arc(ox, oy, radius, startAngle, endAngle, false);
+                                        ctx.closePath();
+                                        ctx.fill();
+                                        startAngle = endAngle; //设置起始弧度
+
+                                        //绘制比例图及文字
+                                        ctx.fillStyle = color_arr[i];
+                                        ctx.fillRect(posX, posY + 20 * i, width, height);
+                                        ctx.moveTo(posX, posY + 20 * i);
+                                        ctx.font = 'bold 12px 微软雅黑'; //斜体 30像素 微软雅黑字体
+                                        ctx.fillStyle = color_arr[i]; //"#000000";
+                                        var percent = text_arr[i] + "：" + 100 * data_arr[i] + "%";
+                                        ctx.fillText(percent, textX, textY + 20 * i);
+                                    }
+                                }
+
+                                function init() {
+                                    //绘制饼图
+                                    //比例数据和颜色
+                                    var data_arr = [0.05, 0.25, 0.6, 0.1];
+                                    var color_arr = ["#00FF21", "#FFAA00", "#00AABB", "#FF4400"];
+                                    var text_arr = ["第一季度", "第二季度", "第三季度", "第四季度"];
+
+                                    drawCircle("canvas_circle", data_arr, color_arr, text_arr);
+                                }
+
+                                //页面加载时执行init()函数
+                                window.onload = init;
+                                </script>
+                                <!--<div class="am-u-sm-2 am-text-right">
+                                    各季度销售额统计 
+                                </div>
+                                <div class="am-u-sm-4">
+                                </div>
+                                <div class="am-u-sm-6"></div>
+                                </div>
+                                -->
+                                <h3> 各季度销售额统计 </h3>
+                                <div class="am-u-sm-1 am-text-right">
+                                    年份 <span class="am-icon-calendar"></span>
+                                </div>
+                                <div class="am-u-sm-4">
+                                    <input type="text" class="am-form-field am-input-sm" placeholder="时间">
+                                </div>
+                                <div class="am-u-sm-6">
+                                    <button type="button" class="am-btn am-btn-primary am-btn-xs">确定</button>
+                                </div>
+                                <!--<p>
+                                    <canvas id="canvas_circle" width="500" height="300" style="border:2px solid #0026ff;">
+                                        浏览器不支持canvas
+                                    </canvas>
+                                </p>-->
+                                
+                                <div class="am-u-sm-10">
+                                    <canvas id="canvas_circle" width="500" height="300" style="border:0px solid #0026ff;">
+                                        浏览器不支持canvas
+                                    </canvas>
+                                </div>
+                                <script>
+                                //绘制饼图
+                                function drawCircle(canvasId, data_arr, color_arr, text_arr) {
+                                    var c = document.getElementById(canvasId);
+                                    var ctx = c.getContext("2d");
+
+                                    var radius = c.height / 2 - 20; //半径
+                                    var ox = radius + 20,
+                                        oy = radius + 20; //圆心
+
+                                    var width = 30,
+                                        height = 10; //图例宽和高
+                                    var posX = ox * 2 + 20,
+                                        posY = 30; //
+                                    var textX = posX + width + 5,
+                                        textY = posY + 10;
+
+                                    var startAngle = 0; //起始弧度
+                                    var endAngle = 0; //结束弧度
+                                    for (var i = 0; i < data_arr.length; i++) {
+                                        //绘制饼图
+                                        endAngle = endAngle + data_arr[i] * Math.PI * 2; //结束弧度
+                                        ctx.fillStyle = color_arr[i];
+                                        ctx.beginPath();
+                                        ctx.moveTo(ox, oy); //移动到到圆心
+                                        ctx.arc(ox, oy, radius, startAngle, endAngle, false);
+                                        ctx.closePath();
+                                        ctx.fill();
+                                        startAngle = endAngle; //设置起始弧度
+
+                                        //绘制比例图及文字
+                                        ctx.fillStyle = color_arr[i];
+                                        ctx.fillRect(posX, posY + 20 * i, width, height);
+                                        ctx.moveTo(posX, posY + 20 * i);
+                                        ctx.font = 'bold 12px 微软雅黑'; //斜体 30像素 微软雅黑字体
+                                        ctx.fillStyle = color_arr[i]; //"#000000";
+                                        var percent = text_arr[i] + "：" + 100 * data_arr[i] + "%";
+                                        ctx.fillText(percent, textX, textY + 20 * i);
+                                    }
+                                }
+
+                                function init() {
+                                    //绘制饼图
+                                    //比例数据和颜色
+                                    var data_arr = [0.05, 0.25, 0.6, 0.1];
+                                    var color_arr = ["#00FF21", "#FFAA00", "#00AABB", "#FF4400"];
+                                    var text_arr = ["第一季度", "第二季度", "第三季度", "第四季度"];
+
+                                    drawCircle("canvas_circle", data_arr, color_arr, text_arr);
+                                }
+
+                                //页面加载时执行init()函数
+                                window.onload = init;
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<footer>
+  <hr>
+  <p class="am-padding-left">2017 SCAU<a href="http://h2design.taobao.com/" target="_blank">666CGN</a></p>
+</footer>-->
+    <!--[if lt IE 9]>
+<script src="assets/js/jquery1.11.1.min.js"></script>
+<script src="assets/js/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

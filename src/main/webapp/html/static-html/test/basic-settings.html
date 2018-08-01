@@ -1,0 +1,220 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <script src="assets/js/jquery1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/system/basic",
+                dataType: "json",
+                async: false,
+                data: {},
+                success: function (data) {
+                    document.getElementById("setting-id").value = data.id;
+                    document.getElementById("website-name").value = data.webName;
+                    document.getElementById("keyword").value = data.keyWord;
+                    document.getElementById("web-description").value = data.description;
+                    document.getElementById("copyright").value = data.copyright;
+                    var hasLoginInfo = data.hasLogNotice;
+                    document.getElementById("login_inform").value = data.logNotice;
+                    var hasWelcomeInfo = data.hasAllNotice;
+                    document.getElementById("welcome_inform").value = data.allNotice;
+                    document.getElementById("notice").innerText = data.notice;
+                    document.getElementById("update_log").innerText = data.updateLog;
+                    if (hasLoginInfo = 0) {
+
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        });
+
+        function changeSetting() {
+            console.log($("#notice").val());
+            var rawData = {
+                id: $("#setting-id").val(),
+                webName: $("#website-name").val(),
+                keyWord: $("#keyword").val(),
+                description: $("#web-description").val(),
+                copyright: $("#copyright").val(),
+                hasLogNotice: "0",
+                logNotice: $("#login_inform").val(),
+                hasAllNotice: "0",
+                allNotice: $("#welcome_inform").val(),
+                notice: $("#notice").val(),
+                updateLog: $("#update_log").val()
+            };
+            var fData = JSON.stringify(rawData);
+            console.log(fData);
+            $.ajax({
+                url: "http://localhost:8080/system/modify",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: "false",
+                data: fData,
+                success:function (data) {
+                    console.log(data);
+                    if (data.result) {
+                        alert("修改成功！");
+                    }
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+         <!--保存成功提示对话框-->
+        <div class="modal fade" id="save-suc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            提示
+                </h4>
+                    </div>
+                    <div class="modal-body">
+                        保存成功
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">确认
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!--保存成功提示对话框结束-->
+        <!-- sidebar end -->
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">基本设置</strong>
+                </div>
+                <hr/>
+                <div class="am-g">
+                    <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                        <form class="am-form am-form-horizontal">
+                            <div class="am-form-group">
+                                <input type="hidden" id="setting-id">
+                            </div>
+                            <div class="am-form-group">
+                                <label for="website-name" class="am-u-sm-3 am-form-label">网站名称</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="website-name" placeholder="输入网站名称">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="keyword" class="am-u-sm-3 am-form-label">关键词</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="keyword" placeholder="输入关键词">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="web-description" class="am-u-sm-3 am-form-label">网站描述</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="web-description" placeholder="输入网站描述">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="copyright" class="am-u-sm-3 am-form-label">底部版权信息</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="copyright" placeholder="输入底部版权信息">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="login_inform" class="am-u-sm-3 am-form-label">登录通知</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" cols="6" rows="5" id="login_inform" placeholder="输入登录通知"></textarea>
+                                    <label for="use_login_inform">
+                                        <input id="use_login_inform" type="checkbox"> 启用
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="welcome_inform" class="am-u-sm-3 am-form-label">欢迎页通知</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" cols="6" rows="5" id="welcome_inform" placeholder="输入欢迎页通知"></textarea>
+                                    <label for="use_welcome_inform">
+                                        <input id="use_welcome_inform" type="checkbox"> 启用
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="notice" class="am-u-sm-3 am-form-label">公告</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" cols="6" rows="5" id="notice" placeholder="输入公告"></textarea>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="update_log" class="am-u-sm-3 am-form-label">更新日志</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" cols="6" rows="5" id="update_log" placeholder="输入新的日志"></textarea>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" class="am-btn am-btn-primary" data-toggle="modal" data-target="#save-suc" onclick="changeSetting()">保存修改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- content end -->
+        </div>
+        <!--[if lt IE 9]>
+        <div id="response">
+            <h2>使用ajax获取数据</h2>
+        </div>
+
+        <script src="assets/js/modernizr.js"></script>
+        <script src="assets/js/polyfill/rem.min.js"></script>
+        <script src="assets/js/polyfill/respond.min.js"></script>
+        <script src="assets/js/amazeui.legacy.js"></script>
+        <![endif]-->
+        <!--[if (gte IE 9)|!(IE)]><!-->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/amazeui.min.js"></script>
+        <!--<![endif]-->
+        <script src="assets/js/app.js"></script>
+</body>
+
+</html>

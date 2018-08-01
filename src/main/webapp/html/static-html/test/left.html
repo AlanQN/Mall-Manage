@@ -1,0 +1,118 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个 user 页面">
+    <meta name="keywords" content="user">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+    <div class="am-cf admin-main" id="leftd">
+        <!-- sidebar start -->
+        <div class="admin-sidebar">
+            <ul class="am-list admin-sidebar-list">
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="fa-product-hunt"></span> 商品管理 <span></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li><a href="#" class="am-cf" onclick="product_table_load();"><span></span> 商品列表<span></span></a></li>
+                        <li><a href="#" onclick="product_classify_load();"><span></span> 分类管理</a></li>
+                        <!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+          <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+          <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>-->
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-pencil-square-o"></span> 订单管理<span></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
+                        <li><a href="#" onclick="order_table_load();" class="am-cf"><span></span>订单列表<span></span></a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="fa-user-circle"></span> 用户管理<span></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
+                        <li><a href="#" class="am-cf" onclick="user_list_load();"><span></span>用户列表<span></span></a></li>
+                        <li><a href="#" class="am-cf" onclick="ban_user_load();"><span></span>已删除 <span></span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav4'}"><span class="fa-assistive-listening-systems"></span> 系统管理<span></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav4">
+                        <li><a href="#" class="am-cf" onclick="basic_setting_load();"><span></span>基本设置<span></span></a></li>
+                        <li><a href="#" class="am-cf" onclick="system_log_load();"><span></span>系统日志<span></span></a></li>
+                        <li><a href="#" class="am-cf" onclick="express_list_load();"><span></span>快递管理<span></span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="system_count_load();"><span class="am-icon-table"></span> 系统报表</a></li>
+            </ul>
+        </div>
+        <!-- sidebar end -->
+        <!-- content start -->
+        <!-- content end -->
+    </div>
+    <!--[if lt IE 9]>
+<script src="assets/js/jquery1.11.1.min.js"></script>
+<script src="assets/js/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+        function product_table_load()
+        {
+            parent.frames["main"].location="product-tables.html";
+        }
+
+        function product_classify_load()
+        {
+            parent.frames["main"].location="product-classifys.html";
+        }
+        function order_table_load()
+        {
+            parent.frames["main"].location="order-tables.html";
+        }
+        function user_list_load()
+        {
+            parent.frames["main"].location="user-lists.html";
+        }
+        function ban_user_load()
+        {
+            parent.frames["main"].location="ban-user-lists.html";
+        }
+        function basic_setting_load()
+        {
+            parent.frames["main"].location="basic-settings.html";
+        }
+        function system_log_load()
+        {
+            parent.frames["main"].location="system-logs.html";
+        }
+        function express_list_load()
+        {
+            parent.frames["main"].location="express-lists.html";
+        }
+        function system_count_load()
+        {
+            parent.frames["main"].location="system-counts.html";
+        }
+
+    </script>>
+</body>
+
+</html>

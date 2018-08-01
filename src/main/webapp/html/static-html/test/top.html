@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>二次元</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="layui-v2.3.0/layui/dist/css/layui.css" media="all">
+    <style type="text/css">
+    .dialog {
+        width: 500px;
+        height: 300px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        margin-top: -100px;
+        margin-left: -150px;
+        z-index: 30;
+        box-shadow: 2px 2px 4px #ccc;
+        background-color: #f1f1f1;
+        border: solid 1px #aaa;
+        border-radius: 4px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+        padding: 6px;
+        background-color: blue;
+    }
+
+    .close {
+        width: 20px;
+        height: 20px;
+        margin: 3px;
+        float: right;
+        cursor: pointer;
+        color: black;
+    }
+
+    .pageCover {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 10;
+        background-color: #666;
+        opacity: 0.5;
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    <header class="am-topbar admin-header">
+        <!--header 页面中一个内容区块或标题-->
+        <div class="am-topbar-brand">
+            <strong>tow commercial</strong> <small>商城管理系统</small>
+        </div>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <!--span 定义行内包含框-->
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+                <!--ul 没有排序的列表-->
+                <li><a href="#" onclick="toindex();"> 首页</a></li>
+                <li><a href="#" > 资料</a></li>
+                <li><a href="#" > 退出</a></li>
+                <!--<li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>-->
+            </ul>
+        </div>
+    </header>
+    <!--[if lt IE 9]>
+<script src="assets/js/jquery1.11.1.min.js"></script>
+<script src="assets/js/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+    function toindex() {
+        parent.frames["main"].location = "main.html";
+    }
+    function hide_left(){
+        parent.frames["left"].getElementById('leftd').style.display = 'none';
+    }
+    </script>>
+</body>
+
+</html>
