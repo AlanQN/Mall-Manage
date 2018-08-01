@@ -1,5 +1,6 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Info;
 import cn.edu.scau.entity.Product;
 import cn.edu.scau.service.impl.ProductServiceImpl;
@@ -20,12 +21,14 @@ public class ProductController {
     @Autowired
     ProductServiceImpl productService;
 
+    @SystemControllerLog(description = "商品查找通过id")
     @RequestMapping("/read_id")
     @ResponseBody
     public Info<Product> read_id(@RequestBody Map<String ,Integer> request){
         return  productService.selectByPrimaryKey(request);
     }
 
+    @SystemControllerLog(description = "商品查找通过价格")
     @RequestMapping("/read_price")
     @ResponseBody
     public Info<Product> read_price(@RequestBody Map<String ,BigDecimal> request){
@@ -33,18 +36,21 @@ public class ProductController {
         return  productService.selectByPrice(request);
     }
 
+    @SystemControllerLog(description = "商品信息修改")
     @RequestMapping("/modify")
     @ResponseBody
     public Info<Product> modify(@RequestBody Product record){
         return productService.updateByPrimaryKeySelective(record);
     }
 
+    @SystemControllerLog(description = "商品添加")
     @RequestMapping("/add")
     @ResponseBody
     public Info<Product> add(@RequestBody Product record){
         return productService.insert(record);
     }
 
+    @SystemControllerLog(description = "商品删除")
     @RequestMapping("/delete")
     @ResponseBody
     public Info<Product> delete(@RequestBody Map<String ,Integer> request){
