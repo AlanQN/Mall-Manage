@@ -50,6 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Admin admin = (Admin) session.getAttribute(LoginInterceptor.USER_INFO_KEY);
         //如果没有登录，则拦截，并且跳转到登录页面
         if (admin == null) {
+            httpServletResponse.sendRedirect("/html/static-html/test/login.html");
             return false;
         }
         return true;
