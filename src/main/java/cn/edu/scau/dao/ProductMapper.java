@@ -1,10 +1,12 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Product;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 

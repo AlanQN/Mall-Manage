@@ -4,17 +4,18 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:p="http://www.springframework.org/schema/p"
         xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context-3.1.xsd
 						http://www.springframework.org/schema/mvc
-						http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+						http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 配置处理器映射器和适配器 -->
     <mvc:annotation-driven></mvc:annotation-driven>
 
+    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
     <!-- 扫描controller和dao等 -->
     <context:component-scan base-package="cn.edu.scau"></context:component-scan>
 
@@ -34,5 +35,20 @@
             <value>.jsp</value>	<!-- 对返回的字符串自动拼接后缀.jsp -->
         </property>
     </bean>
+    
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.edu.scau.interceptor.LoginInterceptor">
+                <property name="excludeUrl">
+                    <list>
+                        <value>http://localhost:8080/user/login</value>
+                        <value>http://127.0.0.1:8080/user/login</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

@@ -1,7 +1,10 @@
 package cn.edu.scau.controller;
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
+import cn.edu.scau.entity.Admin;
 import cn.edu.scau.entity.User;
+import cn.edu.scau.service.IAdminService;
 import cn.edu.scau.service.IUserService;
 import cn.edu.scau.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +26,39 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
+    IAdminService adminService;
+
+    /**
+     * 用户登录
+     * @param request
+     * @param admin
+     * @return
+     */
+    @SystemControllerLog(description = "管理员登录")
+    @RequestMapping("/login")
+    @ResponseBody
+    public Map<String, Object> login(HttpServletRequest request, @RequestBody Admin admin) {
+        return adminService.login(request, admin);
+    }
+
+    /**
+     * 用户注销
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Map<String, Object> logout(HttpServletRequest request) {
+        return adminService.logout(request);
+    }
 
     /**
      * 添加用户
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "添加用户")
     @RequestMapping("/add")
     @ResponseBody
     public Map<String, Object> add(@RequestBody User user) {
@@ -39,6 +70,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "移除用户")
     @RequestMapping("/removeOne")
     @ResponseBody
     public Map<String, Object> removeOne(@RequestBody Map<String, Integer> request) {
@@ -50,9 +82,10 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "移除用户")
     @RequestMapping("/removeMore")
     @ResponseBody
-    public Map<String, Object> removeMore(@RequestBody Integer[] request) {
+    public Map<String, Object> removeMore(@RequestBody Map<String, Integer[]> request) {
         return userService.removeMore(request);
     }
 
@@ -61,6 +94,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "停用用户")
     @RequestMapping("/pause")
     @ResponseBody
     public Map<String, Object> pause(@RequestBody Map<String, Integer> request) {
@@ -72,6 +106,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "启用用户")
     @RequestMapping("/resume")
     @ResponseBody
     public Map<String, Object> resume(@RequestBody Map<String, Integer> request) {
@@ -83,6 +118,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "编辑用户")
     @RequestMapping("/edit")
     @ResponseBody
     public User edit(@RequestBody Map<String, Integer> request) {
@@ -94,6 +130,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "修改用户信息")
     @RequestMapping("/modify")
     @ResponseBody
     public Map<String, Object> modify(@RequestBody User user) {
@@ -105,6 +142,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "修改用户密码")
     @RequestMapping("/changepwd")
     @ResponseBody
     public Map<String, Object> changepwd(@RequestBody User user) {
@@ -116,6 +154,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "删除用户")
     @RequestMapping("/deleteOne")
     @ResponseBody
     public Map<String, Object> deleteOne(@RequestBody Map<String, Integer> request) {
@@ -127,9 +166,10 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "删除用户")
     @RequestMapping("/deleteMore")
     @ResponseBody
-    public Map<String, Object> deleteMore(@RequestBody Integer[] request) {
+    public Map<String, Object> deleteMore(@RequestBody Map<String, Integer[]> request) {
         return userService.deleteMore(request);
     }
 
@@ -138,6 +178,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "还原用户")
     @RequestMapping("/restoreOne")
     @ResponseBody
     public Map<String, Object> restoreOne(@RequestBody Map<String, Integer> request) {
@@ -149,9 +190,10 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "还原用户")
     @RequestMapping("/restoreMore")
     @ResponseBody
-    public Map<String, Object> restoreMore(@RequestBody Integer[] request) {
+    public Map<String, Object> restoreMore(@RequestBody Map<String, Integer[]> request) {
         return userService.restoreMore(request);
     }
 
@@ -160,10 +202,23 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/query")
+    @SystemControllerLog(description = "查找用户")
+    @RequestMapping("/queryNormal")
     @ResponseBody
-    public Page<User> query(@RequestBody  Page<User> request) {
-        return userService.findByPage(request);
+    public Page<User> queryNormal(@RequestBody  Page<User> request) {
+        return userService.findNormalByPage(request);
+    }
+
+    /**
+     * 分页查找已移除用户
+     * @param request
+     * @return
+     */
+    @SystemControllerLog(description = "查找用户")
+    @RequestMapping("/queryRemove")
+    @ResponseBody
+    public Page<User> queryRemove(@RequestBody  Page<User> request) {
+        return userService.findRemoveByPage(request);
     }
 
     /**
@@ -171,6 +226,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "搜索用户")
     @RequestMapping("/search")
     @ResponseBody
     public Page<User> search(@RequestBody Page<User> request) {

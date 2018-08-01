@@ -20,11 +20,12 @@
 
     <!-- spring版本号 -->
     <spring.version>4.2.5.RELEASE</spring.version>
+    <aspectj.version>1.6.11</aspectj.version>
     <!-- mybatis版本号 -->
     <mybatis.version>3.2.4</mybatis.version>
     <!-- log4j日志文件管理包版本 -->
     <slf4j.version>1.6.6</slf4j.version>
-    <log4j.version>1.2.12</log4j.version>
+    <log4j.version>1.2.17</log4j.version>
   </properties>
 
   <dependencies>
@@ -70,6 +71,18 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
       <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <!--使用AspectJ方式注解需要相应的包-->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${aspectj.version}</version>
     </dependency>
 
     <dependency>
@@ -261,7 +274,16 @@
       <version>2.9.6</version>
     </dependency>
     <!-- 添加jackson依赖包end -->
-
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.1</version>
+    </dependency>
   </dependencies>
 
   <build>

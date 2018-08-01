@@ -1,6 +1,7 @@
 package cn.edu.scau.controller;
 
 
+import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
 import cn.edu.scau.dto.OrderInfo;
 import cn.edu.scau.dto.Result;
@@ -24,6 +25,7 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+    @SystemControllerLog(description = "订单查找")
     @RequestMapping("/get")
     @ResponseBody
     public Result<Order> getById(@RequestBody Map<String,Object> map){
@@ -31,6 +33,7 @@ public class OrderController {
         return  orderService.getById(orderId);
     }
 
+    @SystemControllerLog(description = "获取订单详情")
     @RequestMapping("/info")
     @ResponseBody
     public Result<OrderInfo> getInfo(@RequestBody Map<String,Object> map){
@@ -40,6 +43,7 @@ public class OrderController {
         return orderService.getOrderInfoById(offest,limit,orderId);
     }
 
+    @SystemControllerLog(description = "删除订单")
     @RequestMapping("/delete")
     @ResponseBody
     public Result<String> delete(@RequestBody Map<String,Object> map){
@@ -48,6 +52,7 @@ public class OrderController {
         return orderService.delete(ids);
     }
 
+    @SystemControllerLog(description = "订单备注")
     @RequestMapping("/description")
     @ResponseBody
     public Result<String> description(@RequestBody Map<String,Object> map){
@@ -56,6 +61,7 @@ public class OrderController {
         return orderService.description(id,description);
     }
 
+    @SystemControllerLog(description = "取消订单")
     @RequestMapping("cancel")
     @ResponseBody
     public Result<String> cancel(@RequestBody Map<String,Object> map){
@@ -63,6 +69,7 @@ public class OrderController {
         return orderService.cancel(id);
     }
 
+    @SystemControllerLog(description = "订单发货")
     @RequestMapping("/consign")
     @ResponseBody
     public Result<String> consign(@RequestBody Map<String,Object> map){
@@ -72,6 +79,7 @@ public class OrderController {
         return orderService.consign(orderId,shippingId,shippingName);
     }
 
+    @SystemControllerLog(description = "获取订单列表")
     @RequestMapping("/list")
     @ResponseBody
     public Result<Page<Order>> list(@RequestBody Map<String,Object> map){
@@ -80,6 +88,7 @@ public class OrderController {
         return orderService.orderList(pageNum,pageSize);
     }
 
+    @SystemControllerLog(description = "搜索订单")
     @RequestMapping("/search")
     @ResponseBody
     public Result<Page<Order>> search(@RequestBody Map<String,Object> map){
@@ -89,6 +98,7 @@ public class OrderController {
         return orderService.search(pageNum,pageSize,key);
     }
 
+    @SystemControllerLog(description = "添加订单")
     @RequestMapping("/add")
     @ResponseBody
     public Result<String> add(@RequestBody Map<String,Order> map){

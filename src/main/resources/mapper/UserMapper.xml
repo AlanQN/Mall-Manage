@@ -191,13 +191,25 @@
   </select>
 
   <!-- 分页查找用户 -->
-  <select id="findByPage" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.component.Page">
-    select id, username, phone, email, created, updated, state from tb_user limit #{startIndex}, #{pageSize}
+  <select id="findNormalByPage" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.component.Page">
+    select id, username, phone, email, created, updated, state from tb_user
+     where state != 2 limit #{startIndex}, #{pageSize}
   </select>
 
   <!-- 获取用户总数 -->
-  <select id="getUserNum" resultType="java.lang.Integer">
-    select count(*) from tb_user
+  <select id="getNormalUserNum" resultType="java.lang.Integer">
+    select count(*) from tb_user where state != 2;
+  </select>
+
+  <!-- 分页查找已移除用户 -->
+  <select id="findRemoveByPage" resultType="cn.edu.scau.entity.User" parameterType="cn.edu.scau.component.Page">
+    select id, username, phone, email, created, updated, state from tb_user
+     where state = 2 limit #{startIndex}, #{pageSize}
+  </select>
+
+  <!-- 获取已移除用户总数 -->
+  <select id="getRemoveUserNum" resultType="java.lang.Integer">
+    select count(*) from tb_user where state = 2;
   </select>
 
 </mapper>
