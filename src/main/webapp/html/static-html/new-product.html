@@ -69,7 +69,7 @@
                     <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="fa-user-circle"></span> 用户管理<span></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
                         <li><a href="user-list.html" class="am-cf"><span></span>用户列表<span></span></a></li>
-                        <li><a href="ban-user-list.html" class="am-cf"><span></span>停用用户列表<span></span></a></li>
+                        <li><a href="ban-user-list.html" class="am-cf"><span></span>已删除 <span></span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -77,6 +77,7 @@
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav4">
                         <li><a href="basic-setting.html" class="am-cf"><span></span>基本设置<span></span></a></li>
                         <li><a href="system-log.html" class="am-cf"><span></span>系统日志<span></span></a></li>
+                        <li><a href="express-table.html" class="am-cf"><span></span>快递管理<span></span></a></li>
                     </ul>
                 </li>
                 <li><a href="system-count.html"><span class="am-icon-table"></span> 系统报表</a></li>
@@ -85,45 +86,7 @@
         <!-- sidebar end -->
         <!-- content start -->
         <div class="admin-content">
-            <div class="am-cf am-padding">
-                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品管理</strong></div>
-            </div>
-            <!--列表开始-->
-            <div>
-                <div class="am-cf am-padding">商品目录</div>
-                <div class="admin-newside">
-                    <ul class="am-list admin-sidebar-list">
-                        <li class="admin-parent">
-                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav5'}"><span"></span> 高达 <span></span></a>
-                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">
-                                <li><a href="#" class="am-cf"><span></span> 拼装<span></span></a></li>
-                                <li><a href="#"><span></span> 成品</a></li>
-                                <!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
-          <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-          <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>-->
-                            </ul>
-                        </li>
-                        <li class="admin-parent">
-                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav6'}"><span></span> 变形金刚<span></span></a>
-                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav6">
-                                <li><a href="#" class="am-cf"><span></span>MB<span></span></a></li>
-                                <li><a href="#" class="am-cf"><span></span>SS<span></span></a></li>
-                                <li><a href="#" class="am-cf"><span></span>MP<span></span></a></li>
-                            </ul>
-                        </li>
-                        <li class="admin-parent">
-                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav7'}"><span></span>HT<span></span></a>
-                            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav7">
-                                <li><a href="#" class="am-cf"><span></span>电影<span></span></a></li>
-                                <li><a href="#" class="am-cf"><span></span>游戏<span></span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><span></span> GSC<span></span></a></li>
-                        <li><a href="#"><span></span>粘土人</a></li>
-                        <li><a href="#"><span></span>shf</a></li>
-                    </ul>
-                </div>
-            </div>
+            
             <!--列表结束-->
             <div class="admin-content">
                 <div class="am-tabs am-margin" data-am-tabs>
@@ -201,12 +164,31 @@
                                 </div>
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-2 am-text-right">
-                                        描述简介
+                                        商品分类
                                     </div>
-                                    <div class="am-u-sm-4">
-                                        <input type="text" class="am-input-sm">
+                                    <div class="am-u-sm-2 ">
+                                        <select>
+                                            <option value="option1">无</option>
+                                            <option value="option2">高达</option>
+                                            <option value="option2">变形金刚</option>
+                                            <option value="option2">shf</option>
+                                            <option value="option2">GSC</option>
+                                        </select>
+                                       
                                     </div>
-                                    <div class="am-u-sm-6">*选填</div>
+                                    <div class="am-u-sm-2 ">
+                                        <select>
+                                            <option value="option1">无</option>
+                                            <option value="option2">高达</option>
+                                            <option value="option2">变形金刚</option>
+                                            <option value="option2">shf</option>
+                                            <option value="option2">GSC</option>
+                                        </select>
+                                       
+                                    </div>
+                                    <div class="am-u-sm-6">
+                                         *必填
+                                    </div>
                                 </div>
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-2 am-text-right">
@@ -228,10 +210,10 @@
                                 </div>
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-2 am-text-right">
-                                       购买限制数量
+                                       上传图片
                                     </div>
                                     <div class="am-u-sm-4">
-                                        <input type="text" class="am-input-sm">
+                                        <input type="file" class="am-input-sm">
                                     </div>
                                     <div class="am-u-sm-6">*必填</div>
                                 </div>
@@ -245,38 +227,10 @@
                                 </div>
                             </form>
                         </div>
-                        <!--<div class="am-tab-panel am-fade" id="tab3">
-                        <form class="am-form">
-                            <div class="am-g am-margin-top-sm">
-                                <div class="am-u-sm-2 am-text-right">
-                                    SEO 标题
-                                </div>
-                                <div class="am-u-sm-4 am-u-end">
-                                    <input type="text" class="am-input-sm">
-                                </div>
-                            </div>
-                            <div class="am-g am-margin-top-sm">
-                                <div class="am-u-sm-2 am-text-right">
-                                    SEO 关键字
-                                </div>
-                                <div class="am-u-sm-4 am-u-end">
-                                    <input type="text" class="am-input-sm">
-                                </div>
-                            </div>
-                            <div class="am-g am-margin-top-sm">
-                                <div class="am-u-sm-2 am-text-right">
-                                    SEO 描述
-                                </div>
-                                <div class="am-u-sm-4 am-u-end">
-                                    <textarea rows="4"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>-->
                     </div>
                 </div>
                 <div class="am-margin">
-                    <button type="button" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs">提交</button>
             
                 </div>
             </div>

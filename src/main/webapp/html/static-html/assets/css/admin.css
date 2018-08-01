@@ -25,18 +25,19 @@ background: #f3f3f3;
 }
 
 .admin-sidebar {
-width: 260px;
+width: 160px;
 min-height: 100%;
 float: left;
 border-right: 1px solid #cecece;
 }
+
 
 .admin-sidebar-list {
 margin-bottom: 0;
 }
 
 .admin-newside{
-  width: 160px;
+  width: 120px;
   min-height: 100%;
   float: left;
   border-right: 1px solid #cecece;
