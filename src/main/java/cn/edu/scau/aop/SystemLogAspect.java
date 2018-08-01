@@ -35,6 +35,43 @@ public class SystemLogAspect {
     public void controllerAspect() {
     }
 
+    @Pointcut("execution(* cn.edu.scau.controller.UserController.logout(..))")
+    public void logout() {
+    }
+
+    @Before("logout()")
+    public void addLogoutLog(JoinPoint joinPoint) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.
+                getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        //读取session中的用户
+
+        Admin admin = (Admin) session.getAttribute(LoginInterceptor.USER_INFO_KEY);
+        //获取请求ip
+        String ip = getRemortIP(request);
+        try {
+            Log log = new Log();
+            if(admin == null)
+            {
+                log.setUser("用户未登录");
+            }else {
+                log.setUser(admin.getName());
+            }
+            log.setName("管理员注销");
+            log.setType(0);
+            log.setIp(ip);
+            log.setCreateDate(new Date());
+            //保存数据库
+            logMapper.insert(log);
+        } catch (Exception ex) {
+            //记录本地异常日志
+            logger.error("==异常通知异常==");
+            logger.error("异常信息:{}", ex.getMessage());
+
+        }
+    }
+
+
     /**
      * 前置通知 用于拦截Controller层记录用户的操作
      *
@@ -47,6 +84,7 @@ public class SystemLogAspect {
                 getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
+
         Admin admin = (Admin) session.getAttribute(LoginInterceptor.USER_INFO_KEY);
         //获取请求ip
         String ip = getRemortIP(request);

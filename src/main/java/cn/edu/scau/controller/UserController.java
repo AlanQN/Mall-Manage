@@ -35,7 +35,7 @@ public class UserController {
      * @param admin
      * @return
      */
-    @SystemControllerLog(description = "用户登录")
+    @SystemControllerLog(description = "管理员登录")
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, Object> login(HttpServletRequest request, @RequestBody Admin admin) {
@@ -58,6 +58,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "添加用户")
     @RequestMapping("/add")
     @ResponseBody
     public Map<String, Object> add(@RequestBody User user) {
@@ -69,6 +70,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "移除用户")
     @RequestMapping("/removeOne")
     @ResponseBody
     public Map<String, Object> removeOne(@RequestBody Map<String, Integer> request) {
@@ -80,6 +82,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "移除用户")
     @RequestMapping("/removeMore")
     @ResponseBody
     public Map<String, Object> removeMore(@RequestBody Map<String, Integer[]> request) {
@@ -91,6 +94,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "停用用户")
     @RequestMapping("/pause")
     @ResponseBody
     public Map<String, Object> pause(@RequestBody Map<String, Integer> request) {
@@ -102,6 +106,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "启用用户")
     @RequestMapping("/resume")
     @ResponseBody
     public Map<String, Object> resume(@RequestBody Map<String, Integer> request) {
@@ -113,6 +118,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "编辑用户")
     @RequestMapping("/edit")
     @ResponseBody
     public User edit(@RequestBody Map<String, Integer> request) {
@@ -124,6 +130,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "修改用户信息")
     @RequestMapping("/modify")
     @ResponseBody
     public Map<String, Object> modify(@RequestBody User user) {
@@ -135,6 +142,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @SystemControllerLog(description = "修改用户密码")
     @RequestMapping("/changepwd")
     @ResponseBody
     public Map<String, Object> changepwd(@RequestBody User user) {
@@ -146,6 +154,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "删除用户")
     @RequestMapping("/deleteOne")
     @ResponseBody
     public Map<String, Object> deleteOne(@RequestBody Map<String, Integer> request) {
@@ -157,6 +166,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "删除用户")
     @RequestMapping("/deleteMore")
     @ResponseBody
     public Map<String, Object> deleteMore(@RequestBody Map<String, Integer[]> request) {
@@ -168,6 +178,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "还原用户")
     @RequestMapping("/restoreOne")
     @ResponseBody
     public Map<String, Object> restoreOne(@RequestBody Map<String, Integer> request) {
@@ -179,6 +190,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "还原用户")
     @RequestMapping("/restoreMore")
     @ResponseBody
     public Map<String, Object> restoreMore(@RequestBody Map<String, Integer[]> request) {
@@ -190,6 +202,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "查找用户")
     @RequestMapping("/queryNormal")
     @ResponseBody
     public Page<User> queryNormal(@RequestBody  Page<User> request) {
@@ -201,6 +214,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "查找用户")
     @RequestMapping("/queryRemove")
     @ResponseBody
     public Page<User> queryRemove(@RequestBody  Page<User> request) {
@@ -212,6 +226,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerLog(description = "搜索用户")
     @RequestMapping("/search")
     @ResponseBody
     public Page<User> search(@RequestBody Page<User> request) {
