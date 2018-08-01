@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>创建多行多列表格</title>
+<script type="text/javascript">
+	function addTable(){
+		var rowsLength=10;//行数
+		var colLength=20;//列数
+		var position = document.getElementById("blue");//定义table生成的位置
+		var objTable = document.createElement("table");
+		objTable.border="10";
+		for(var i=0;i<rowsLength;i++)
+		{
+		var objTr = document.createElement("tr");
+		for(var j=0;j<colLength;j++)
+		{
+		var objTd = document.createElement("td");
+		//内容
+		objTd.innerText = "1111"+"2222"; 
+		objTr.appendChild(objTd);
+		}
+		objTable.appendChild(objTr);
+		}
+		position.appendChild(objTable);
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="输出" onclick="addTable()">
+	<div id="blue"></div>
+</body>
+</html>
