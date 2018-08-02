@@ -81,7 +81,7 @@
                 <!--ul 没有排序的列表-->
                 <li><a href="#" onclick="toindex();"> 首页</a></li>
                 <li><a href="#" > 资料</a></li>
-                <li><a href="#" > 退出</a></li>
+                <li><a id="logout"> 退出</a></li>
                 <!--<li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>-->
             </ul>
         </div>
@@ -105,7 +105,11 @@
     function hide_left(){
         parent.frames["left"].getElementById('leftd').style.display = 'none';
     }
-    </script>>
+    </script>
+
+    <!-- 退出登录 -->
+    <script src="js/logout.js"></script>
+
 </body>
 
 </html>
