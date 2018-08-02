@@ -11,15 +11,18 @@ $(document).ready(function () {
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        async: "false",
+        async: false,
         data: request,
         success: function (data) {
             console.log(data);
+            //显示记录个数
+            $('#totalRecord').text(data.totalRecord == null ? 0 : data.totalRecord);
+            console.log("recordNum = " + data.totalRecord);
+            //显示用户信息
             var rows = "";
             var records = data.records;
             for(var i in records)
             {
-                console.log(records[i]);
                 var phone = records[i].phone == null ? "" : records[i].phone;
                 var email = records[i].email == null ? "" : records[i].email;
                 var stateLabel = "";
