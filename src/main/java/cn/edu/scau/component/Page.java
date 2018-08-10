@@ -23,13 +23,15 @@ public class Page<T> {
 
     private Integer keyType;    //关键字类型
 
+    private Integer searchType; //搜索类型，用于区分搜索正常用户和已删除用户
+
     private List<T> records;    //当前页显示的记录
 
     public Page() {
 
     }
 
-    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, Integer keyType, List<T> records) {
+    public Page(Integer pageNum, Integer pageSize, Integer startIndex, Integer totalRecord, Integer totalPage, Integer recordNum, String keyword, Integer keyType, Integer searchType, List<T> records) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.startIndex = startIndex;
@@ -38,6 +40,7 @@ public class Page<T> {
         this.recordNum = recordNum;
         this.keyword = keyword;
         this.keyType = keyType;
+        this.searchType = searchType;
         this.records = records;
     }
 
@@ -52,6 +55,7 @@ public class Page<T> {
                 ", recordNum=" + recordNum +
                 ", keyword='" + keyword + '\'' +
                 ", keyType=" + keyType +
+                ", searchType=" + searchType +
                 ", records=" + records +
                 '}';
     }
@@ -110,6 +114,14 @@ public class Page<T> {
 
     public void setKeyType(Integer keyType) {
         this.keyType = keyType;
+    }
+
+    public Integer getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(Integer searchType) {
+        this.searchType = searchType;
     }
 
     public List<T> getRecords() {

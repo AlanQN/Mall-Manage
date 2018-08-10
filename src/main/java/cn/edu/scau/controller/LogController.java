@@ -31,13 +31,13 @@ public class LogController {
 
     /**
      * 批量删除日志
-     * @param ids
+     * @param request
      * @return
      */
     @RequestMapping("/deleteMore")
     @ResponseBody
-    public Map<String, Object> deleteMore(@RequestBody Integer[] ids) {
-        return logService.deleteMore(ids);
+    public Map<String, Object> deleteMore(@RequestBody Map<String, Integer[]> request) {
+        return logService.deleteMore(request);
     }
 
     /**

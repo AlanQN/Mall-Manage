@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="xxx">
+    <div class="ooo">
+    <a id="demo1">
+        <ul class="demo11">
+            <li></li>
+        </ul>
+    </a>
+    <a>
+        <ul id="demo2">
+        </ul>
+    </a>
+    </div>
+</div>
+<a href="javascript:open()">123</a>
+    <script src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var k = "demo11";
+        var x = $("a>ul."+ k);
+        var y = $(" > li");
+        console.log(x[0]);
+        var li = document.createElement("li");
+        li.innerHTML = "123";
+        x[0].appendChild(li);
+
+        function open() {
+
+        }
+    </script>
+</body>
+</html>

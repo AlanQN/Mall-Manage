@@ -4,6 +4,7 @@ import cn.edu.scau.annotation.SystemControllerLog;
 import cn.edu.scau.component.Page;
 import cn.edu.scau.entity.Admin;
 import cn.edu.scau.entity.User;
+import cn.edu.scau.interceptor.LoginInterceptor;
 import cn.edu.scau.service.IAdminService;
 import cn.edu.scau.service.IUserService;
 import cn.edu.scau.service.impl.UserServiceImpl;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +54,15 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> logout(HttpServletRequest request) {
         return adminService.logout(request);
+    }
+
+    //获取登录用户的信息
+    @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public Admin getAdminInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute(LoginInterceptor.USER_INFO_KEY);
+        return admin;
     }
 
     /**
@@ -123,6 +135,17 @@ public class UserController {
     @ResponseBody
     public User edit(@RequestBody Map<String, Integer> request) {
         return userService.find(request);
+    }
+
+    /**
+     * 检验字段唯一性
+     * @param user
+     * @return
+     */
+    @RequestMapping("/check/unique")
+    @ResponseBody
+    public Map<String, Object> checkUniqueField(@RequestBody User user) {
+        return userService.checkUniqueField(user);
     }
 
     /**

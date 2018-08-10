@@ -16,10 +16,10 @@ public interface ILogService {
 
     /**
      * 批量删除日志
-     * @param ids
+     * @param request
      * @return
      */
-    public Map<String, Object> deleteMore(Integer[] ids);
+    public Map<String, Object> deleteMore(Map<String, Integer[]> request);
 
     /**
      * 查找日志

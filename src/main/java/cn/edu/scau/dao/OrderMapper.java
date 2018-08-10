@@ -1,6 +1,7 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.component.Page;
+import cn.edu.scau.entity.Count;
 import cn.edu.scau.entity.Order;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,7 +32,7 @@ public interface OrderMapper {
     List<Order> queryAll(@Param("offset") Integer offset , @Param("limit") Integer limit);
 
     /**
-     * 通过id查询图书
+     * 通过id查询
      * @param id
      * @return
      */
@@ -73,5 +74,13 @@ public interface OrderMapper {
      * @param page
      * @return
      */
-    List<Order> findRecords(Page<Order> page);
+    List<Order> findRecords(Page page);
+
+    /**
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Count> listCount(@Param("start") String start , @Param("end") String end);
 }

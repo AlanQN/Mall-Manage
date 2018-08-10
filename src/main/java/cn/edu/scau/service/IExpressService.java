@@ -4,6 +4,7 @@ import cn.edu.scau.component.Page;
 import cn.edu.scau.dto.Result;
 import cn.edu.scau.entity.Express;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IExpressService {
@@ -37,4 +38,11 @@ public interface IExpressService {
      * @return
      */
     Result<Page<Express>> search(Integer pageNum, Integer pageSize, String key);
+
+
+    /**
+     * 获取全部快递
+     * @return
+     */
+    Result<List<Express>> getAll();
 }

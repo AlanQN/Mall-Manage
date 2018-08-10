@@ -135,4 +135,10 @@ public interface UserMapper {
      */
     public int getRemoveUserNum();
 
+    /**
+     * 获取所有用户总数
+     * @return
+     */
+    public int getTotalUserNum();
+
 }

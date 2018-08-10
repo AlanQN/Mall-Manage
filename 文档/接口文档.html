@@ -69,6 +69,12 @@
                                         <a href="#9214e790fe334fcdbef22bb47d1d6d8c">批量还原用户</a>
                                     </li><li>
                                         <a href="#65ed88e8df724e0695206d53b42e5b0f">用户登录</a>
+                                    </li><li>
+                                        <a href="#c1682374d2574f91bb68f2343266eb14">用户注销</a>
+                                    </li><li>
+                                        <a href="#3bfab261b95d40058afc93accbf06256">查看已删除用户（分页查询）</a>
+                                    </li><li>
+                                        <a href="#c35edc89ed574c36aa7a1f7010b2e8b0">检验字段唯一性</a>
                                     </li>
                                 </ul><span>系统管理</span>
                                 <ul class="nav list-group">
@@ -85,6 +91,8 @@
                                         <a href="#f23b3779caab4dc9a75ea56338f2164e">编辑快递</a>
                                     </li><li>
                                         <a href="#fc36f0d8d13a4960b1adfeb96188f50b">查看快递（分页查询）</a>
+                                    </li><li>
+                                        <a href="#ba8f22bff59e4587a27ee1b23e9c8603">获取快递（全部）</a>
                                     </li><li>
                                         <a href="#15572be0388f4a67a455bddd2ccf40ec">搜索快递（分页）</a>
                                     </li><li>
@@ -128,7 +136,7 @@
                                     </li><li>
                                         <a href="#e0c0e58a7a6345698002542ebe48a25a">商品删除 --完成</a>
                                     </li><li>
-                                        <a href="#63c7ffed7e354dddb12ec02152f9058d">商品查找（id）--完成</a>
+                                        <a href="#63c7ffed7e354dddb12ec02152f9058d">商品查找（name）--完成</a>
                                     </li><li>
                                         <a href="#4be8bb98a7c844aea0706691ec142443">商品查找（价格）--完成</a>
                                     </li><li>
@@ -136,18 +144,28 @@
                                     </li><li>
                                         <a href="#ed2d156ed27a4f35b0f21e015a127ef5">商品上架下架 --完成</a>
                                     </li><li>
-                                        <a href="#90eca8b9bcbd46f98f481b701cf5e6af">商品分类添加（根类下添加子类） --完成</a>
+                                        <a href="#90eca8b9bcbd46f98f481b701cf5e6af">Pro父类下添加子类</a>
                                     </li><li>
                                         <a href="#276aa95238954440912bcd8351e33b23">商品分类删除（删除子分类下商品信息）--完成</a>
                                     </li><li>
                                         <a href="#d0c94c1613ff4592820a658af2dc756e">商品分类（分类修改）--完成</a>
                                     </li><li>
                                         <a href="#97bb6dc6270e4c5abb7b93ca8e107369">商品分类查找（id） --完成</a>
+                                    </li><li>
+                                        <a href="#3855557bb73e4a59b9e218656b4dc134">Pro父类下查找子类</a>
+                                    </li><li>
+                                        <a href="#0a58b740ffd64c0ea3f0b994809f2415">Pro添加父类</a>
+                                    </li><li>
+                                        <a href="#f52ee89f7f84484a9590fa865180bebe">Pro查询父类</a>
                                     </li>
                                 </ul><span>系统统计</span>
                                 <ul class="nav list-group">
                                     
-                                    
+                                    <li>
+                                        <a href="#8c38c1cc02e8487cbfc4ef1e2d6e3ee1">获取首页信息</a>
+                                    </li><li>
+                                        <a href="#3175c2e8aa7a4f8dbb0ff6803d05d081">获取统计信息</a>
+                                    </li>
                                 </ul>                                <span>附录</span>
                                 <ul class="nav list-group">
                                     <li>
@@ -174,7 +192,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/query                        </p>
+                            请求地址：http://127.0.0.1:8080/user/queryNormal                        </p>
                         
                         
                         
@@ -236,6 +254,7 @@
         {
             "id": "value",
             "username": "value",
+            "sex": "value",
             "phone": "value",
             "email": "value",
             "created": "value",
@@ -245,6 +264,7 @@
         {
             "id": "value",
             "username": "value",
+            "sex": "value",
             "phone": "value",
             "email": "value",
             "created": "value",
@@ -322,7 +342,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/pause                        </p>
+                            请求地址：http://127.0.0.1:8080/user/pause                        </p>
                         
                         
                         
@@ -401,7 +421,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/resume                        </p>
+                            请求地址：http://127.0.0.1:8080/user/resume                        </p>
                         
                         
                         
@@ -480,7 +500,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/edit                        </p>
+                            请求地址：http://127.0.0.1:8080/user/edit                        </p>
                         
                         
                         
@@ -561,7 +581,7 @@
                                     <th>string</th>
                                 </tr><tr>
                                     <td>sex</td>
-                                    <td>性别</td>
+                                    <td>性别，1代表男，0代表女</td>
                                     <th>integer</th>
                                 </tr><tr>
                                     <td>phone</td>
@@ -589,7 +609,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/modify                        </p>
+                            请求地址：http://127.0.0.1:8080/user/modify                        </p>
                         
                         
                         
@@ -710,7 +730,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/add                        </p>
+                            请求地址：http://127.0.0.1:8080/user/add                        </p>
                         
                         
                         
@@ -800,7 +820,17 @@
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "errorCode": "value"
+    "errorCode": "value",
+    "user": {
+        "id": "value",
+        "username": "value",
+        "password": "value",
+        "sex": "value",
+        "phone": "value",
+        "description": "value",
+        "email": "value",
+        "headicon": "value"
+    }
 }</code>
                             </pre>
                         </div>                        
@@ -821,6 +851,42 @@
                                     <td>errorCode</td>
                                     <td>0代表正常，1代表错误</td>
                                     <th>integer</th>
+                                </tr><tr>
+                                    <td>user</td>
+                                    <td>用户信息</td>
+                                    <th>object</th>
+                                </tr><tr>
+                                    <td>user.id</td>
+                                    <td>用户编号</td>
+                                    <th>integer</th>
+                                </tr><tr>
+                                    <td>user.username</td>
+                                    <td>用户名</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.password</td>
+                                    <td>密码</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.sex</td>
+                                    <td>性别</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.phone</td>
+                                    <td>手机号</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.description</td>
+                                    <td>描述</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.email</td>
+                                    <td>邮箱</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.headicon</td>
+                                    <td>头像</td>
+                                    <th>string</th>
                                 </tr>                            </tbody>
                         </table>
                     </div><div class="api-one">
@@ -831,7 +897,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/deleteOne                        </p>
+                            请求地址：http://127.0.0.1:8080/user/deleteOne                        </p>
                         
                         
                         
@@ -910,7 +976,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/deleteMore                        </p>
+                            请求地址：http://127.0.0.1:8080/user/deleteMore                        </p>
                         
                         
                         
@@ -919,11 +985,13 @@
                                     <div>
                                     <span class="label label-success">Body</span>
                                     </div>
-                                    <textarea class="">[
-    "value",
-    "value",
-    "value"
-]</textarea>
+                                    <textarea class="">{
+    "ids": [
+        "value",
+        "value",
+        "value"
+    ]
+}</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
                                     <col class="col-xs-2">
@@ -996,7 +1064,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/search                        </p>
+                            请求地址：http://127.0.0.1:8080/user/search                        </p>
                         
                         
                         
@@ -1006,10 +1074,11 @@
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "keyword": "value",
-    "keyType": "value",
-    "pageNum": "value",
-    "pageSize": "value"
+    "keyword": "test",
+    "searchType": "0",
+    "keyType": "9",
+    "pageNum": "1",
+    "pageSize": "100"
 }</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
@@ -1036,20 +1105,26 @@
                                             <td>用户名</td>
                                             <td></td>
                                         </tr><tr>
-                                            <td>keyType</td>
-                                            <td>integer</td>
+                                            <td>searchType</td>
+                                            <td>number</td>
                                             <td>是</td>
-                                            <td>关键字类型，1代表id，2代表用户名，3代表手机号</td>
+                                            <td>搜索类型，0表示搜索正常用户，1表示已删除用户</td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>keyType</td>
+                                            <td>number</td>
+                                            <td>是</td>
+                                            <td>关键字类型，1代表id，2代表用户名，3代表手机号，4代表邮箱，9代表唯一字段</td>
                                             <td></td>
                                         </tr><tr>
                                             <td>pageNum</td>
-                                            <td>integer</td>
+                                            <td>number</td>
                                             <td>是</td>
                                             <td>页号</td>
                                             <td></td>
                                         </tr><tr>
                                             <td>pageSize</td>
-                                            <td>integer</td>
+                                            <td>number</td>
                                             <td>是</td>
                                             <td>一页中的记录数</td>
                                             <td></td>
@@ -1065,28 +1140,54 @@
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "result": "value",
-    "message": "value",
-    "searchName": "value",
-    "total": "value",
-    "users": [
+    "pageNum": 1,
+    "pageSize": 100,
+    "startIndex": 0,
+    "totalRecord": 3,
+    "totalPage": 1,
+    "recordNum": 3,
+    "keyword": "test",
+    "keyType": 9,
+    "searchType": 0,
+    "records": [
         {
-            "id": "value",
-            "username": "value",
-            "phone": "value",
-            "email": "value",
-            "created": "value",
-            "updated": "value",
-            "state": "value"
+            "id": 10,
+            "username": "test139",
+            "password": null,
+            "phone": "1328392",
+            "email": "17827823@qq.com",
+            "created": "2017-09-05 21:27:54",
+            "updated": "2018-08-05 16:21:15",
+            "sex": null,
+            "state": 1,
+            "headicon": null,
+            "description": null
         },
         {
-            "id": "value",
-            "username": "value",
-            "phone": "value",
-            "email": "value",
-            "created": "value",
-            "updated": "value",
-            "state": "value"
+            "id": 103,
+            "username": "testid",
+            "password": null,
+            "phone": "1748219",
+            "email": "1343455@qq.com",
+            "created": "2018-08-05 17:09:44",
+            "updated": "2018-08-05 17:09:44",
+            "sex": null,
+            "state": 0,
+            "headicon": null,
+            "description": null
+        },
+        {
+            "id": 104,
+            "username": "TestID123",
+            "password": null,
+            "phone": "124784378",
+            "email": "1248483355@qq.com",
+            "created": "2018-08-05 17:16:42",
+            "updated": "2018-08-05 17:16:42",
+            "sex": null,
+            "state": 0,
+            "headicon": null,
+            "description": null
         }
     ]
 }</code>
@@ -1163,7 +1264,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/removeOne                        </p>
+                            请求地址：http://127.0.0.1:8080/user/removeOne                        </p>
                         
                         
                         
@@ -1217,7 +1318,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/removeMore                        </p>
+                            请求地址：http://127.0.0.1:8080/user/removeMore                        </p>
                         
                         
                         
@@ -1226,11 +1327,13 @@
                                     <div>
                                     <span class="label label-success">Body</span>
                                     </div>
-                                    <textarea class="">[
-    "value",
-    "value",
-    "value"
-]</textarea>
+                                    <textarea class="">{
+    "ids": [
+        "value",
+        "value",
+        "value"
+    ]
+}</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
                                     <col class="col-xs-2">
@@ -1250,6 +1353,12 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>ids</td>
+                                            <td>array</td>
+                                            <td>是</td>
+                                            <td>用户编号组</td>
+                                            <td></td>
+                                        </tr><tr>
                                             <td>value</td>
                                             <td>integer</td>
                                             <td>是</td>
@@ -1298,7 +1407,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/changepwd                        </p>
+                            请求地址：http://127.0.0.1:8080/user/changepwd                        </p>
                         
                         
                         
@@ -1384,7 +1493,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/restoreOne                        </p>
+                            请求地址：http://127.0.0.1:8080/user/restoreOne                        </p>
                         
                         
                         
@@ -1463,7 +1572,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/restoreMore                        </p>
+                            请求地址：http://127.0.0.1:8080/user/restoreMore                        </p>
                         
                         
                         
@@ -1472,11 +1581,13 @@
                                     <div>
                                     <span class="label label-success">Body</span>
                                     </div>
-                                    <textarea class="">[
-    "value",
-    "value",
-    "value"
-]</textarea>
+                                    <textarea class="">{
+    "ids": [
+        "value",
+        "value",
+        "value"
+    ]
+}</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
                                     <col class="col-xs-2">
@@ -1496,6 +1607,12 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>ids</td>
+                                            <td>array</td>
+                                            <td>是</td>
+                                            <td>用户编号组</td>
+                                            <td></td>
+                                        </tr><tr>
                                             <td>value</td>
                                             <td>integer</td>
                                             <td>是</td>
@@ -1544,7 +1661,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/user/login                        </p>
+                            请求地址：http://127.0.0.1:8080/se12/user/login                        </p>
                         
                         
                         
@@ -1554,7 +1671,7 @@
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "username": "value",
+    "name": "value",
     "password": "value"
 }</textarea>
                                 </div>                                                                            
@@ -1568,7 +1685,18 @@
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "result": "value"
+    "result": true,
+    "user": {
+        "id": 1,
+        "name": "admin",
+        "password": null,
+        "phone": "17621230884",
+        "email": "1012139570@qq.com",
+        "sex": "男",
+        "description": "超级管理员",
+        "headicon": "http://ow2h3ee9w.bkt.clouddn.com/1507866340369.png",
+        "created": 1504618074000
+    }
 }</code>
                             </pre>
                         </div>                        
@@ -1587,8 +1715,336 @@
                             <tbody>
                                 <tr>
                                     <td>result</td>
-                                    <td>校验结果</td>
+                                    <td>处理结果</td>
                                     <th>boolean</th>
+                                </tr><tr>
+                                    <td>user</td>
+                                    <td>用户信息</td>
+                                    <th>object</th>
+                                </tr><tr>
+                                    <td>user.id</td>
+                                    <td>编号</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>user.name</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.password</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.phone</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>user.email</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.sex</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.description</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.headicon</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>user.created</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div><div class="api-one">
+                        <h3 id="c1682374d2574f91bb68f2343266eb14">用户注销</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=c1682374d2574f91bb68f2343266eb14" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=c1682374d2574f91bb68f2343266eb14" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/user/logout                        </p>
+                        
+                        
+                        
+
+                                                
+                        <p>详细说明：</p>
+                        <p>
+                        <div class="detail-info">
+                            <div>界面点击退出登录按钮，交由后台处理，后台返回处理结果。</div>
+                        </div>
+                        </p>
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "result": true
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>result</td>
+                                    <td>处理结果</td>
+                                    <th>boolean</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div><div class="api-one">
+                        <h3 id="3bfab261b95d40058afc93accbf06256">查看已删除用户（分页查询）</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3bfab261b95d40058afc93accbf06256" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3bfab261b95d40058afc93accbf06256" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/user/queryRemove                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "pageNum": "value",
+    "pageSize": "value"
+}</textarea>
+                                </div>                            <table class="table table-hover">
+                                    <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                  </colgroup>
+                                    <thead>
+                                         <tr>
+                                            <th style="padding-left: 0px;"><span class="label label-success">Body参数名</span></th>
+                                            <th>类型</th>
+                                            <th>必需</th>
+                                            <th>描述</th>
+                                            <th>示例 e.g.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>pageNum</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>当前页号</td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>pageSize</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>一页中的记录行数</td>
+                                            <td></td>
+                                        </tr>                                    </tbody>
+                                </table>                                                
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "totalRecord": "value",
+    "totalPage": "value",
+    "recordNum": "value",
+    "records": [
+        {
+            "id": "value",
+            "username": "value",
+            "phone": "value",
+            "email": "value",
+            "created": "value",
+            "updated": "value",
+            "state": "value"
+        },
+        {
+            "id": "value",
+            "username": "value",
+            "phone": "value",
+            "email": "value",
+            "created": "value",
+            "updated": "value",
+            "state": "value"
+        }
+    ]
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>totalRecord</td>
+                                    <td>用户总数</td>
+                                    <th>integer</th>
+                                </tr><tr>
+                                    <td>totalPage</td>
+                                    <td>总页数</td>
+                                    <th>integer</th>
+                                </tr><tr>
+                                    <td>recordNum</td>
+                                    <td>当前页实际记录数</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records</td>
+                                    <td>记录</td>
+                                    <th>array</th>
+                                </tr><tr>
+                                    <td>records.id</td>
+                                    <td>用户编号</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.username</td>
+                                    <td>用户名</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.phone</td>
+                                    <td>手机号</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.email</td>
+                                    <td>电子邮件</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.created</td>
+                                    <td>注册时间</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.updated</td>
+                                    <td>更新时间</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>records.state</td>
+                                    <td>状态，0代表正常状态，1代表禁用状态</td>
+                                    <th>string</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div><div class="api-one">
+                        <h3 id="c35edc89ed574c36aa7a1f7010b2e8b0">检验字段唯一性</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=c35edc89ed574c36aa7a1f7010b2e8b0" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=c35edc89ed574c36aa7a1f7010b2e8b0" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/user/check/unique                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "id": "62",
+    "username": "admin"
+}</textarea>
+                                </div>                            <table class="table table-hover">
+                                    <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                  </colgroup>
+                                    <thead>
+                                         <tr>
+                                            <th style="padding-left: 0px;"><span class="label label-success">Body参数名</span></th>
+                                            <th>类型</th>
+                                            <th>必需</th>
+                                            <th>描述</th>
+                                            <th>示例 e.g.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>id</td>
+                                            <td>integer</td>
+                                            <td>是</td>
+                                            <td>用户编号</td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>username</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>用户名</td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>phone</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>手机号</td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>email</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>邮箱</td>
+                                            <td></td>
+                                        </tr>                                    </tbody>
+                                </table>                                                
+                        <p>详细说明：</p>
+                        <p>
+                        <div class="detail-info">
+                            <div>添加用户或者修改用户信息时，对唯一字段进行检验，如果字段已被使用，则返回错误代号。</div>
+                        </div>
+                        </p>
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "errorCode": "value"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>errorCode</td>
+                                    <td>错误代号，0表示正常，1表示字段已被使用</td>
+                                    <th>integer</th>
                                 </tr>                            </tbody>
                         </table>
                     </div><h1 id="t_api_doc">系统管理</h1>
@@ -1601,7 +2057,7 @@
                         </p>
                         <p>请求方式：GET</p>
                         <p>
-                            请求地址：http://localhost:8080/system/basic                        </p>
+                            请求地址：http://127.0.0.1:8080/system/basic                        </p>
                         
                         
                         
@@ -1698,7 +2154,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/express/add                        </p>
+                            请求地址：http://127.0.0.1:8080/express/add                        </p>
                         
                         
                         
@@ -2083,8 +2539,8 @@
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "pageNum": "1",
-    "pageSize": "3"
+    "pageNum": 1,
+    "pageSize": 3
 }</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
@@ -2123,27 +2579,24 @@
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "pageNum": 1,
-    "pageSize": 3,
-    "startIndex": 0,
-    "totalRecord": 4,
-    "totalPage": 2,
-    "recordNum": 3,
-    "keyword": null,
-    "records": [
-        {
-            "id": 5,
-            "expressName": "jos快递"
-        },
-        {
-            "id": 4,
-            "expressName": "中通快递"
-        },
-        {
-            "id": 1,
-            "expressName": "京东快递"
-        }
-    ]
+    "success": true,
+    "data": {
+        "pageNum": 1,
+        "pageSize": 3,
+        "startIndex": 0,
+        "totalRecord": 7,
+        "totalPage": 3,
+        "recordNum": 3,
+        "keyword": null,
+        "keyType": null,
+        "records": [
+            {
+                "id": 14,
+                "expressName": "2"
+            }
+        ]
+    },
+    "error": null
 }</code>
                             </pre>
                         </div>                        
@@ -2161,43 +2614,124 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>pageNum</td>
+                                    <td>success</td>
+                                    <td></td>
+                                    <th>boolean</th>
+                                </tr><tr>
+                                    <td>data</td>
+                                    <td></td>
+                                    <th>object</th>
+                                </tr><tr>
+                                    <td>data.pageNum</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>pageSize</td>
+                                    <td>data.pageSize</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>startIndex</td>
+                                    <td>data.startIndex</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>totalRecord</td>
+                                    <td>data.totalRecord</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>totalPage</td>
+                                    <td>data.totalPage</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>recordNum</td>
+                                    <td>data.recordNum</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>keyword</td>
+                                    <td>data.keyword</td>
                                     <td></td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>records</td>
+                                    <td>data.keyType</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.records</td>
                                     <td></td>
                                     <th>array</th>
                                 </tr><tr>
-                                    <td>records.id</td>
+                                    <td>data.records.id</td>
                                     <td></td>
                                     <th>number</th>
                                 </tr><tr>
-                                    <td>records.expressName</td>
+                                    <td>data.records.expressName</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>error</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div><div class="api-one">
+                        <h3 id="ba8f22bff59e4587a27ee1b23e9c8603">获取快递（全部）</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=ba8f22bff59e4587a27ee1b23e9c8603" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=ba8f22bff59e4587a27ee1b23e9c8603" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/express/list                        </p>
+                        
+                        
+                        
+
+                                                                                                    
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "success": true,
+    "data": [
+        {
+            "id": 14,
+            "expressName": "2"
+        }
+    ],
+    "error": null
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>success</td>
+                                    <td></td>
+                                    <th>boolean</th>
+                                </tr><tr>
+                                    <td>data</td>
+                                    <td></td>
+                                    <th>array</th>
+                                </tr><tr>
+                                    <td>data.id</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.expressName</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>error</td>
                                     <td></td>
                                     <th>string</th>
                                 </tr>                            </tbody>
@@ -2319,7 +2853,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/log/deleteOne                        </p>
+                            请求地址：http://127.0.0.1:8080/log/deleteOne                        </p>
                         
                         
                         
@@ -2398,7 +2932,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/log/deleteMore                        </p>
+                            请求地址：http://127.0.0.1:8080/log/deleteMore                        </p>
                         
                         
                         
@@ -2407,11 +2941,13 @@
                                     <div>
                                     <span class="label label-success">Body</span>
                                     </div>
-                                    <textarea class="">[
-    "value",
-    "value",
-    "value"
-]</textarea>
+                                    <textarea class="">{
+    "ids": [
+        "value",
+        "value",
+        "value"
+    ]
+}</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
                                     <col class="col-xs-2">
@@ -2479,7 +3015,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/log/search                        </p>
+                            请求地址：http://127.0.0.1:8080/log/search                        </p>
                         
                         
                         
@@ -2621,7 +3157,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/log/search                        </p>
+                            请求地址：http://127.0.0.1:8080/log/search                        </p>
                         
                         
                         
@@ -2770,7 +3306,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/system/modify                        </p>
+                            请求地址：http://127.0.0.1:8080/system/modify                        </p>
                         
                         
                         
@@ -2921,7 +3457,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/order/add                        </p>
+                            请求地址：http://127.0.0.1:8080/se12/order/add                        </p>
                         
                         
                         
@@ -3035,7 +3571,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/order/list                        </p>
+                            请求地址：http://127.0.0.1:8080/order/list                        </p>
                         
                         
                         
@@ -3260,7 +3796,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/order/search                        </p>
+                            请求地址：http://127.0.0.1:8080/order/search                        </p>
                         
                         
                         
@@ -3590,7 +4126,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/order/cancel                        </p>
+                            请求地址：http://127.0.0.1:8080/order/cancel                        </p>
                         
                         
                         
@@ -4038,7 +4574,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/order/info                        </p>
+                            请求地址：http://127.0.0.1:8080/order/info                        </p>
                         
                         
                         
@@ -4251,7 +4787,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/add                        </p>
+                            请求地址：http://127.0.0.1:8080/product/add                        </p>
                         
                         
                         
@@ -4261,7 +4797,6 @@
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "id": "value",
     "name": "value",
     "desription": "value",
     "price": "value",
@@ -4345,8 +4880,7 @@
                             <pre>
                                 <code class="json hljs">{
     "success": "value",
-    "error": "value",
-    "fail": "value"
+    "error": "value"
 }</code>
                             </pre>
                         </div>                        
@@ -4359,7 +4893,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/delete                        </p>
+                            请求地址：http://127.0.0.1:8080/product/delete                        </p>
                         
                         
                         
@@ -4413,14 +4947,14 @@
                         </div>                        
                         
                     </div><div class="api-one">
-                        <h3 id="63c7ffed7e354dddb12ec02152f9058d">商品查找（id）--完成</h3>
+                        <h3 id="63c7ffed7e354dddb12ec02152f9058d">商品查找（name）--完成</h3>
                         <p>
                             <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=63c7ffed7e354dddb12ec02152f9058d" class="label label-warning">在线测试</a>
                             <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=63c7ffed7e354dddb12ec02152f9058d" class="label label-warning">在线浏览</a>
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/read_id                        </p>
+                            请求地址：http://127.0.0.1:8080/product/read_name                        </p>
                         
                         
                         
@@ -4430,7 +4964,7 @@
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "id": "562379"
+    "name": "value"
 }</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
@@ -4471,16 +5005,9 @@ span.s1 {font-kerning: none}
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "id": "value",
-    "name": "value",
-    "desription": "value",
-    "price": "value",
-    "num": "value",
-    "image": "value",
-    "catid": "value",
-    "status": "value",
-    "created": "value",
-    "updated": "value"
+    "success": "value",
+    "error": "value",
+    "data":"value"
 }</code>
                             </pre>
                         </div>                        
@@ -4571,7 +5098,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/read_price                        </p>
+                            请求地址：http://127.0.0.1:8080/product/read_price                        </p>
                         
                         
                         
@@ -4594,16 +5121,9 @@ span.s1 {font-kerning: none}
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "id": "value",
-    "name": "value",
-    "desription": "value",
-    "price": "value",
-    "num": "value",
-    "image": "value",
-    "catid": "value",
-    "status": "value",
-    "created": "value",
-    "updated": "value"
+    "success": "value",
+    "error": "value",
+    "data":"value"
 }</code>
                             </pre>
                         </div>                        
@@ -4670,7 +5190,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/modify                        </p>
+                            请求地址：http://127.0.0.1:8080/product/modify                        </p>
                         
                         
                         
@@ -4787,7 +5307,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/product/modify                        </p>
+                            请求地址：http://127.0.0.1:8080/product/modify                        </p>
                         
                         
                         
@@ -4837,16 +5357,9 @@ span.s1 {font-kerning: none}
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "id": "value",
-    "name": "value",
-    "description": "value",
-    "price": "value",
-    "num": "value",
-    "img": "value",
-    "status":"value",
-    "catid": "value",
-    "createed":"value",
-    "updated":"value"
+    "success": "value",
+    "error": "value",
+    "data":"value"
 }</code>
                             </pre>
                         </div>                        
@@ -4906,14 +5419,14 @@ span.s1 {font-kerning: none}
                                 </tr>                            </tbody>
                         </table>
                     </div><div class="api-one">
-                        <h3 id="90eca8b9bcbd46f98f481b701cf5e6af">商品分类添加（根类下添加子类） --完成</h3>
+                        <h3 id="90eca8b9bcbd46f98f481b701cf5e6af">Pro父类下添加子类</h3>
                         <p>
                             <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=90eca8b9bcbd46f98f481b701cf5e6af" class="label label-warning">在线测试</a>
                             <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=90eca8b9bcbd46f98f481b701cf5e6af" class="label label-warning">在线浏览</a>
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/productCat/add                        </p>
+                            请求地址：http://127.0.0.1:8080/pro/add                        </p>
                         
                         
                         
@@ -4923,15 +5436,9 @@ span.s1 {font-kerning: none}
                                     <span class="label label-success">Body</span>
                                     </div>
                                     <textarea class="">{
-    "id": "value",
-    "parent_id": "value",
+    "tag":"value",
     "name": "value",
-    "status": "value",
-    "sort_order": "value",
-    "icon": "value",
-    "description": "value",
-    "created": "value",
-    "updated": "value"
+    "description": "value"
 }</textarea>
                                 </div>                            <table class="table table-hover">
                                     <colgroup>
@@ -4969,7 +5476,9 @@ span.s1 {font-kerning: none}
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "message": "value"
+    "success": "value",
+    "error": "value",
+    "data":"value"
 }</code>
                             </pre>
                         </div>                        
@@ -5004,7 +5513,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/productCat/delete                        </p>
+                            请求地址：http://127.0.0.1:8080/productCat/delete                        </p>
                         
                         
                         
@@ -5052,7 +5561,9 @@ span.s1 {font-kerning: none}
                         <div class="highlight">
                             <pre>
                                 <code class="json hljs">{
-    "message": "value"
+    "success": "value",
+    "error": "value",
+    "data":"value"
 }</code>
                             </pre>
                         </div>                        
@@ -5065,7 +5576,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/productCat/modify                        </p>
+                            请求地址：http://127.0.0.1:8080/productCat/modify                        </p>
                         
                         
                         
@@ -5147,7 +5658,7 @@ span.s1 {font-kerning: none}
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/productCat/read_id                        </p>
+                            请求地址：http://127.0.0.1:8080/productCat/read_id                        </p>
                         
                         
                         
@@ -5178,9 +5689,200 @@ span.s1 {font-kerning: none}
                             </pre>
                         </div>                        
                         
+                    </div><div class="api-one">
+                        <h3 id="3855557bb73e4a59b9e218656b4dc134">Pro父类下查找子类</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3855557bb73e4a59b9e218656b4dc134" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3855557bb73e4a59b9e218656b4dc134" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/pro/read                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "tag": "value"
+}</textarea>
+                                </div>                                                                            
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "success": "value",
+    "error": "value",
+    "data":"value"
+}</code>
+                            </pre>
+                        </div>                        
+                        
+                    </div><div class="api-one">
+                        <h3 id="0a58b740ffd64c0ea3f0b994809f2415">Pro添加父类</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=0a58b740ffd64c0ea3f0b994809f2415" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=0a58b740ffd64c0ea3f0b994809f2415" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/se12/procat/add                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "tag": "value",
+    "name": "value",
+    "description":"value"
+}</textarea>
+                                </div>                                                                            
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "success": "value",
+    "error": "value",
+    "data":"value"
+}</code>
+                            </pre>
+                        </div>                        
+                        
+                    </div><div class="api-one">
+                        <h3 id="f52ee89f7f84484a9590fa865180bebe">Pro查询父类</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=f52ee89f7f84484a9590fa865180bebe" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=f52ee89f7f84484a9590fa865180bebe" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/se12/procat/read                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "tag": "value"
+}</textarea>
+                                </div>                                                                            
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "success": "value",
+    "error": "value",
+    "data":"value"
+}</code>
+                            </pre>
+                        </div>                        
+                        
                     </div><h1 id="t_api_doc">系统统计</h1>
                     
-                    
+                    <div class="api-one">
+                        <h3 id="8c38c1cc02e8487cbfc4ef1e2d6e3ee1">获取首页信息</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=8c38c1cc02e8487cbfc4ef1e2d6e3ee1" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=8c38c1cc02e8487cbfc4ef1e2d6e3ee1" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/se12/statistic/indexInfo                        </p>
+                        
+                        
+                        
+
+                                                
+                        
+                                                
+                        
+                    </div><div class="api-one">
+                        <h3 id="3175c2e8aa7a4f8dbb0ff6803d05d081">获取统计信息</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3175c2e8aa7a4f8dbb0ff6803d05d081" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/d2d286f3e094a2204c2c3bf041f41cbb/browse?api=3175c2e8aa7a4f8dbb0ff6803d05d081" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://127.0.0.1:8080/se12/count/data                        </p>
+                        
+                        
+                        
+
+                        <div class="raw-area">
+                                    <div>
+                                    <span class="label label-success">Body</span>
+                                    </div>
+                                    <textarea class="">{
+    "start": "2018-08-01",
+    "end": "2018-08-07"
+}</textarea>
+                                </div>                                                                            
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "success": true,
+    "data": [
+        {
+            "count": 78,
+            "data": "2018-08-05"
+        }
+    ],
+    "error": null
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>success</td>
+                                    <td></td>
+                                    <th>boolean</th>
+                                </tr><tr>
+                                    <td>data</td>
+                                    <td></td>
+                                    <th>array</th>
+                                </tr><tr>
+                                    <td>data.count</td>
+                                    <td></td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.data</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>error</td>
+                                    <td></td>
+                                    <th>string</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div>
                     <h1 id="t_api_doc">附录</h1>
                      <div class="api-one">
                         <h3 id="envs"> 环境变量</h3>

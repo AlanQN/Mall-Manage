@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -69,6 +71,14 @@ public class ExpressController {
         Integer pageNum = (Integer) map.get("pageNum");
         Integer pageSize = (Integer)map.get("pageSize");
         return expressService.getPage(pageNum,pageSize);
+    }
+
+
+    @SystemControllerLog(description = "获取快递")
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<List<Express>> getAll() {
+        return expressService.getAll();
     }
 
 

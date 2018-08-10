@@ -51,6 +51,13 @@ public interface IUserService {
     public Map<String, Object> resume(Map<String, Integer> request);
 
     /**
+     * 对唯一字段进行检验
+     * @param user
+     * @return
+     */
+    public Map<String, Object> checkUniqueField(User user);
+
+    /**
      * 修改用户信息
      * @param user
      * @return

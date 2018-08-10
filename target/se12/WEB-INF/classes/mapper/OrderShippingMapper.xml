@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.OrderShippingMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.scau.entity.OrderShipping" >
+    <constructor >
+      <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="receiver_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_city" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_district" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="created" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, receiver_name, receiver_mobile, receiver_state, receiver_city, receiver_district, 
+    receiver_address, created
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from tb_order_shipping
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from tb_order_shipping
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="cn.edu.scau.entity.OrderShipping" >
+    insert into tb_order_shipping (order_id, receiver_name, receiver_mobile, 
+      receiver_state, receiver_city, receiver_district, 
+      receiver_address, created
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, 
+      #{receiverState,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, #{receiverDistrict,jdbcType=VARCHAR}, 
+      #{receiverAddress,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="update" parameterType="cn.edu.scau.entity.OrderShipping" >
+    update tb_order_shipping
+    set receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      receiver_state = #{receiverState,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

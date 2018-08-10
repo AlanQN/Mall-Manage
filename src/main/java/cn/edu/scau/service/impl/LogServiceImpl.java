@@ -38,12 +38,14 @@ public class LogServiceImpl implements ILogService {
 
     /**
      * 批量删除日志
-     * @param ids
+     * @param request
      * @return
      */
     @Override
-    public Map<String, Object> deleteMore(Integer[] ids) {
+    public Map<String, Object> deleteMore(Map<String, Integer[]> request) {
         Map<String, Object> response = new HashMap<String, Object>();
+        //获取编号组
+        Integer[] ids = request.get("ids");
         //删除批量选定的日志
         if (logMapper.deleteMore(ids) > 0) {
             response.put("result", true);

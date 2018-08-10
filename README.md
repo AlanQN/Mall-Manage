@@ -1,36 +1,34 @@
 # 二次元商城
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+------
 
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Instructions
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Contribution
-
-1. Fork the project
-2. Create Feat_xxx branch
-3. Commit your code
-4. Create Pull Request
+二次元手办商城后台管理系统是一个用于管理网上商城的后台管理系统，在这个后台管理系统中，管理员可以修改（增加、删除）商品信息，编辑（增加、删除）用户信息、设置网站的基本信息、查看并处理新提交的订单等、实现对商城系统的管理
 
 
-#### Gitee Feature
+# 首页
+* [演示地址](http://alanqn.xin:8080/se12)
+* [git](https://gitee.com/two_yuan_commercial_city/two_yuan_commercial_city.git)
 
-1. You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2. Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3. Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4. The most valuable open source project [GVP](https://gitee.com/gvp)
-5. The manual of Gitee [http://git.mydoc.io/](http://git.mydoc.io/)
-6. The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+# 环境
+* intellij idea
+* jdk 1.8
+* Tomcat 7
+
+# 后台技术
+* Spring
+* SpringMVC
+* MyBatis
+* MySql
+* Maven
+
+# 前端技术
+* HTML+CSS+JS
+* Amaze UI
+* Bootstrap
+* JQuery
+
+# 项目模块图
+![model1](http://on-img.com/chart_image/5b4f6b66e4b053a09c0b015c.png)
+
+# 项目截图
+暂时没传

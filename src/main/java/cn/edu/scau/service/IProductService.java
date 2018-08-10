@@ -11,9 +11,9 @@ import java.util.Map;
 @Component
 public interface IProductService {
 
-    Info<Product> selectByPrimaryKey(Map<String,Integer> request);
+    Info<List<Product>> selectByName(Map<String,String> request);
 
-    Info<Product> selectByPrice(Map<String,BigDecimal> request);
+    Info<List<Product>> selectByPrice(Map<String,BigDecimal> request);
 
     Info<Product> updateByPrimaryKeySelective(Product record);
 

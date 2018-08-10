@@ -1,5 +1,7 @@
 package cn.edu.scau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Admin {
@@ -101,6 +103,7 @@ public class Admin {
         this.headicon = headicon == null ? null : headicon.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreated() {
         return created;
     }

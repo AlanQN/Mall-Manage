@@ -76,7 +76,8 @@ public class OrderServiceImpl implements IOrderService {
 
         OrderShipping orderShipping = orderShippingMapper.select(id);
         List<OrderProduct> orderProductList = orderProductMapper.queryAllByID(offset, limit, id);
-        if ( orderProductList == null || orderShipping == null ) {
+        Order order = orderMapper.getById(id);
+        if ( orderProductList == null ) {
             orderInfoResult.setSuccess(false);
             orderInfoResult.setData(null);
             orderInfoResult.setError("无法得到订单详情或者订单商品");
@@ -84,6 +85,7 @@ public class OrderServiceImpl implements IOrderService {
         else {
             orderInfo.setOrderProductList(orderProductList);
             orderInfo.setOrderShipping(orderShipping);
+            orderInfo.setOrder(order);
             orderInfoResult.setSuccess(true);
             orderInfoResult.setData(orderInfo);
             orderInfoResult.setError(null);
@@ -184,12 +186,14 @@ public class OrderServiceImpl implements IOrderService {
     public Result<Page<Order>> orderList(Integer pageNum, Integer pageSize) {
         orderPage.setPageNum(pageNum);
         orderPage.setPageSize(pageSize);
+        orderPage.setKeyword(null);
         //查询订单总数
         Integer totalNum = orderMapper.getTotal(orderPage);
         orderPage.setTotalRecord(totalNum);
         //设置总页数和偏移量
-        Integer totalPage = (int) Math.ceil((double) totalNum / pageSize);
+        Integer totalPage = (int) (Math.ceil((double) totalNum / pageSize));
         Integer startIndex =pageSize * (pageNum - 1);
+
         orderPage.setTotalPage(totalPage);
         orderPage.setStartIndex(startIndex);
         //查询当前页用户

@@ -14,37 +14,24 @@ public class Product {
 
     private Integer num;
 
-    private String image;
-
-    private String catid;
+    private Integer tag;
 
     private Integer status;
 
-    private Date created;
+    private Date create_time;
 
-    private Date updated;
+    private Date update_time;
 
-    private String message;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Product(Integer id, String name, String description, BigDecimal price, Integer num, String image, String catid, Integer status, Date created, Date updated) {
+    public Product(Integer id, String name, String description, BigDecimal price, Integer num, Integer tag, Integer status, Date create_time, Date update_time) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.num = num;
-        this.image = image;
-        this.catid = catid;
+        this.tag = tag;
         this.status = status;
-        this.created = created;
-        this.updated = updated;
+        this.create_time = create_time;
+        this.update_time = update_time;
     }
 
     public Product() {
@@ -91,21 +78,6 @@ public class Product {
         this.num = num;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
-
-    public String getCatid() {
-        return catid;
-    }
-
-    public void setCatid(String catid) {
-        this.catid = catid == null ? null : catid.trim();
-    }
 
     public Integer getStatus() {
         return status;
@@ -115,19 +87,27 @@ public class Product {
         this.status = status;
     }
 
-    public Date getCreated() {
-        return created;
+    public Integer getTag() {
+        return tag;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
-    public Date getUpdated() {
-        return updated;
+    public Date getCreate_time() {
+        return create_time;
     }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 }

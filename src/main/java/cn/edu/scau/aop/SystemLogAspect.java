@@ -90,7 +90,7 @@ public class SystemLogAspect {
         String ip = getRemortIP(request);
         try {
             //*========控制台输出=========*//
-            System.out.println("=====前置通知开始=====");
+            System.out.println("=====通知开始=====");
             System.out.println("请求方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
             System.out.println("方法描述:" + getControllerMethodDescription(joinPoint));
             System.out.println("请求人:" + admin.getName());
@@ -111,7 +111,7 @@ public class SystemLogAspect {
             log.setCreateDate(new Date());
             //保存数据库
             logMapper.insert(log);
-            System.out.println("=====后置通知结束=====");
+            System.out.println("=====通知结束=====");
         } catch (Exception ex) {
             //记录本地异常日志
             logger.error("==异常通知异常==");

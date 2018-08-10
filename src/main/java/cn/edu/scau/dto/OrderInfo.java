@@ -1,9 +1,8 @@
 package cn.edu.scau.dto;
 
+import cn.edu.scau.entity.Order;
 import cn.edu.scau.entity.OrderProduct;
 import cn.edu.scau.entity.OrderShipping;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +14,17 @@ public class OrderInfo {
 
     private List<OrderProduct> orderProductList;
 
+    private Order order;
+
     public OrderInfo(){}
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public OrderShipping getOrderShipping() {
         return orderShipping;

@@ -42,6 +42,12 @@ public interface LogMapper {
      */
     public int insert(Log log);
 
+    /**
+     * 获取浏览量
+     * @return
+     */
+    public int getTotalViewNum();
+
     Log selectByPrimaryKey(Integer id);
 
 }

@@ -8,9 +8,7 @@ import cn.edu.scau.service.IExpressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ExpressServiceImpl implements IExpressService {
@@ -25,6 +23,8 @@ public class ExpressServiceImpl implements IExpressService {
     private Result<Page<Express>> expressPageResult;
     @Autowired
     private Page<Express> expressPage;
+    @Autowired
+    private Result<List<Express>> listResult;
 
     @Override
     public Result<String> insert(String name) {
@@ -152,6 +152,22 @@ public class ExpressServiceImpl implements IExpressService {
         }
 
         return expressPageResult;
+    }
+
+    @Override
+    public Result<List<Express>> getAll() {
+        List<Express> expressList = expressMapper.getAll();
+        if(expressList != null)
+        {
+            listResult.setSuccess(true);
+            listResult.setData(expressList);
+            listResult.setError(null);
+        }else {
+            listResult.setSuccess(true);
+            listResult.setData(null);
+            listResult.setError("无快递");
+        }
+        return listResult;
     }
 
 }

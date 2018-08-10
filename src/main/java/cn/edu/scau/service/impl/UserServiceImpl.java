@@ -34,6 +34,7 @@ public class UserServiceImpl implements IUserService {
         //设置创建时间和更新时间
         user.setCreated(new Date());
         user.setUpdated(new Date());
+        user.setState(0);
         if (userMapper.findByUniqueField(user) != null) {    //判断唯一字段是否发生重复
             errorCode = 1;
         } else {
@@ -41,6 +42,7 @@ public class UserServiceImpl implements IUserService {
             errorCode = 0;
         }
         response.put("errorCode", errorCode);
+        response.put("user", user);
         return response;
     }
 
@@ -99,9 +101,29 @@ public class UserServiceImpl implements IUserService {
         return response;
     }
 
+    /**
+     * 对唯一字段进行检验
+     * @param user
+     * @return
+     */
+    @Override
+    public Map<String, Object> checkUniqueField(User user) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        //如果字段已经存在，则返回错误代号
+        if (userMapper.findByUniqueField(user) != null) {
+            response.put("errorCode", 1);
+        } else {
+            response.put("errorCode", 0);
+        }
+        return response;
+    }
+
+
     @Override
     public Map<String, Object> modify(User user) {
         Map<String, Object> response = new HashMap<String, Object>();
+        //更新时间
+        user.setUpdated(new Date());
         //修改用户信息
         if (userMapper.findByUniqueField(user) == null && userMapper.update(user) > 0) {
             response.put("errorCode", 0);

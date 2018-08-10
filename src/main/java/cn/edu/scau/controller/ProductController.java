@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,17 +22,17 @@ public class ProductController {
     @Autowired
     ProductServiceImpl productService;
 
-    @SystemControllerLog(description = "商品查找通过id")
-    @RequestMapping("/read_id")
+    @SystemControllerLog(description = "商品查找通过关键字")
+    @RequestMapping("/read_name")
     @ResponseBody
-    public Info<Product> read_id(@RequestBody Map<String ,Integer> request){
-        return  productService.selectByPrimaryKey(request);
+    public Info<List<Product>> read_name(@RequestBody Map<String ,String> request){
+        return  productService.selectByName(request);
     }
 
     @SystemControllerLog(description = "商品查找通过价格")
     @RequestMapping("/read_price")
     @ResponseBody
-    public Info<Product> read_price(@RequestBody Map<String ,BigDecimal> request){
+    public Info<List<Product>> read_price(@RequestBody Map<String ,BigDecimal> request){
 
         return  productService.selectByPrice(request);
     }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.OrderProductMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.scau.entity.OrderProduct" >
+    <constructor >
+      <idArg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="total_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="pic_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+     product_id, order_id, num, name, price, total_fee, pic_path
+  </sql>
+
+
+  <insert id="insert" parameterType="cn.edu.scau.entity.OrderProduct" >
+    insert into tb_order_product (product_id, order_id,
+      num, name, price, total_fee, 
+      pic_path)
+    values (#{productId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+      #{num,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{totalFee,jdbcType=DECIMAL}, 
+      #{picPath,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="queryAllByID" resultMap="BaseResultMap">
+    select *
+    from tb_order_product
+    where order_id = #{id}
+    order by product_id
+    limit #{offset},#{limit}
+  </select>
+
+  <select id="getTotal">
+    select sum(total_fee)
+    from tb_order_product
+    where order_id = #{id}
+  </select>
+
+
+</mapper>

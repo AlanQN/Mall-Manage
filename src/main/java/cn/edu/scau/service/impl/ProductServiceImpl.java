@@ -23,36 +23,45 @@ public class ProductServiceImpl implements IProductService{
     @Autowired
     private Info info;
 
+    @Autowired
+    private Info<List<Product>> listInfo;
+
     @Override
-    public Info<Product> selectByPrimaryKey(@RequestBody Map<String, Integer> request) {
-        info.clear();
-        Product product_id = productMapper.selectByPrimaryKey(request.get("id"));
-        if(product_id != null){
-            info.setData(product_id);
-            info.setSuccess("查询成功");
-            return info;
+    public Info<List<Product>> selectByName(@RequestBody Map<String, String> request) {
+        listInfo.clear();
+        String name = request.get("name");
+
+        List<Product> product_name = productMapper.selectByName(name);
+
+        System.out.println("123");
+        System.out.println(product_name);
+        if(!product_name.isEmpty()){
+            System.out.println(product_name);
+            listInfo.setData(product_name);
+            listInfo.setSuccess("查询成功");
+            return listInfo;
         }
 
         else {
-            info.setError("查询商品不存在");
-            return info;
+            listInfo.setError("查询商品不存在");
+            return listInfo;
         }
     }
 
     @Override
-    public Info<Product> selectByPrice(@RequestBody Map<String,BigDecimal> requset) {
-        info.clear();
+    public Info<List<Product>> selectByPrice(@RequestBody Map<String,BigDecimal> requset) {
+        listInfo.clear();
         List<Product> product_price = productMapper.selectByPrice(requset.get("price"));
         if(!product_price.isEmpty()){
 
             System.out.println(product_price);
-            info.setData(product_price);
-            info.setSuccess("查询成功");
+            listInfo.setData(product_price);
+            listInfo.setSuccess("查询成功");
         }
         else {
-            info.setError("查询商品不存在");
+            listInfo.setError("查询商品不存在");
         }
-        return info;
+        return listInfo;
     }
 
     @Override
@@ -73,8 +82,9 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public Info<Product> insert(@RequestBody Product record) {
         info.clear();
+        productMapper.insert(record);
         info.setData(record);
-        info.setSuccess("查询成功");
+        info.setSuccess("添加成功");
         return info;
 //        if(productMapper.selectByPrimaryKey(record.getId()) == null){
 //            info.setSuccess();

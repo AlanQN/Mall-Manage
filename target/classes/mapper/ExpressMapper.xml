@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.ExpressMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.scau.entity.Express" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="express_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, express_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_express
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from tb_express
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_express
+    where express_name = #{name}
+  </select>
+  <select id="search" resultMap="BaseResultMap" >
+    select * from tb_express
+    where express_name like #{s}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_express
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" >
+    insert into tb_express ( express_name)
+    values (#{expressName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.scau.entity.Express" >
+    insert into tb_express
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="expressName != null" >
+        express_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="expressName != null" >
+        #{expressName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.scau.entity.Express" >
+    update tb_express
+    <set >
+      <if test="expressName != null" >
+        express_name = #{expressName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.scau.entity.Express" >
+    update tb_express
+    set express_name = #{expressName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- 查找日志总数 -->
+  <select id="getTotal" resultType="java.lang.Integer" parameterType="cn.edu.scau.component.Page">
+    select count(*) from tb_express
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and id like '%${keyword}%' or express_name like '%${keyword}%'
+      </if>
+    </where>
+  </select>
+
+  <!-- 查找当前页的记录 -->
+  <select id="findRecords" resultMap="BaseResultMap" parameterType="cn.edu.scau.component.Page">
+    select * from tb_express
+    <where>
+      <if test="keyword != null and keyword != ''">
+        and id like '%${keyword}%' or express_name like '%${keyword}%'
+      </if>
+    </where>
+    limit #{startIndex}, #{pageSize}
+  </select>
+
+  <!-- 批量删除日志 -->
+  <delete id="deleteMore">
+    delete from tb_express
+    <where>
+      <if test="array != null and array.length > 0">
+        and id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.BaseMapper" >
+
+  <resultMap id="BaseResultMap" type="cn.edu.scau.entity.Base" >
+    <id property="id" column="id"></id>
+    <result property="webName" column="web_name"></result>
+    <result property="keyWord" column="key_word"></result>
+    <result property="description" column="description"></result>
+    <result property="copyright" column="copyright"></result>
+    <result property="hasLogNotice" column="has_log_notice"></result>
+    <result property="logNotice" column="log_notice"></result>
+    <result property="hasAllNotice" column="has_all_notice"></result>
+    <result property="allNotice" column="all_notice"></result>
+    <result property="notice" column="notice"></result>
+    <result property="updateLog" column="update_log"></result>
+  </resultMap>
+
+  <!-- 根据id获取系统信息 -->
+  <select id="find" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from tb_base
+  </select>
+
+  <!-- 根据id更新系统信息 -->
+  <update id="updateById" parameterType="cn.edu.scau.entity.Base" >
+    update tb_base
+    set web_name = #{webName}, key_word = #{keyWord}, description = #{description},
+      copyright = #{copyright}, has_log_notice = #{hasLogNotice}, log_notice = #{logNotice},
+      has_all_notice = #{hasAllNotice}, all_notice = #{allNotice}, notice = #{notice},
+      update_log = #{updateLog}
+    where id = #{id}
+  </update>
+
+</mapper>

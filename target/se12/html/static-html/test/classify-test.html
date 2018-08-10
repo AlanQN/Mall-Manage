@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        .dialog {
+            width: 500px;
+            height: 300px;
+            position: fixed;
+            /*left: 50%;
+            top: 50%;
+            margin-top: -100px;
+            margin-left: -100px;*/
+            margin: 100px 100px 10px 200px;
+            z-index: 30;
+            box-shadow: 2px 2px 4px #ccc;
+            background-color: #f1f1f1;
+            border: solid 1px #aaa;
+            border-radius: 4px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            padding: 6px;
+            background-color: #00FFFF;
+        }
+
+        .close {
+            width: 20px;
+            height: 20px;
+            margin: 3px;
+            float: right;
+            cursor: pointer;
+            color: black;
+        }
+
+        .pageCover {
+            width: 100%;
+            height: 973px;
+            position: absolute;
+            z-index: 10;
+            background-color: #666;
+            opacity: 0.5;
+            display: none;
+        }
+
+        .button_a {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="am-list admin-sidebar-list">
+            <li class="admin-parent">
+                <a class="am-cf" data-am-collapse="{target: '#collapse-nav5'}" name="father" onclick="add(10)" id="test">家居用品</a>
+                <!--<ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">-->
+                    <!--&lt;!&ndash;<li><a href="#" name="son">拼装</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#" name="son">成品</a></li>&ndash;&gt;-->
+                <!--</ul>-->
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5"></ul>
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="../assets/js/product-classify.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

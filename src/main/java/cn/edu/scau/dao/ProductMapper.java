@@ -1,6 +1,7 @@
 package cn.edu.scau.dao;
 
 import cn.edu.scau.entity.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -14,11 +15,18 @@ public interface ProductMapper {
 
     // int insertSelective(Product record);
 
-    Product selectByPrimaryKey(Integer id);
+    /**
+     *
+     * @param name
+     * @return
+     */
+    List<Product> selectByName(@Param("name") String name);
 
     List<Product> selectByPrice(BigDecimal price);
 
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    int getTotalProductNum();
 }

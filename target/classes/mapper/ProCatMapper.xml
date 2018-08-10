@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.scau.dao.ProCatMapper" >
+    <resultMap id="BaseResultMap" type="cn.edu.scau.entity.ProCat" >
+        <constructor >
+            <arg column="tag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+        </constructor>
+    </resultMap>
+    <select id="selectByTag" resultType="cn.edu.scau.entity.ProCat" parameterType="java.lang.Integer">
+        select tb_pro_cat.tag,tb_pro_cat.name,tb_pro_cat.description
+        --         SELECT *
+        from tb_pro_cat
+        where tb_pro_cat.tag = #{tag,jdbcType=INTEGER}
+    </select>
+    <insert id="insertBySome" parameterType="cn.edu.scau.entity.ProCat">
+        insert into tb_pro_cat
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="tag != null" >
+                tag,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=INTEGER},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
