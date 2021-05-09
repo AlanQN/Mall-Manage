@@ -23,8 +23,3 @@
 * Bootstrap
 * JQuery
 
-# 项目模块图
-![model1](http://on-img.com/chart_image/5b4f6b66e4b053a09c0b015c.png)
-
-# 项目截图
-暂时没传
